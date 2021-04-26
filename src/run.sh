@@ -2,7 +2,7 @@
 
 #!/bin/bash
 
-echo -e "** Building **\n"
+echo "** Building **\n"
 make -j
-echo -e "\n** Starting game... **\n"
+echo "\n** Launching game... **\n"
 ./drunkrun
