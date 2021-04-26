@@ -1,3 +1,7 @@
+drunkrun
+*.DS_Store
+*.vscode
+
 # GitHub CPP .gitignore
 
 # Prerequisites
