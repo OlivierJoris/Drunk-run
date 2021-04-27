@@ -6,6 +6,6 @@
 
 #include "Kerb.hpp"
 
-Kerb::Kerb(){
+Kerb::Kerb():DangerousObstacle(){
     // to fill
 }

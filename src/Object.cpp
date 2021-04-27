@@ -6,6 +6,14 @@
 
 #include "Object.hpp"
 
+#include <memory>
+
 Object::Object(){
-    // to fill
+    size = std::make_shared<Size3D>();
+    topleft = std::make_shared<Coordinate3D>();
+    color = std::make_shared<RGBColor>();
+}
+
+void Object::draw(){
+    // TO DO: fill
 }

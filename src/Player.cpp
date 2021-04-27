@@ -7,5 +7,5 @@
 #include "Player.hpp"
 
 Player::Player(){
-    // to fill
+    box = std::make_shared<Object>();
 }

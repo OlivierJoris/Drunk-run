@@ -1,0 +1,35 @@
+/*
+ * A three dimensionnal coordinate.
+ *
+ * @author Maxime Goffart (180521) & Olivier Joris (182113)
+ */
+
+#ifndef __COORDINATE_3D__
+#define __COORDINATE_3D__
+
+// Represents a three dimensionnal size.
+class Coordinate3D{ 
+
+public:
+    // Constructor.
+    Coordinate3D(double x, double y, double z);
+    // Setter of the x field.
+    void set_x(double x);
+    // Getter of the x field.
+    double get_x() const;
+    // Setter of the y field.
+    void set_y(double y);
+    // Getter of the y field.
+    double get_y() const;
+    // Setter of the z field.
+    void set_z(double z);
+    // Getter of the z field.
+    double get_z() const;
+
+private:
+    double x;
+    double y;
+    double z;
+};
+
+#endif
