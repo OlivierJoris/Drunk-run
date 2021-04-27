@@ -7,6 +7,12 @@
 #include "RGBColor.hpp"
 
 #include <cstdint>
+
+RGBColor::RGBColor(uint8_t r, uint8_t g, uint8_t b){
+    red = r;
+    green = g;
+    blue = b;
+}
   
 void RGBColor::set_red(uint8_t r){
     red = r;
