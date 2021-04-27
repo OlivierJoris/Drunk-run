@@ -39,12 +39,14 @@ int App::run(){
     }
 
     SDL_Event event;
+    Uint32 time = 0;
+    const Uint32 TIME_PER_FRAME = 1000/game->get_frame_rate();
 
     // Sets the state as running
     game->get_game_state()->set_status(GameStateStatus::ongoing);
 
     while(game->get_game_state()->get_status() == GameStateStatus::ongoing){
-
+        time = SDL_GetTicks();
         // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){
             DrunkRunEvent drEvent = Event::get_event(event);
@@ -57,6 +59,12 @@ int App::run(){
 
         // Updates screen
         SDL_RenderPresent(window->get_sdl_renderer());
+
+        // Lock rendering at 30 fps
+        Uint32 diffTime = SDL_GetTicks() - time;
+        if(diffTime < TIME_PER_FRAME){
+            SDL_Delay(TIME_PER_FRAME - diffTime);
+        }
     }
 
     return 0;
