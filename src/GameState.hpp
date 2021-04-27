@@ -28,13 +28,13 @@ public:
      *
      * @param newDist New distance travelled.
      */
-    void set_travelled_dist(double newDist);
+    void set_travelled_dist(const double newDist);
     /*
      * Increases the distance travelled by Cymi.
      *
      * @param increase Distance to add to the travelled distance.
      */
-    void increase_travelled_dist(double increase);
+    void increase_travelled_dist(const double increase);
 
     /*
      * Returns the status of the game.
@@ -47,7 +47,7 @@ public:
      *
      * @param newStatus New status of the game.
      */
-    void set_status(GameStateStatus newStatus);
+    void set_status(const GameStateStatus newStatus);
 
 private:
     double travelledDist;

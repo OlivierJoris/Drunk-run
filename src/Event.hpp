@@ -23,7 +23,7 @@ public:
      * 
      * @return The DrunkRunEvent associated to the given SDL event.
      */
-    static DrunkRunEvent get_event(SDL_Event& sdlEvent);
+    static DrunkRunEvent get_event(const SDL_Event& sdlEvent);
 };
 
 #endif

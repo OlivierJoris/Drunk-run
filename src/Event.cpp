@@ -8,7 +8,7 @@
 
 #include <SDL2/SDL.h>
 
-DrunkRunEvent Event::get_event(SDL_Event& sdlEvent){
+DrunkRunEvent Event::get_event(const SDL_Event& sdlEvent){
     // X of window
     if(sdlEvent.type == SDL_QUIT)
         return DrunkRunEvent::close;

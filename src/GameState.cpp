@@ -12,11 +12,11 @@ double GameState::get_travelled_dist() const{
     return travelledDist;
 }
 
-void GameState::set_travelled_dist(double newDist){
+void GameState::set_travelled_dist(const double newDist){
     travelledDist = newDist;
 }
 
-void GameState::increase_travelled_dist(double increase){
+void GameState::increase_travelled_dist(const double increase){
     travelledDist+=increase;
 }
 
@@ -24,6 +24,6 @@ GameStateStatus GameState::get_status() const{
     return status;
 }
 
-void GameState::set_status(GameStateStatus newStatus){
+void GameState::set_status(const GameStateStatus newStatus){
     status = newStatus;
 }
