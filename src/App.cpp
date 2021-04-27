@@ -41,17 +41,23 @@ int App::run(){
     SDL_Event event;
     Uint32 time = 0;
     const Uint32 TIME_PER_FRAME = 1000/game->get_frame_rate();
+    // With this, 1 meter = 1 second
+    const double SCORE_INCREMENT = 1.0/game->get_frame_rate();
 
     // Sets the state as running
     game->get_game_state()->set_status(GameStateStatus::ongoing);
 
     while(game->get_game_state()->get_status() == GameStateStatus::ongoing){
         time = SDL_GetTicks();
+    
         // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){
             DrunkRunEvent drEvent = Event::get_event(event);
             handle_event(drEvent);
         }
+
+        // Updates score
+        game->update_score(SCORE_INCREMENT);
 
         // Draws the game
         if(game->draw(window) < 0)

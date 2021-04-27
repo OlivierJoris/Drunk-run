@@ -114,6 +114,13 @@ public:
      */
     double get_distribution_dangerous() const;
 
+    /*
+     * Increments the score by a given amount.
+     *
+     * @param Increment for the score.
+     */
+    void update_score(const double increment) const;
+
 private:
     // State of the game.
     std::shared_ptr<GameState> state;

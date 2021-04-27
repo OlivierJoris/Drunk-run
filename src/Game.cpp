@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 #include <list>
+#include <cmath>
 
 using namespace std;
 
@@ -63,9 +64,14 @@ int Game::draw(shared_ptr<Window> w){
     if(drawRect < 0)
         return -1;
 
+    unsigned int score;
+    score = static_cast<unsigned int>(floor(state->get_travelled_dist()));
+    string scoreTxt = to_string(score);
+    scoreTxt+=" m";
+
     RGBColor white(255, 255, 255);
-    unsigned int pos = (w->get_width() / 2) - 50;
-    if(w->draw_text("Test", 48, white, 100, 100, pos, 0) < 0)
+    unsigned int pos = (w->get_width() / 2) - 25;
+    if(w->draw_text(scoreTxt, 48, white, 50, 50, pos, 0) < 0)
         return -1;
 
     // Draws other elements
@@ -113,4 +119,9 @@ double Game::get_clearance_dist() const{
 
 double Game::get_distribution_dangerous() const{
     return dangerousObstacleRate;
+}
+
+void Game::update_score(const double increment) const{
+    if(state)
+        state->increase_travelled_dist(increment);
 }
