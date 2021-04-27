@@ -6,6 +6,7 @@
 
 #include "Game.hpp"
 
+#include <iostream>
 #include <memory>
 #include <vector>
 #include <list>
@@ -29,8 +30,51 @@ Game::Game(
     obstacles = list<Object>();
 }
 
-void Game::draw(shared_ptr<Window> w){
-    // to be filled
+int Game::draw(shared_ptr<Window> w){
+    if(!w)
+        return -1;
+
+    // Black background
+    if(SDL_SetRenderDrawColor(w->get_sdl_renderer(), 0, 0, 0, 255) < 0){
+        cerr << "Error while setting background color" << endl;
+        return -1;
+    }
+    if(SDL_RenderClear(w->get_sdl_renderer()) < 0){
+        cerr << "Error while printing background color" << endl;
+        return -1;
+    }
+
+    RGBColor red(255, 0, 0);
+    if(w->draw_line(0, 0, w->get_width(), w->get_height(), red) < 0)
+        return -1;
+
+    if(w->draw_line(0, w->get_height(), w->get_width(), 0, red) < 0)
+        return -1;
+
+    RGBColor blue(0, 0, 255);
+    int drawRect;
+    drawRect = w->draw_rect(
+        w->get_height()/2,
+        w->get_width()/2,
+        w->get_width()/4,
+        w->get_height()/4,
+        blue
+    );
+    if(drawRect < 0)
+        return -1;
+
+    RGBColor white(255, 255, 255);
+    unsigned int pos = (w->get_width() / 2) - 50;
+    if(w->draw_text("Test", 48, white, 100, 100, pos, 0) < 0)
+        return -1;
+
+    // Draws other elements
+    //path->draw();
+    //kerbs[0]->draw();
+    //kerbs[1]->draw();
+    // Draw obstacles but only the want in the DoV (depth of view)
+
+    return 0;
 }
 
 shared_ptr<GameState> Game::get_game_state() const{
@@ -53,7 +97,7 @@ const list<Object>& Game::get_obstacles() const{
     return obstacles;
 }
 
-void Game::add_obstacle(Object& obstacle){
+void Game::add_obstacle(const Object& obstacle){
     /* TO DO: modifies in order to keep the list sorted by distance.
         Requires the Object class to be implemented. */
     obstacles.push_back(obstacle);

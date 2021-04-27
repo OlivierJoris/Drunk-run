@@ -46,8 +46,10 @@ public:
      * Draws the game on the given window.
      *
      * @param w The window on which to draw the game.
+     * 
+     * @return 0 no error. Else, error while drawing the game.
      */
-    void draw(std::shared_ptr<Window> w);
+    int draw(std::shared_ptr<Window> w);
 
     /*
      * Returns the state of the game.
@@ -89,7 +91,7 @@ public:
      *
      * @param obstacle Obstacle to add.
      */
-    void add_obstacle(Object& obstacle);
+    void add_obstacle(const Object& obstacle);
 
     /*
      * Returns the fixed frame rate of the game.
