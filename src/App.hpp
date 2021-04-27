@@ -37,7 +37,7 @@ public:
      *
      * @param event The DrunkRunEvent.
      */
-    void handle_event(DrunkRunEvent& event) const;
+    void handle_event(const DrunkRunEvent& event) const;
 
     /*
      * Returns the window of the app.

@@ -3,9 +3,9 @@
 # Maxime Goffart (180521) & Olivier Joris (182113)
 
 CXX=g++
-SDL_LIB=-lSDL2
+SDL_LIB=-lSDL2 -lSDL2_image -lSDL2_ttf
 SDL_INCLUDE=-I/usr/include/SDL2
-FLAGS=-std=c++17 -pedantic -Wall -Wextra
+FLAGS=-std=c++17 --pedantic -Wall -Wextra
 APP=drunkrun
 
 SOURCES=$(wildcard *.cpp)
