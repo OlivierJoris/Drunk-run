@@ -10,6 +10,8 @@
 #include "GameState.hpp"
 #include "Event.hpp"
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include <iostream>
 #include <memory>
 
@@ -43,23 +45,31 @@ int App::run(){
 
     while(game->get_game_state()->get_status() == GameStateStatus::ongoing){
 
+        // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){
             DrunkRunEvent drEvent = Event::get_event(event);
             handle_event(drEvent);
         }
 
-        SDL_UpdateWindowSurface(window->get_sdl());
+        // Draws the game
+        if(game->draw(window) < 0)
+            return -1;
+
+        // Updates screen
+        SDL_RenderPresent(window->get_sdl_renderer());
     }
 
     return 0;
 }
 
 void App::quit(){
-    SDL_DestroyWindow(window->get_sdl());
+    SDL_DestroyRenderer(window->get_sdl_renderer());
+    SDL_DestroyWindow(window->get_sdl_window());
+    TTF_Quit();
     SDL_Quit();
 }
 
-void App::handle_event(DrunkRunEvent& event) const {
+void App::handle_event(const DrunkRunEvent& event) const {
 
     switch(event) {
         case DrunkRunEvent::close:
