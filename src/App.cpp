@@ -31,8 +31,6 @@ shared_ptr<Game> App::get_game() const {
 }
 
 int App::run(){
-    cout << "* Starting the game *" << endl;
-
     if(window == nullptr || game == nullptr){
         cerr << "Unable to run game" << endl;
         return -1;
@@ -72,6 +70,12 @@ int App::run(){
             SDL_Delay(TIME_PER_FRAME - diffTime);
         }
     }
+
+    if(game->draw(window) < 0)
+        return -1;
+    SDL_Delay(1000 * 3); // Show game over message for 3 seconds
+
+
 
     return 0;
 }

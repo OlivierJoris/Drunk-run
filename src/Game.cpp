@@ -5,6 +5,7 @@
  */
 
 #include "Game.hpp"
+#include "GameState.hpp"
 
 #include <iostream>
 #include <memory>
@@ -79,6 +80,15 @@ int Game::draw(shared_ptr<Window> w){
     //kerbs[0]->draw();
     //kerbs[1]->draw();
     // Draw obstacles but only the want in the DoV (depth of view)
+
+    // If game is over, adds "game over" text
+    if(state->get_status() == GameStateStatus::ended){
+        unsigned int height = 100, width = 250;
+        unsigned int xTop = (w->get_width() / 2) - 125;
+        unsigned int yTop = (w->get_height() / 2) - 50;
+        if(w->draw_text("Game Over!", 96, white, height, width, xTop, yTop))
+            return -1;
+    }
 
     return 0;
 }
