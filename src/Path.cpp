@@ -6,6 +6,6 @@
 
 #include "Path.hpp"
 
-Path::Path(){
+Path::Path():Object(){
     // to fill
 }

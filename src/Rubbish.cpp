@@ -6,7 +6,8 @@
 
 #include "Rubbish.hpp"
 
-Rubbish::Rubbish():NonDangerousObstacle(){
+// 15x7x7 cm³ gray obstacle
+Rubbish::Rubbish():NonDangerousObstacle(15, 7, 7, 128, 128, 128){
     // to fill
 }
 

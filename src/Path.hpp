@@ -7,7 +7,9 @@
 #ifndef __PATH__
 #define __PATH__
 
-class Path{ // to fill
+#include "Object.hpp"
+
+class Path : public Object{ // to fill
 
 public:
     // Constructor.

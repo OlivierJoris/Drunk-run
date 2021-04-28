@@ -1,5 +1,5 @@
 /*
- * A kerb of the game drunk run.
+ * A rubbish obstacle of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -14,6 +14,7 @@ class Rubbish : public NonDangerousObstacle{ // to fill
 public:
     // Constructor.
     Rubbish();
+    // Tests if the obstacle hit the player.
     void test_hit();
 };
 

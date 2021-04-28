@@ -10,10 +10,13 @@
 
 #include <memory>
 
-// Represents a dangerous obstacle of the game.
+// Represents a crate object of the game.
 class Crate : public NonDangerousObstacle{
     public:
+        // Constructor.
         Crate();
+
+        // Tests if the obstacle hit the player.
         void test_hit();
 };
 

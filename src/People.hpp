@@ -10,10 +10,12 @@
 
 #include <memory>
 
-// Represents a dangerous obstacle of the game.
+// Represents a people obstacle of the game.
 class People : public DangerousObstacle{
     public:
+        // Constructor.
         People();
+        // Test if the obstacle hit the player.
         void test_hit();
 };
 

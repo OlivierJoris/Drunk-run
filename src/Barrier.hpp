@@ -10,7 +10,7 @@
 
 #include <memory>
 
-// Represents a dangerous obstacle of the game.
+// Represents a barrier object of the game.
 class Barrier : public DangerousObstacle{
     public:
         Barrier();

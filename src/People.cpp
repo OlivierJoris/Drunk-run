@@ -7,6 +7,7 @@
 
 #include <memory>
 
-People::People():DangerousObstacle(){}
+// 40x180x40 cm³ blue obstacle.
+People::People():DangerousObstacle(40, 180, 40, 0, 0, 255){}
 
 void People::test_hit(){}

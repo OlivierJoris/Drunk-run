@@ -6,7 +6,6 @@
 
 #include "Player.hpp"
 
-Player::Player(){
-    box = std::make_shared<Object>();
+// The player represented as a 40x180x40 cm³ white object.
+Player::Player():Object(40, 180, 40, 0, 0, 0){
 }
-

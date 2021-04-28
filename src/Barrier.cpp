@@ -7,5 +7,7 @@
 
 #include <memory>
 
-Barrier::Barrier():DangerousObstacle(){}
+// 120x90x20 cm³ red obstacle
+Barrier::Barrier():DangerousObstacle(120, 90, 20, 255, 0, 0){}
+
 void Barrier::test_hit(){}

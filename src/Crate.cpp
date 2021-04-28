@@ -6,7 +6,8 @@
 
 #include "Crate.hpp"
 
-Crate::Crate():NonDangerousObstacle(){
+// 45x18x30 cm³ yellow obstacle
+Crate::Crate():NonDangerousObstacle(45, 18, 30, 255, 255, 0){
     // to fill
 }
 

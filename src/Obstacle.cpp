@@ -7,6 +7,9 @@
 
 #include <memory>
 
-Obstacle::Obstacle(){
-    object = std::make_shared<Object>();
+Obstacle::Obstacle():Object(){
 }
+
+Obstacle::Obstacle(const unsigned int height, const unsigned int width, 
+             const unsigned int depth, const uint8_t r, const uint8_t g, 
+             const uint8_t b):Object(height, width, depth, r, g, b){}

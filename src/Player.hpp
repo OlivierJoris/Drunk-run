@@ -11,7 +11,7 @@
 
 #include <memory>
 
-class Player{
+class Player : public Object{
 
 public:
     // Constuctor.
@@ -29,10 +29,8 @@ private:
     const unsigned int MAX_RANGE_MOVEMENT = 6;
     // Drunk movement in seconds
     const unsigned int MOVEMENT_RATE = 2;
-    // Size of a movement 
+    // Size of a movement in cm
     const unsigned int LATERAL_MOVEMENT_SIZE = 5;
-    // Object representing a player
-    std::shared_ptr<Object> box;
 };
 
 #endif

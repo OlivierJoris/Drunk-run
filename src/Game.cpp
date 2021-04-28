@@ -6,6 +6,8 @@
 
 #include "Game.hpp"
 #include "GameState.hpp"
+#include "People.hpp"
+#include "Renderer.hpp"
 
 #include <iostream>
 #include <memory>

@@ -14,6 +14,8 @@ class Kerb : public DangerousObstacle{ // to fill
 public:
     // Constructor.
     Kerb();
+    
+    // Test if the obstacle has been hit by the player.
     void test_hit();
 };
 
