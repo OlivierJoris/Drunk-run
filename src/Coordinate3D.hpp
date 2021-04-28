@@ -12,17 +12,18 @@ class Coordinate3D{
 
 public:
     // Constructor.
-    Coordinate3D(double x, double y, double z);
+    Coordinate3D();
+    Coordinate3D(const double x, const double y, const double z);
     // Setter of the x field.
-    void set_x(double x);
+    void set_x(const double x);
     // Getter of the x field.
     double get_x() const;
     // Setter of the y field.
-    void set_y(double y);
+    void set_y(const double y);
     // Getter of the y field.
     double get_y() const;
     // Setter of the z field.
-    void set_z(double z);
+    void set_z(const double z);
     // Getter of the z field.
     double get_z() const;
 

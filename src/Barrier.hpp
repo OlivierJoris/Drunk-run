@@ -1,5 +1,5 @@
 /*
- * An object of the game drunk run.
+ * A barrier object of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -14,6 +14,7 @@
 class Barrier : public DangerousObstacle{
     public:
         Barrier();
+        void test_hit();
 };
 
 #endif

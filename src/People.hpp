@@ -14,6 +14,7 @@
 class People : public DangerousObstacle{
     public:
         People();
+        void test_hit();
 };
 
 #endif

@@ -14,6 +14,7 @@ class Kerb : public DangerousObstacle{ // to fill
 public:
     // Constructor.
     Kerb();
+    void test_hit();
 };
 
 #endif

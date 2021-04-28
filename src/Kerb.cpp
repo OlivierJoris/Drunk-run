@@ -7,5 +7,9 @@
 #include "Kerb.hpp"
 
 Kerb::Kerb():DangerousObstacle(){
-    // to fill
+    // TO DO : to fill
+}
+
+void Kerb::test_hit(){
+    
 }

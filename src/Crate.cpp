@@ -9,3 +9,7 @@
 Crate::Crate():NonDangerousObstacle(){
     // to fill
 }
+
+void Crate::test_hit(){
+
+}

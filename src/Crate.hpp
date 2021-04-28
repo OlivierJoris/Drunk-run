@@ -14,6 +14,7 @@
 class Crate : public NonDangerousObstacle{
     public:
         Crate();
+        void test_hit();
 };
 
 #endif

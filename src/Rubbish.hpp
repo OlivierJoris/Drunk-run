@@ -14,6 +14,7 @@ class Rubbish : public NonDangerousObstacle{ // to fill
 public:
     // Constructor.
     Rubbish();
+    void test_hit();
 };
 
 #endif

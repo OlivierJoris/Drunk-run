@@ -9,3 +9,4 @@
 Player::Player(){
     box = std::make_shared<Object>();
 }
+

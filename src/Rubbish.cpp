@@ -1,5 +1,5 @@
 /*
- * Implementation of the crate object of the game drunk run.
+ * Implementation of the rubbish object of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -9,3 +9,5 @@
 Rubbish::Rubbish():NonDangerousObstacle(){
     // to fill
 }
+
+void Rubbish::test_hit(){}

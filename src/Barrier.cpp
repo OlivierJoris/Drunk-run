@@ -1,5 +1,5 @@
 /*
- * Implementation of the object of the game drunk run.
+ * Implementation of the barrier object of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -8,3 +8,4 @@
 #include <memory>
 
 Barrier::Barrier():DangerousObstacle(){}
+void Barrier::test_hit(){}

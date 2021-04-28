@@ -8,3 +8,5 @@
 #include <memory>
 
 People::People():DangerousObstacle(){}
+
+void People::test_hit(){}
