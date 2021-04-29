@@ -37,7 +37,7 @@ int App::run(){
     }
 
     SDL_Event event;
-    Uint32 time = 0;
+    Uint32 time = 0, frameCounter = 0;
     const Uint32 TIME_PER_FRAME = 1000/game->get_frame_rate();
     // With this, 1 meter = 1 second
     const double SCORE_INCREMENT = 1.0/game->get_frame_rate();
@@ -46,6 +46,15 @@ int App::run(){
     game->get_game_state()->set_status(GameStateStatus::ongoing);
 
     while(game->get_game_state()->get_status() == GameStateStatus::ongoing){
+
+        // Generates random object every 50 cm (0,5 sec)
+        if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
+            frameCounter++;
+            if(frameCounter >= game->get_frame_rate() / 2){
+                game->add_random_obstacle();
+                frameCounter = 0;
+            }
+        }
         time = SDL_GetTicks();
     
         // Gets the events & reacts to them
@@ -73,8 +82,7 @@ int App::run(){
 
     if(game->draw(window) < 0)
         return -1;
-    SDL_Delay(1000 * 3); // Show game over message for 3 seconds
-
+    SDL_Delay(1000 * 2); // Show game over message for 2 seconds
 
 
     return 0;

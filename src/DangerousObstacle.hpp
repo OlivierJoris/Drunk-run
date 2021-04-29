@@ -14,8 +14,13 @@
 // Represents a dangerous obstacle of the game.
 class DangerousObstacle : public Obstacle{
     public:
+        // Number of different random dangerous obstacles (barrier, people).
+        static const unsigned int NB_RANDOM_D_OBSTACLES = 2;
+    
         // Constructor.
         DangerousObstacle();
+
+        virtual ~DangerousObstacle() = default;
 
        /* Constructor.
         *
@@ -29,6 +34,8 @@ class DangerousObstacle : public Obstacle{
         DangerousObstacle(const unsigned int height, const unsigned int width, 
              const unsigned int depth, const uint8_t r, const uint8_t g, 
              const uint8_t b);
+
+        virtual void draw() const = 0;
              
 };
 

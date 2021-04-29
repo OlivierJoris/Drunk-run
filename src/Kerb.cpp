@@ -6,10 +6,19 @@
 
 #include "Kerb.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 Kerb::Kerb():DangerousObstacle(){
     // TO DO : to fill
 }
 
 void Kerb::test_hit(){
     
+}
+
+void Kerb::draw() const{
+    // temporary
+    cout << "kerb" << endl;
 }

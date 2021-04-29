@@ -17,6 +17,9 @@ class People : public DangerousObstacle{
         People();
         // Test if the obstacle hit the player.
         void test_hit();
+
+        // Draws the person.
+        virtual void draw() const;
 };
 
 #endif

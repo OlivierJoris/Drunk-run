@@ -14,6 +14,9 @@
 class Obstacle : public Object{ 
 
 public:
+    // Number of different random obstacles (barrier, people, rubish, crate).
+    static const unsigned int NB_RANDOM_OBSTACLES = 4;
+
     // Constructor.
     Obstacle();
     
@@ -32,6 +35,9 @@ public:
 
     // Test if the obstacle hit the player
     virtual void test_hit() = 0;
+
+    // Draws the obstacle.
+    virtual void draw() const = 0;
 };
 
 #endif

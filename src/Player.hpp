@@ -16,6 +16,8 @@ class Player : public Object{
 public:
     // Constuctor.
     Player();
+
+    virtual void draw() const;
 private:
     // FOV in degree
     const unsigned int FOV = 60; 

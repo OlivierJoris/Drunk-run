@@ -18,6 +18,9 @@ class Crate : public NonDangerousObstacle{
 
         // Tests if the obstacle hit the player.
         void test_hit();
+
+        // Draws the crate.
+        virtual void draw() const;
 };
 
 #endif

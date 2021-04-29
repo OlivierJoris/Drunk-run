@@ -28,6 +28,4 @@ void Object::set_coordinates(double x, double y, double z){
     topleft->set_z(z);
 }
 
-void Object::draw(){
-    // TO DO: fill
-}
+void Object::draw() const{}

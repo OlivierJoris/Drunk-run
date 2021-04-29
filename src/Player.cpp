@@ -9,3 +9,5 @@
 // The player represented as a 40x180x40 cm³ white object.
 Player::Player():Object(40, 180, 40, 0, 0, 0){
 }
+
+void Player::draw()const{}

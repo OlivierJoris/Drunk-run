@@ -6,6 +6,10 @@
 
 #include "Crate.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 // 45x18x30 cm³ yellow obstacle
 Crate::Crate():NonDangerousObstacle(45, 18, 30, 255, 255, 0){
     // to fill
@@ -13,4 +17,8 @@ Crate::Crate():NonDangerousObstacle(45, 18, 30, 255, 255, 0){
 
 void Crate::test_hit(){
 
+}
+
+void Crate::draw() const{
+    cout << "crate" << endl;
 }

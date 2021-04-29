@@ -20,6 +20,11 @@ public:
     // Constructor.
     Object();
 
+    /*
+     * Default destructor.
+     */
+    virtual ~Object() = default;
+
    /* Constructor.
     *
     * @param height : height of the object.
@@ -35,8 +40,8 @@ public:
 
     void set_coordinates(double x, double y, double z);
            
-    // Draw the object.
-    void draw();
+    // Draws the object.
+    virtual void draw() const;
 
 protected:
     // Size of the object

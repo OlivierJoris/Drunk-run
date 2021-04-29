@@ -17,6 +17,9 @@ public:
     
     // Test if the obstacle has been hit by the player.
     void test_hit();
+
+    // Draws the kerb.
+    virtual void draw() const;
 };
 
 #endif

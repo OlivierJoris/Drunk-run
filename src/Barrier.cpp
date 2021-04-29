@@ -5,9 +5,17 @@
  */
 #include "Barrier.hpp"
 
+#include <iostream>
 #include <memory>
+
+using namespace std;
 
 // 120x90x20 cm³ red obstacle
 Barrier::Barrier():DangerousObstacle(120, 90, 20, 255, 0, 0){}
 
 void Barrier::test_hit(){}
+
+void Barrier::draw() const{
+    // temporary
+    cout << "barrier" << endl;
+}

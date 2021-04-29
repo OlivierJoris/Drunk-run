@@ -14,6 +14,8 @@ class Path : public Object{ // to fill
 public:
     // Constructor.
     Path();
+
+    virtual void draw() const;
 };
 
 #endif

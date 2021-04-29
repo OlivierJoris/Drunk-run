@@ -13,8 +13,13 @@
 // Represents a non-dangerous obstacle of the game.
 class NonDangerousObstacle : public Obstacle{
     public:
+        // Number of different random non-dangerous obstacles (rubbish, crate).
+        static const unsigned int NB_RANDOM_ND_OBSTACLES = 2;
+
         // Constuctor.
         NonDangerousObstacle();
+
+        virtual ~NonDangerousObstacle() = default;
         
        /* Constructor.
         *
@@ -28,6 +33,9 @@ class NonDangerousObstacle : public Obstacle{
         NonDangerousObstacle(const unsigned int height, const unsigned int width, 
              const unsigned int depth, const uint8_t r, const uint8_t g, 
              const uint8_t b);
+
+        // Draws the obstacle.
+        virtual void draw() const = 0;
 };
 
 #endif

@@ -15,6 +15,9 @@ class Barrier : public DangerousObstacle{
     public:
         Barrier();
         void test_hit();
+
+        // Draws the barrier.
+        virtual void draw() const;
 };
 
 #endif

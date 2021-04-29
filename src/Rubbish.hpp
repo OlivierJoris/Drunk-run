@@ -16,6 +16,9 @@ public:
     Rubbish();
     // Tests if the obstacle hit the player.
     void test_hit();
+
+    // Draws the rubbish.
+    virtual void draw() const;
 };
 
 #endif
