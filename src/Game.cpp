@@ -174,3 +174,19 @@ void Game::update_score(const double increment) const{
 unsigned int Game::get_random(unsigned int upperLimit){
     return randomGenerator() % upperLimit;
 }
+
+void Game::player_random_movement(){
+    // Need to take into account the current position of Cymi.
+    unsigned int movSizeMin = player->get_min_movement_range();
+    unsigned int movSizeMax = player->get_max_movement_range();
+    unsigned int randMovSize = get_random(movSizeMax - movSizeMin + 1);
+    
+    double increaseX;
+
+    if(get_random(2) == 0)
+        increaseX = randMovSize * player->get_movement_size();
+    else
+        increaseX = (- static_cast<double>(randMovSize)) * player->get_movement_size();
+
+    player->increaseXPosition(increaseX);
+}

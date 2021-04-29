@@ -18,6 +18,34 @@ public:
     Player();
 
     virtual void draw() const;
+
+    /*
+     * Increase/Decrease the position of the player on the x axis.
+     *
+     * @param increase Value to add to the position on the x axis.
+     */
+    void increaseXPosition(double increase);
+
+    /*
+     * Returns the minimum size of a movement of the player.
+     */
+    unsigned int get_min_movement_range() const;
+
+    /*
+     * Returns the maximum size of a movement of the player.
+     */
+    unsigned int get_max_movement_range() const;
+
+    /*
+     * Returns the rate of random movement.
+     */
+    unsigned int get_movement_rate() const;
+
+    /*
+     * Returns the size of a movement.
+     */
+    unsigned int get_movement_size() const;
+
 private:
     // FOV in degree
     const unsigned int FOV = 60; 

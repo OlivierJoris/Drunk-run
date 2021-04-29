@@ -134,6 +134,12 @@ public:
      */
     unsigned int get_random(unsigned int upperLimit);
 
+    /*
+     * Generates a random movement of the player (Cymi).
+     */
+    void player_random_movement();
+
+
 private:
     // State of the game.
     std::shared_ptr<GameState> state;
