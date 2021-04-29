@@ -6,6 +6,15 @@
 
 #include "Path.hpp"
 
-Path::Path(){
+#include <iostream>
+
+using namespace std;
+
+Path::Path():Object(){
     // to fill
+}
+
+void Path::draw() const{
+    //temporary
+    cout << "path" << endl;
 }

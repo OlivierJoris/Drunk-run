@@ -17,6 +17,7 @@
 #include <memory>
 #include <list>
 #include <vector>
+#include <random>
 
 // Represents the game of drunk run.
 class Game{
@@ -24,8 +25,8 @@ class Game{
 public:
     // Default frame rate for the game.
     static const unsigned int DEFAULT_FRAME_RATE = 30;
-    // Default dangerous obstacles rate.
-    constexpr static const double DEFAULT_DANGEROUS_RATE = 0.3L;
+    // Default dangerous obstacles rate (base 10).
+    static const unsigned int DEFAULT_DANGEROUS_RATE = 3;
     // Default clearing distance before first obstacle.
     constexpr static const double DEFAULT_CLEARANCE = 4.0L;
 
@@ -84,7 +85,7 @@ public:
      *
      * @return List of obstacles as objects.
      */
-    const std::list<Object>& get_obstacles() const;
+    const std::list<std::shared_ptr<Object>>& get_obstacles() const;
 
     /*
      * Adds an obstacle to the game.
@@ -92,6 +93,11 @@ public:
      * @param obstacle Obstacle to add.
      */
     void add_obstacle(const Object& obstacle);
+
+    /*
+     * Adds a new randomly generated obstacle.
+     */
+    void add_random_obstacle();
 
     /*
      * Returns the fixed frame rate of the game.
@@ -121,6 +127,19 @@ public:
      */
     void update_score(const double increment) const;
 
+    /*
+     * Returns a random number in [0, upperLimit[.
+     *
+     * @return Random number in [0, upperlimit[.
+     */
+    unsigned int get_random(unsigned int upperLimit);
+
+    /*
+     * Generates a random movement of the player (Cymi).
+     */
+    void player_random_movement();
+
+
 private:
     // State of the game.
     std::shared_ptr<GameState> state;
@@ -135,7 +154,10 @@ private:
     std::vector<Kerb> kerbs;
 
     // Obstacles on the path/road.
-    std::list<Object> obstacles;
+    std::list<std::shared_ptr<Object>> obstacles;
+
+    // Random number generator.
+    std::minstd_rand randomGenerator;
 
     // Frame rate of the game.
     unsigned int frameRate;

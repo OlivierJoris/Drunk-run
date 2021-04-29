@@ -13,7 +13,7 @@
 class RGBColor{
 
 public:
-
+    RGBColor();
     /*
      * Constructor.
      *

@@ -6,12 +6,22 @@
 
 #include "Game.hpp"
 #include "GameState.hpp"
+#include "Renderer.hpp"
+#include "Obstacle.hpp"
+#include "DangerousObstacle.hpp"
+#include "NonDangerousObstacle.hpp"
+#include "People.hpp"
+#include "Barrier.hpp"
+#include "Rubbish.hpp"
+#include "Crate.hpp"
 
 #include <iostream>
 #include <memory>
 #include <vector>
 #include <list>
 #include <cmath>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -29,7 +39,9 @@ Game::Game(
     kerbs.push_back(Kerb());
     kerbs.push_back(Kerb());
 
-    obstacles = list<Object>();
+    obstacles = list<shared_ptr<Object>>();
+
+    randomGenerator = minstd_rand(chrono::system_clock::now().time_since_epoch().count());
 }
 
 int Game::draw(shared_ptr<Window> w){
@@ -80,6 +92,8 @@ int Game::draw(shared_ptr<Window> w){
     //kerbs[0]->draw();
     //kerbs[1]->draw();
     // Draw obstacles but only the want in the DoV (depth of view)
+    //for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
+    //    iter->get()->draw();
 
     // If game is over, adds "game over" text
     if(state->get_status() == GameStateStatus::ended){
@@ -109,14 +123,35 @@ const vector<Kerb>& Game::get_kerbs() const{
     return kerbs;
 }
 
-const list<Object>& Game::get_obstacles() const{
+const list<shared_ptr<Object>>& Game::get_obstacles() const{
     return obstacles;
 }
 
 void Game::add_obstacle(const Object& obstacle){
     /* TO DO: modifies in order to keep the list sorted by distance.
         Requires the Object class to be implemented. */
-    obstacles.push_back(obstacle);
+    obstacles.push_back(make_shared<Object>(obstacle));
+}
+
+void Game::add_random_obstacle(){
+    unsigned int dangerousOrNot = get_random(10);
+    unsigned int type;
+
+    if(dangerousOrNot < DEFAULT_DANGEROUS_RATE){
+        // Needs to generate a dangerous obstacle
+        type = get_random(DangerousObstacle::NB_RANDOM_D_OBSTACLES);
+        if(type == 0)
+            obstacles.push_back(make_shared<Barrier>());
+        else
+            obstacles.push_back(make_shared<People>());
+    }else{
+        // Needs to generate a non-dangerous obstacle
+        type = get_random(NonDangerousObstacle::NB_RANDOM_ND_OBSTACLES);
+        if(type == 0)
+            obstacles.push_back(make_shared<Rubbish>());
+        else
+            obstacles.push_back(make_shared<Crate>());
+    }
 }
 
 unsigned int Game::get_frame_rate() const{
@@ -134,4 +169,24 @@ double Game::get_distribution_dangerous() const{
 void Game::update_score(const double increment) const{
     if(state)
         state->increase_travelled_dist(increment);
+}
+
+unsigned int Game::get_random(unsigned int upperLimit){
+    return randomGenerator() % upperLimit;
+}
+
+void Game::player_random_movement(){
+    // Need to take into account the current position of Cymi.
+    unsigned int movSizeMin = player->get_min_movement_range();
+    unsigned int movSizeMax = player->get_max_movement_range();
+    unsigned int randMovSize = get_random(movSizeMax - movSizeMin + 1);
+    
+    double increaseX;
+
+    if(get_random(2) == 0)
+        increaseX = randMovSize * player->get_movement_size();
+    else
+        increaseX = (- static_cast<double>(randMovSize)) * player->get_movement_size();
+
+    player->increaseXPosition(increaseX);
 }
