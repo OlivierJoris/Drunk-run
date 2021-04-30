@@ -11,8 +11,6 @@
 class Size3D{ 
 
 public:
-    // Constructor.
-    Size3D();
 
     /* Constructor.
      *
@@ -21,9 +19,9 @@ public:
      * @param depth Depth of the 3D size.
      */
     Size3D(
-        const unsigned int height,
-        const unsigned int width, 
-        const unsigned int depth
+        const unsigned int height = 0.0,
+        const unsigned int width = 0.0,
+        const unsigned int depth = 0.0
     );
 
     // Setter of the height field.

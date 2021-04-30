@@ -6,13 +6,11 @@
 
 #include "Coordinate3D.hpp"
 
-Coordinate3D::Coordinate3D(){}
-
 Coordinate3D::Coordinate3D(
     const double x,
-    const double y, 
+    const double y,
     const double z
-):x{x}, y{y}, z{z}{}
+):x{x}, y{y}, z{z} {}
 
 void Coordinate3D::set_x(const double x){
     Coordinate3D::x = x;

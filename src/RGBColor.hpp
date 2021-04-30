@@ -15,6 +15,7 @@ class RGBColor{
 public:
     // Constructor.
     RGBColor();
+
     /*
      * Constructor.
      *

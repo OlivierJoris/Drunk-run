@@ -6,8 +6,6 @@
 
 #include "Size3D.hpp"
 
-Size3D::Size3D(){}
-
 Size3D::Size3D(
     const unsigned int height,
     const unsigned int width,

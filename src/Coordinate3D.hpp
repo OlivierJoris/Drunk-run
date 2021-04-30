@@ -11,8 +11,6 @@
 class Coordinate3D{
 
 public:
-    // Constructor.
-    Coordinate3D();
 
     /* Constructor.
      *
@@ -20,7 +18,11 @@ public:
      * @param y Y 3D coordinate.
      * @param z Z 3D coordinate.
      */
-    Coordinate3D(const double x, const double y, const double z);
+    Coordinate3D(
+        const double x = 0.0,
+        const double y = 0.0,
+        const double z = 0.0
+    );
 
     // Setter of the x field.
     void set_x(const double x);
