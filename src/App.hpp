@@ -17,6 +17,11 @@
 class App{
 
 public:
+
+    /* Number of seconds during which to display the game over message
+        at the end of the game. */
+    static const unsigned int GAME_OVER_TIME = 2;
+
     // Constructor.
     App();
 

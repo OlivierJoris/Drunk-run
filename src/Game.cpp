@@ -111,6 +111,18 @@ shared_ptr<GameState> Game::get_game_state() const{
     return state;
 }
 
+GameStateStatus Game::get_game_status() const{
+    if(state)
+        return state->get_status();
+    else
+        return GameStateStatus::ended;
+}
+
+void Game::set_game_status(GameStateStatus status){
+    if(state)
+        state->set_status(status);
+}
+
 shared_ptr<Player> Game::get_player() const{
     return player;
 }
@@ -166,7 +178,7 @@ double Game::get_distribution_dangerous() const{
     return dangerousObstacleRate;
 }
 
-void Game::update_score(const double increment) const{
+void Game::increment_score(const double increment) const{
     if(state)
         state->increase_travelled_dist(increment);
 }

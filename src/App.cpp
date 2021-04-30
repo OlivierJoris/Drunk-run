@@ -38,17 +38,18 @@ int App::run(){
 
     SDL_Event event;
     Uint32 time = 0, frameCounter = 0, randomMovCounter = 0;
-    const Uint32 TIME_PER_FRAME = 1000/game->get_frame_rate();
-    // With this, 1 meter = 1 second
-    const double SCORE_INCREMENT = 1.0/game->get_frame_rate();
+    // Time per frame in ms
+    const Uint32 TIME_PER_FRAME = 1000 / game->get_frame_rate();
+    // Score increment per frame. With this, 1 meter = 1 second
+    const double SCORE_INCREMENT = 1.0 / game->get_frame_rate();
 
-    // Sets the state as running
-    game->get_game_state()->set_status(GameStateStatus::ongoing);
+    // Sets the status as running
+    game->set_game_status(GameStateStatus::ongoing);
 
-    while(game->get_game_state()->get_status() == GameStateStatus::ongoing){
+    while(game->get_game_status() == GameStateStatus::ongoing){
         time = SDL_GetTicks();
 
-        // Generates random object every 50 cm (0,5 sec)
+        // Generates random object every 50 cm (0,5 sec) after clearance
         if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
             if(frameCounter >= game->get_frame_rate() / 2){
                 game->add_random_obstacle();
@@ -57,7 +58,7 @@ int App::run(){
                 frameCounter++;
         }
 
-        // One random movement every 2 seconds
+        // One random movement at a given rate (2 seconds as default)
         if(randomMovCounter >= game->get_player()->get_movement_rate()){
             game->player_random_movement();
             randomMovCounter = 0;
@@ -70,8 +71,8 @@ int App::run(){
             handle_event(drEvent);
         }
 
-        // Updates score
-        game->update_score(SCORE_INCREMENT);
+        // Increments score
+        game->increment_score(SCORE_INCREMENT);
 
         // Draws the game
         if(game->draw(window) < 0)
@@ -80,17 +81,18 @@ int App::run(){
         // Updates screen
         SDL_RenderPresent(window->get_sdl_renderer());
 
-        // Lock rendering at 30 fps
+        // Lock rendering at given frame rate
         Uint32 diffTime = SDL_GetTicks() - time;
         if(diffTime < TIME_PER_FRAME){
             SDL_Delay(TIME_PER_FRAME - diffTime);
         }
     }
 
+    // If game is ended, shows game over message for 2 seconds.
     if(game->draw(window) < 0)
         return -1;
-    SDL_Delay(1000 * 2); // Show game over message for 2 seconds
 
+    SDL_Delay(1000 * GAME_OVER_TIME);
 
     return 0;
 }
