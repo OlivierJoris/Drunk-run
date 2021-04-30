@@ -64,6 +64,10 @@ int App::run(){
             randomMovCounter = 0;
         }else
             randomMovCounter+=1;
+
+        /* Cymi is always walking forward. Since the score is the distance,
+            we can use the score increment for the distance */
+        game->get_player()->player_goes_forward(SCORE_INCREMENT);
     
         // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){
@@ -112,13 +116,13 @@ void App::handle_event(const DrunkRunEvent& event) const {
             break;
         
         case DrunkRunEvent::left:
-            cout << "Cymi going left" << endl;
-            // Need to call the adequate function inside the Player class
+            if(game && game->get_player())
+                game->get_player()->player_goes_left();
             break;
         
         case DrunkRunEvent::right:
-            cout << "Cymi going right" << endl;
-            // Need to call the adequate function inside the Player class
+            if(game && game->get_player())
+                game->get_player()->player_goes_right();
             break;
         
         default:

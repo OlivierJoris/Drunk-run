@@ -6,9 +6,13 @@
 
 #include "Player.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 Player::Player(): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
     set_coordinates(
-        0 - DEFAULT_WIDTH/2,
+        0 - static_cast<double>(DEFAULT_WIDTH/2),
         -(405.0/2 - 180),
         0
     );
