@@ -8,16 +8,18 @@
 
 Size3D::Size3D(){}
 
-Size3D::Size3D(const unsigned int height, const unsigned int width, 
-               const unsigned int depth):height{height}, width{width}, depth{depth}{
-}
+Size3D::Size3D(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth
+):height{height}, width{width}, depth{depth}{}
 
 void Size3D::set_height(const unsigned int height){
     Size3D::height = height;
 }
 
 unsigned int Size3D::get_height() const{
-    return Size3D::height;
+    return height;
 }
 
 void Size3D::set_width(const unsigned int width){
@@ -25,7 +27,7 @@ void Size3D::set_width(const unsigned int width){
 }
 
 unsigned int Size3D::get_width() const{
-    return Size3D::width;
+    return width;
 }
    
 void Size3D::set_depth(const unsigned int depth){
@@ -33,5 +35,5 @@ void Size3D::set_depth(const unsigned int depth){
 }
     
 unsigned int Size3D::get_depth() const{
-    return Size3D::depth;
+    return depth;
 }

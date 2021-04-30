@@ -1,5 +1,5 @@
 /*
- * A three dimensionnal size.
+ * A three dimensional size.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -7,21 +7,24 @@
 #ifndef __SIZE_3D__
 #define __SIZE_3D__
 
-// Represents a three dimensionnal size.
+// Represents a three dimensional size.
 class Size3D{ 
 
 public:
-    // Constructors
+    // Constructor.
     Size3D();
 
-   /* Constructor.
-    *
-    * @param height : height of the 3D size.
-    * @param width : width of the 3D size.
-    * @param depth : depth of the 3D size.
-    */
-    Size3D(const unsigned int height, const unsigned int width, 
-           const unsigned int depth);
+    /* Constructor.
+     *
+     * @param height Height of the 3D size.
+     * @param width Width of the 3D size.
+     * @param depth Depth of the 3D size.
+     */
+    Size3D(
+        const unsigned int height,
+        const unsigned int width, 
+        const unsigned int depth
+    );
 
     // Setter of the height field.
     void set_height(const unsigned int height);
