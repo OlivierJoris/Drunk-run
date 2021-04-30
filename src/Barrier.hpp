@@ -41,6 +41,15 @@ public:
         const double z = 0.0
     );
 
+    /*
+     * Constructor.
+     *
+     * @param x X coordinate of top left corner.
+     * @param y Y coordinate of top left corner.
+     * @param z Z coordinate of top left corner.
+     */
+    Barrier(const double x, const double y, const double z);
+
     // Draws the barrier.
     virtual void draw() const;
 

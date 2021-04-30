@@ -23,6 +23,13 @@ Rubbish::Rubbish(
     const double z
 ): NonDangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
+Rubbish::Rubbish(const double x, const double y, const double z)
+: NonDangerousObstacle(
+    DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH,
+    DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE,
+    x, y, z
+){}
+
 int Rubbish::test_hit(shared_ptr<Player> player) const {
     // temporary
     return 0;

@@ -102,13 +102,6 @@ public:
     const std::list<std::shared_ptr<Object>>& get_obstacles() const;
 
     /*
-     * Adds an obstacle to the game.
-     *
-     * @param obstacle Obstacle to add.
-     */
-    void add_obstacle(const Object& obstacle);
-
-    /*
      * Adds a new randomly generated obstacle.
      */
     void add_random_obstacle();

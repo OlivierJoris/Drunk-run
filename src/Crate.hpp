@@ -42,6 +42,15 @@ public:
     );
 
     /*
+     * Constructor.
+     *
+     * @param x X coordinate of top left corner.
+     * @param y Y coordinate of top left corner.
+     * @param z Z coordinate of top left corner.
+     */
+    Crate(const double x, const double y, const double z);
+
+    /*
      * Tests if the obstacle hit the player.
      *
      * @param player The player.

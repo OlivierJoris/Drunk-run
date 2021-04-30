@@ -24,6 +24,13 @@ People::People(
     const double z
 ): DangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
+People::People(const double x, const double y, const double z)
+: DangerousObstacle(
+    DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH,
+    DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE,
+    x, y, z
+){}
+
 int People::test_hit(shared_ptr<Player>) const {
     // temporary
     return 0;
