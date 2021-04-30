@@ -13,9 +13,6 @@
 class RGBColor{
 
 public:
-    // Constructor.
-    RGBColor();
-
     /*
      * Constructor.
      *
@@ -23,7 +20,7 @@ public:
      * @param g Value for green component.
      * @param b Value for blue component.
      */
-    RGBColor(uint8_t r, uint8_t g, uint8_t b);
+    RGBColor(uint8_t r = 0, uint8_t g = 0, uint8_t b = 0);
 
     /*
      * Sets the value for the red component.
