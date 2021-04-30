@@ -1,5 +1,5 @@
 /*
- * A three dimensionnal coordinate.
+ * A three dimensional coordinate.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -7,19 +7,19 @@
 #ifndef __COORDINATE_3D__
 #define __COORDINATE_3D__
 
-// Represents a three dimensionnal size.
-class Coordinate3D{ 
+// Represents a coordinate in three dimensions.
+class Coordinate3D{
 
 public:
     // Constructor.
     Coordinate3D();
 
-   /* Constructor.
-    *
-    * @param x : x 3D coordinate.
-    * @param y : y 3D coordinate.
-    * @param z : z 3D coordinate.
-    */
+    /* Constructor.
+     *
+     * @param x X 3D coordinate.
+     * @param y Y 3D coordinate.
+     * @param z Z 3D coordinate.
+     */
     Coordinate3D(const double x, const double y, const double z);
 
     // Setter of the x field.
