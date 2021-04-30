@@ -58,25 +58,6 @@ int Game::draw(shared_ptr<Window> w){
         return -1;
     }
 
-    RGBColor red(255, 0, 0);
-    if(w->draw_line(0, 0, w->get_width(), w->get_height(), red) < 0)
-        return -1;
-
-    if(w->draw_line(0, w->get_height(), w->get_width(), 0, red) < 0)
-        return -1;
-
-    RGBColor blue(0, 0, 255);
-    int drawRect;
-    drawRect = w->draw_rect(
-        w->get_height()/2,
-        w->get_width()/2,
-        w->get_width()/4,
-        w->get_height()/4,
-        blue
-    );
-    if(drawRect < 0)
-        return -1;
-
     unsigned int score;
     score = static_cast<unsigned int>(floor(state->get_travelled_dist()));
     string scoreTxt = to_string(score);
