@@ -5,17 +5,27 @@
  */
 
 #include "Kerb.hpp"
+#include "DangerousObstacle.hpp"
 
 #include <iostream>
 
 using namespace std;
 
-Kerb::Kerb():DangerousObstacle(){
-    // TO DO : to fill
-}
+Kerb::Kerb(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth,
+    const uint8_t r,
+    const uint8_t g,
+    const uint8_t b,
+    const double x,
+    const double y,
+    const double z
+): DangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
-void Kerb::test_hit(){
-    
+int Kerb::test_hit(shared_ptr<Player> player) const {
+    // temporary
+    return 0;
 }
 
 void Kerb::draw() const{

@@ -21,34 +21,53 @@ public:
     Object();
 
     /*
+     * Constructor.
+     *
+     * @param height Height of the object.
+     * @param width Width of the object.
+     * @param depth Depth of the object.
+     * @param r Red value of the object color.
+     * @param g Green value of the object color.
+     * @param b Blue value of the object color.
+     * @param x X coordinate of top left corner.
+     * @param y Y coordinate of top left corner.
+     * @param z Z coordinate of top left corner.
+     */
+    Object(
+        const unsigned int height,
+        const unsigned int width,
+        const unsigned int depth,
+        const uint8_t r,
+        const uint8_t g, 
+        const uint8_t b,
+        const double x = 0.0,
+        const double y = 0.0,
+        const double z = 0.0
+    );
+        
+    /*
      * Default destructor.
      */
     virtual ~Object() = default;
 
-   /* Constructor.
-    *
-    * @param height : height of the object.
-    * @param width : width of the object.
-    * @param depth : depth of the object.
-    * @param r : red value of the object color.
-    * @param g : green value of the object color.
-    * @param b : blue value of the object color.
-    */
-    Object(const unsigned int height, const unsigned int width, 
-           const unsigned int depth, const uint8_t r, const uint8_t g, 
-           const uint8_t b);
-
+    /*
+     * Sets the 3D coordinates of the object.
+     *
+     * @param x X coordinate.
+     * @param y Y coordinate.
+     * @param z Z coordinate.
+     */
     void set_coordinates(double x, double y, double z);
            
     // Draws the object.
     virtual void draw() const;
 
 protected:
-    // Size of the object
+    // Size of the object.
     std::shared_ptr<Size3D> size;
-    // 3D coordinates of the top left coin of the object
+    // 3D coordinates of the top left corner of the object.
     std::shared_ptr<Coordinate3D> topleft;
-    // RGB color of the obstacle
+    // RGB color of the obstacle.
     std::shared_ptr<RGBColor> color;
 };
 

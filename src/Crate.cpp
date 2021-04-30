@@ -5,20 +5,30 @@
  */
 
 #include "Crate.hpp"
+#include "NonDangerousObstacle.hpp"
 
 #include <iostream>
 
 using namespace std;
 
-// 45x18x30 cm³ yellow obstacle
-Crate::Crate():NonDangerousObstacle(45, 18, 30, 255, 255, 0){
-    // to fill
-}
+Crate::Crate(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth,
+    const uint8_t r,
+    const uint8_t g,
+    const uint8_t b,
+    const double x,
+    const double y,
+    const double z
+): NonDangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
-void Crate::test_hit(){
-
+int Crate::test_hit(shared_ptr<Player> player) const {
+    // temporary
+    return 0;
 }
 
 void Crate::draw() const{
+    // temporary
     cout << "crate" << endl;
 }

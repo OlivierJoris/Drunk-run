@@ -3,17 +3,32 @@
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
+
 #include "Barrier.hpp"
+#include "DangerousObstacle.hpp"
+#include "Player.hpp"
 
 #include <iostream>
 #include <memory>
 
 using namespace std;
 
-// 120x90x20 cm³ red obstacle
-Barrier::Barrier():DangerousObstacle(120, 90, 20, 255, 0, 0){}
+Barrier::Barrier(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth,
+    const uint8_t r,
+    const uint8_t g,
+    const uint8_t b,
+    const double x,
+    const double y,
+    const double z
+): DangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
-void Barrier::test_hit(){}
+int Barrier::test_hit(shared_ptr<Player>) const{
+    // temporary
+    return 0;
+}
 
 void Barrier::draw() const{
     // temporary

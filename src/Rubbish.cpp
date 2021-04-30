@@ -5,17 +5,28 @@
  */
 
 #include "Rubbish.hpp"
+#include "NonDangerousObstacle.hpp"
 
 #include <iostream>
 
 using namespace std;
 
-// 15x7x7 cm³ gray obstacle
-Rubbish::Rubbish():NonDangerousObstacle(15, 7, 7, 128, 128, 128){
-    // to fill
-}
+Rubbish::Rubbish(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth,
+    const uint8_t r,
+    const uint8_t g,
+    const uint8_t b,
+    const double x,
+    const double y,
+    const double z
+): NonDangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
-void Rubbish::test_hit(){}
+int Rubbish::test_hit(shared_ptr<Player> player) const {
+    // temporary
+    return 0;
+}
 
 void Rubbish::draw() const{
     // temporary

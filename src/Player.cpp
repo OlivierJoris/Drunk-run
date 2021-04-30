@@ -6,15 +6,32 @@
 
 #include "Player.hpp"
 
-
-// The player represented as a 40x180x40 cm³ white object.
-Player::Player(): Object(40, 180, 40, 0, 0, 0){
-    set_coordinates(0, 0, 0);
+Player::Player(): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
+    set_coordinates(
+        0 - DEFAULT_WIDTH/2,
+        -(405.0/2 - 180),
+        0
+    );
 }
 
 void Player::increaseXPosition(double increase){
     double currentX = topleft->get_x();
     topleft->set_x(currentX + increase);
+}
+
+void Player::player_goes_forward(double increase){
+    double currentZ = topleft->get_z();
+    topleft->set_z(currentZ + increase);
+}
+
+void Player::player_goes_left(){
+    double currentX = topleft->get_x();
+    topleft->set_x(currentX - LATERAL_MOVEMENT_SIZE);
+}
+
+void Player::player_goes_right(){
+    double currentX = topleft->get_x();
+    topleft->set_x(currentX + LATERAL_MOVEMENT_SIZE);
 }
 
 unsigned int Player::get_min_movement_range() const{
@@ -32,5 +49,3 @@ unsigned int Player::get_movement_rate() const{
 unsigned int Player::get_movement_size() const{
     return LATERAL_MOVEMENT_SIZE;
 }
-
-void Player::draw()const{}
