@@ -7,6 +7,8 @@
 #ifndef __RENDERER__
 #define __RENDERER__
 
+#include "Player.hpp"
+
 class Renderer{
 
 public:
@@ -19,7 +21,7 @@ public:
      * 
      * @return The value in pixel.
      */ 
-    double static from_cm_to_pixel(double value);
+    double static from_cm_to_pixel_x(double x, std::shared_ptr<Player> p);
 
     /* Converts a x coord (in pixel) from the centered coordinate system to 
      * the window coordinate system.
@@ -45,10 +47,11 @@ public:
      *
      * @param x : the given x 3D coordinate.
      * @param z : the given z 3D coordinate.
+     * @param p : pointer to player.
      * 
      * @return The x perspective coordinate.
      */ 
-    double static compute_perspective_x(double x, double z);
+    double static compute_perspective_x(double x, double z, std::shared_ptr<Player> p);
 
     /* Computes the y perspective coordinate given the y and z 3D coordinates.
      *
@@ -59,13 +62,21 @@ public:
      */ 
     double static compute_perspective_y(double y, double z);
 
+    double getScreenWidth(std::shared_ptr<Player> p);
+
+    double getScreenHeight(std::shared_ptr<Player> p);
+
+    double from_cm_to_pixel_x(double x, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
+
+    double from_cm_to_pixel_y(double y, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
+
 private:
     // in cm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     constexpr static double DISTANCE_EYE_GROUND = 170.0;
     // in cm
     constexpr static double DISTANCE_EYE_SCREEN = 20.0;
-    // in pixel / cm
-    const static unsigned int SCALE = 3;
+    // Ratio between width and height of the screen
+    constexpr static double ASPECT_RATIO = 1.33333333333333333333;
 };
 
 #endif

@@ -10,8 +10,11 @@
 #include "Size3D.hpp"
 #include "Coordinate3D.hpp"
 #include "RGBColor.hpp"
+#include "Window.hpp"
 
 #include <memory>
+
+class Player;
 
 // Represents an object of the game.
 class Object{ 
@@ -60,7 +63,7 @@ public:
     void set_coordinates(double x, double y, double z);
            
     // Draws the object.
-    virtual void draw() const;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
 protected:
     // Size of the object.

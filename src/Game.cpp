@@ -69,12 +69,12 @@ int Game::draw(shared_ptr<Window> w){
         return -1;
 
     // Draws other elements
-    //path->draw();
-    //kerbs[0]->draw();
-    //kerbs[1]->draw();
+    path->draw(w, player);
+    kerbs[0].draw(w, player);
+    kerbs[1].draw(w, player);
     // Draw obstacles but only the want in the DoV (depth of view)
-    //for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
-    //    iter->get()->draw();
+    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
+       iter->get()->draw(w, player);
 
     // If game is over, adds "game over" text
     if(state->get_status() == GameStateStatus::ended){

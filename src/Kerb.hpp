@@ -45,7 +45,7 @@ public:
     virtual int test_hit(std::shared_ptr<Player> player) const;
 
     // Draws the kerb.
-    virtual void draw() const;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 };
 
 #endif

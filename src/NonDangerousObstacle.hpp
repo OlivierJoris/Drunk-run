@@ -50,7 +50,7 @@ public:
     virtual ~NonDangerousObstacle() = default;
 
     // Draws the obstacle.
-    virtual void draw() const = 0;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
 
     /*
      * Tests if the obstacle hit the player.

@@ -35,7 +35,7 @@ int Crate::test_hit(shared_ptr<Player> player) const {
     return 0;
 }
 
-void Crate::draw() const{
-    // temporary
-    cout << "crate" << endl;
+void Crate::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+    Object::draw(w, p);
+    // cout << "crate" << endl;
 }

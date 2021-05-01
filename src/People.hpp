@@ -8,6 +8,8 @@
 #define __PEOPLE__
 
 #include "DangerousObstacle.hpp"
+#include "Window.hpp"
+#include "Player.hpp"
 
 #include <memory>
 
@@ -51,7 +53,7 @@ public:
     People(const double x, const double y, const double z);
 
     // Draws the person.
-    virtual void draw() const;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
     /*
      * Tests if the obstacle hit the player.

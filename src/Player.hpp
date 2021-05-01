@@ -11,7 +11,7 @@
 
 #include <memory>
 
-class Player: public Object{
+class Player: public Object {
 
 public:
 
@@ -26,7 +26,7 @@ public:
     Player();
 
     // Draws the player.
-    virtual void draw() const {};
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const {};
 
     /*
      * Increases/Decreases the position of the player on the x axis.
@@ -71,6 +71,10 @@ public:
      * Returns the size of a movement.
      */
     unsigned int get_movement_size() const;
+
+    double get_x() const;
+
+    unsigned get_fov() const;
 
 private:
     // FOV in degree.

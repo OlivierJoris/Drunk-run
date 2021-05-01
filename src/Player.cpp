@@ -53,3 +53,11 @@ unsigned int Player::get_movement_rate() const{
 unsigned int Player::get_movement_size() const{
     return LATERAL_MOVEMENT_SIZE;
 }
+
+double Player::get_x() const{
+    return topleft->get_x();
+}
+
+unsigned int Player::get_fov() const{
+    return FOV;
+}
