@@ -60,6 +60,20 @@ public:
     std::shared_ptr<GameState> get_game_state() const;
 
     /*
+     * Returns the status of the game.
+     *
+     * @return The status of the game.
+     */
+    GameStateStatus get_game_status() const;
+
+    /*
+     *  Sets the status (running or end) of the game.
+     *
+     * @param status The new status of the game.
+     */
+    void set_game_status(GameStateStatus status);
+
+    /*
      * Returns the player of the game.
      *
      * @return Player of the game.
@@ -86,13 +100,6 @@ public:
      * @return List of obstacles as objects.
      */
     const std::list<std::shared_ptr<Object>>& get_obstacles() const;
-
-    /*
-     * Adds an obstacle to the game.
-     *
-     * @param obstacle Obstacle to add.
-     */
-    void add_obstacle(const Object& obstacle);
 
     /*
      * Adds a new randomly generated obstacle.
@@ -125,7 +132,7 @@ public:
      *
      * @param Increment for the score.
      */
-    void update_score(const double increment) const;
+    void increment_score(const double increment) const;
 
     /*
      * Returns a random number in [0, upperLimit[.

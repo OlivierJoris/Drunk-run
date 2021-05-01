@@ -65,6 +65,10 @@ int Window::draw_rect(
     const unsigned int yTopLeft,
     const RGBColor& color
 ){
+    if(!(check_x_coordinate(xTopLeft + width) &&
+            check_y_coordinate(yTopLeft + height)))
+        return -1;
+
     // Builds rect
     SDL_Rect rect;
     rect.x = xTopLeft; rect.y = yTopLeft;
@@ -97,6 +101,10 @@ int Window::draw_line(
     const unsigned int yEnd,
     const RGBColor& color
 ){
+    if(!(check_x_coordinate(xStart) && check_y_coordinate(yStart) &&
+            check_x_coordinate(xEnd) && check_y_coordinate(yEnd)))
+        return -1;
+
     int setColor;
     // Sets color
     setColor = SDL_SetRenderDrawColor(
@@ -126,6 +134,10 @@ int Window::draw_text(
     const unsigned int xTopLeft,
     const unsigned int yTopLeft
 ){
+    if(!(check_x_coordinate(xTopLeft + width) &&
+            check_y_coordinate(yTopLeft + height)))
+        return -1;
+
     // Based on https://stackoverflow.com/questions/22886500/how-to-render-text-in-sdl2
 
     TTF_Font* font = TTF_OpenFont("OpenSans.ttf", fontSize);
@@ -173,4 +185,18 @@ int Window::draw_text(
         SDL_DestroyTexture(texture);
 
     return 0;
+}
+
+bool Window::check_x_coordinate(const unsigned int x) const{
+    if(x > width)
+        return false;
+    else
+        return true;    
+}
+
+bool Window::check_y_coordinate(const unsigned int y) const{
+    if(y > height)
+        return false;
+    else
+        return true;
 }

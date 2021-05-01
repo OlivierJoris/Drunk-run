@@ -14,11 +14,19 @@ Object::Object(){
     color = std::make_shared<RGBColor>();
 }
 
-Object::Object(const unsigned int height, const unsigned int width, 
-               const unsigned int depth, const uint8_t r, const uint8_t g, 
-               const uint8_t b){
+Object::Object(
+    const unsigned int height,
+    const unsigned int width,
+    const unsigned int depth,
+    const uint8_t r,
+    const uint8_t g,
+    const uint8_t b,
+    const double x,
+    const double y,
+    const double z
+){
     size = std::make_shared<Size3D>(height, width, depth);
-    topleft = std::make_shared<Coordinate3D>();
+    topleft = std::make_shared<Coordinate3D>(x, y, z);
     color = std::make_shared<RGBColor>(r, g, b);
 }
 

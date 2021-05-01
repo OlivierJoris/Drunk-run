@@ -58,25 +58,6 @@ int Game::draw(shared_ptr<Window> w){
         return -1;
     }
 
-    RGBColor red(255, 0, 0);
-    if(w->draw_line(0, 0, w->get_width(), w->get_height(), red) < 0)
-        return -1;
-
-    if(w->draw_line(0, w->get_height(), w->get_width(), 0, red) < 0)
-        return -1;
-
-    RGBColor blue(0, 0, 255);
-    int drawRect;
-    drawRect = w->draw_rect(
-        w->get_height()/2,
-        w->get_width()/2,
-        w->get_width()/4,
-        w->get_height()/4,
-        blue
-    );
-    if(drawRect < 0)
-        return -1;
-
     unsigned int score;
     score = static_cast<unsigned int>(floor(state->get_travelled_dist()));
     string scoreTxt = to_string(score);
@@ -111,6 +92,18 @@ shared_ptr<GameState> Game::get_game_state() const{
     return state;
 }
 
+GameStateStatus Game::get_game_status() const{
+    if(state)
+        return state->get_status();
+    else
+        return GameStateStatus::ended;
+}
+
+void Game::set_game_status(GameStateStatus status){
+    if(state)
+        state->set_status(status);
+}
+
 shared_ptr<Player> Game::get_player() const{
     return player;
 }
@@ -127,30 +120,36 @@ const list<shared_ptr<Object>>& Game::get_obstacles() const{
     return obstacles;
 }
 
-void Game::add_obstacle(const Object& obstacle){
-    /* TO DO: modifies in order to keep the list sorted by distance.
-        Requires the Object class to be implemented. */
-    obstacles.push_back(make_shared<Object>(obstacle));
-}
-
 void Game::add_random_obstacle(){
     unsigned int dangerousOrNot = get_random(10);
     unsigned int type;
+
+    double x = 70 + get_random(400);
+    double y = -202.5;
+    double z = state->get_travelled_dist();
 
     if(dangerousOrNot < DEFAULT_DANGEROUS_RATE){
         // Needs to generate a dangerous obstacle
         type = get_random(DangerousObstacle::NB_RANDOM_D_OBSTACLES);
         if(type == 0)
-            obstacles.push_back(make_shared<Barrier>());
+            obstacles.push_back(
+                make_shared<Barrier>(x, y + Barrier::DEFAULT_HEIGHT, z)
+            );
         else
-            obstacles.push_back(make_shared<People>());
+            obstacles.push_back(
+                make_shared<People>(x, y + People::DEFAULT_HEIGHT, z)
+            );
     }else{
         // Needs to generate a non-dangerous obstacle
         type = get_random(NonDangerousObstacle::NB_RANDOM_ND_OBSTACLES);
         if(type == 0)
-            obstacles.push_back(make_shared<Rubbish>());
+            obstacles.push_back(
+                make_shared<Rubbish>(x, y + Rubbish::DEFAULT_HEIGHT, z)
+            );
         else
-            obstacles.push_back(make_shared<Crate>());
+            obstacles.push_back(
+                make_shared<Crate>(x, y + Crate::DEFAULT_HEIGHT, z)
+            );
     }
 }
 
@@ -166,7 +165,7 @@ double Game::get_distribution_dangerous() const{
     return dangerousObstacleRate;
 }
 
-void Game::update_score(const double increment) const{
+void Game::increment_score(const double increment) const{
     if(state)
         state->increase_travelled_dist(increment);
 }

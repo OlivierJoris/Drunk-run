@@ -16,8 +16,9 @@
 class Window{
 
 public:
-
+    // Default width of the window.
     static const unsigned int DEFAULT_WIDTH = 640;
+    // Default height of the window.
     static const unsigned int DEFAULT_HEIGHT = 480;
 
     /*
@@ -68,8 +69,8 @@ public:
      *
      * @param height Height of the rectangle (in pixels).
      * @param width Width of the rectangle (in pixels).
-     * @param xTopLeft X coordinate of the top left corner.
-     * @param yTopLeft Y coordinate of the top left corner.
+     * @param xTopLeft X coordinate of the top left corner (sdl window coordinate).
+     * @param yTopLeft Y coordinate of the top left corner (sdl window coordinate).
      * @param color Color of the border of the rectangle.
      * 
      * @return 0 no error. Else, error while drawing.
@@ -85,10 +86,10 @@ public:
     /*
      * Draws a line on the window.
      *
-     * @param xStart X coordinate of the start of the line.
-     * @param yStart Y coordinate of the start of the line.
-     * @param xEnd X coordinate of the end of the line.
-     * @param yEnd Y coordinate of the end of the line.
+     * @param xStart X coordinate of the start of the line (sdl window coordinate).
+     * @param yStart Y coordinate of the start of the line (sdl window coordinate).
+     * @param xEnd X coordinate of the end of the line (sdl window coordinate).
+     * @param yEnd Y coordinate of the end of the line (sdl window coordinate).
      * @param color Color of the line.
      * 
      * @return 0 no error. Else, error while drawing.
@@ -107,10 +108,10 @@ public:
      * @param text Text to display.
      * @param fontSize Size of the font.
      * @param textColor Color of the text.
-     * @param height Height of the text.
-     * @param width Width of the text.
-     * @param xTopLeft X coordinate of the top left corner.
-     * @param yTopLeft Y coordinate of the top left corner.
+     * @param height Height of the text (in pixels).
+     * @param width Width of the text (in pixels).
+     * @param xTopLeft X coordinate of the top left corner (sdl window coordinate).
+     * @param yTopLeft Y coordinate of the top left corner (sdl window coordinate).
      *
      * @return 0 no error. -1 SDL error. -2 TTF error.
      */
@@ -129,6 +130,19 @@ private:
      * Builds the SDL_window.
      */
     void build_window();
+
+    /*
+     * Checks if a given x coordinate fit in the window.
+     *
+     * @return true if it fits. false if it does not.
+     */
+    bool check_x_coordinate(const unsigned int x) const;
+    /*
+     * Checks if a given y coordinate fit in the window.
+     *
+     * @return true if it fits. false if it does not.
+     */
+    bool check_y_coordinate(const unsigned int y) const;
 
     unsigned int height;
     unsigned int width;

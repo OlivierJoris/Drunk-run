@@ -11,20 +11,46 @@
 
 #include <memory>
 
-class Player : public Object{
+class Player: public Object{
 
 public:
+
+    // Default height of the player in cm.
+    static const unsigned int DEFAULT_HEIGHT = 180;
+    // Default width of the player in cm.
+    static const unsigned int DEFAULT_WIDTH = 40;
+    // Default depth of the player in cm.
+    static const unsigned int DEFAULT_DEPTH = 40;
+
     // Constuctor.
     Player();
 
-    virtual void draw() const;
+    // Draws the player.
+    virtual void draw() const {};
 
     /*
-     * Increase/Decrease the position of the player on the x axis.
+     * Increases/Decreases the position of the player on the x axis.
      *
      * @param increase Value to add to the position on the x axis.
      */
     void increaseXPosition(double increase);
+
+    /*
+     * Player goes forward with a movement of size increase.
+     *
+     * @param increase Increase in depth.
+     */
+    void player_goes_forward(double increase);
+
+    /*
+     * Player does one movement to the left.
+     */
+    void player_goes_left();
+
+    /*
+     * Player does one movement to the right.
+     */
+    void player_goes_right();
 
     /*
      * Returns the minimum size of a movement of the player.
@@ -47,19 +73,19 @@ public:
     unsigned int get_movement_size() const;
 
 private:
-    // FOV in degree
+    // FOV in degree.
     const unsigned int FOV = 60; 
-    // DOV in cm
+    // DOV in cm.
     const unsigned int DOV = 15000;
-    // Cm per second
-    const unsigned int SPEED = 10;
-    // Min range for drunk movement 
+    // Cm per second.
+    const unsigned int SPEED = 100;
+    // Min range for drunk movement.
     const unsigned int MIN_RANGE_MOVEMENT = 1;
-    // Max range for drunk movement
+    // Max range for drunk movement.
     const unsigned int MAX_RANGE_MOVEMENT = 6;
-    // Drunk movement in seconds
+    // Drunk movement in seconds.
     const unsigned int MOVEMENT_RATE = 2;
-    // Size of a movement in cm
+    // Size of a movement in cm.
     const unsigned int LATERAL_MOVEMENT_SIZE = 5;
 };
 

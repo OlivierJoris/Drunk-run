@@ -15,8 +15,7 @@
 
 using namespace std;
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
     // Initializes SDL
     int initSDL = SDL_Init(SDL_INIT_VIDEO);
     if(initSDL < 0){

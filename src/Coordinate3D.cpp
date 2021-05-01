@@ -6,18 +6,18 @@
 
 #include "Coordinate3D.hpp"
 
-Coordinate3D::Coordinate3D(){}
-
-Coordinate3D::Coordinate3D(const double x, const double y, 
-                           const double z):x{x}, y{y}, z{z}{
-}
+Coordinate3D::Coordinate3D(
+    const double x,
+    const double y,
+    const double z
+):x{x}, y{y}, z{z} {}
 
 void Coordinate3D::set_x(const double x){
     Coordinate3D::x = x;
 }
 
 double Coordinate3D::get_x() const{
-    return Coordinate3D::x;
+    return x;
 }
 
 void Coordinate3D::set_y(const double y){
@@ -25,7 +25,7 @@ void Coordinate3D::set_y(const double y){
 }
 
 double Coordinate3D::get_y() const{
-    return Coordinate3D::y;
+    return y;
 }
 
 void Coordinate3D::set_z(const double z){
@@ -33,5 +33,5 @@ void Coordinate3D::set_z(const double z){
 }
 
 double Coordinate3D::get_z() const{
-    return Coordinate3D::z;
+    return z;
 }
