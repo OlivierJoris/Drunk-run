@@ -8,6 +8,7 @@
 #include "Renderer.hpp"
 
 #include <memory>
+#include <iostream>
 
 Object::Object(){
     size = std::make_shared<Size3D>();
@@ -73,28 +74,28 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     double z8 = z3;
 
     double xper1 = r.from_cm_to_pixel_x(r.compute_perspective_x(x1, z1, p), w, p);
-    double yper1 = r.from_cm_to_pixel_y(r.compute_perspective_y(y1, z1), w, p);
+    double yper1 = r.from_cm_to_pixel_y(r.compute_perspective_y(y1, z1, p), w, p);
 
     double xper2 = r.from_cm_to_pixel_x(r.compute_perspective_x(x2, z2, p), w, p);
-    double yper2 = r.from_cm_to_pixel_y(r.compute_perspective_y(y2, z2), w, p);
+    double yper2 = r.from_cm_to_pixel_y(r.compute_perspective_y(y2, z2, p), w, p);
 
     double xper3 = r.from_cm_to_pixel_x(r.compute_perspective_x(x3, z3, p), w, p);
-    double yper3 = r.from_cm_to_pixel_y(r.compute_perspective_y(y3, z3), w, p);
+    double yper3 = r.from_cm_to_pixel_y(r.compute_perspective_y(y3, z3, p), w, p);
 
     double xper4 = r.from_cm_to_pixel_x(r.compute_perspective_x(x4, z4, p), w, p);
-    double yper4 = r.from_cm_to_pixel_y(r.compute_perspective_y(y4, z4), w, p);
+    double yper4 = r.from_cm_to_pixel_y(r.compute_perspective_y(y4, z4, p), w, p);
 
     double xper5 = r.from_cm_to_pixel_x(r.compute_perspective_x(x5, z5, p), w, p);
-    double yper5 = r.from_cm_to_pixel_y(r.compute_perspective_y(y5, z5), w, p);
+    double yper5 = r.from_cm_to_pixel_y(r.compute_perspective_y(y5, z5, p), w, p);
 
     double xper6 = r.from_cm_to_pixel_x(r.compute_perspective_x(x6, z6, p), w, p);
-    double yper6 = r.from_cm_to_pixel_y(r.compute_perspective_y(y6, z6), w, p);
+    double yper6 = r.from_cm_to_pixel_y(r.compute_perspective_y(y6, z6, p), w, p);
 
     double xper7 = r.from_cm_to_pixel_x(r.compute_perspective_x(x7, z7, p), w, p);
-    double yper7 = r.from_cm_to_pixel_y(r.compute_perspective_y(y7, z7), w, p);
+    double yper7 = r.from_cm_to_pixel_y(r.compute_perspective_y(y7, z7, p), w, p);
 
     double xper8 = r.from_cm_to_pixel_x(r.compute_perspective_x(x8, z8, p), w, p);
-    double yper8 = r.from_cm_to_pixel_y(r.compute_perspective_y(y8, z8), w, p);
+    double yper8 = r.from_cm_to_pixel_y(r.compute_perspective_y(y8, z8, p), w, p);
 
     xper1 = r.x_to_window_coordinate(xper1, w->DEFAULT_WIDTH);
     yper1 = r.x_to_window_coordinate(yper1, w->DEFAULT_HEIGHT);
@@ -119,8 +120,6 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
 
     xper8 = r.x_to_window_coordinate(xper8, w->DEFAULT_WIDTH);
     yper8 = r.x_to_window_coordinate(yper8, w->DEFAULT_HEIGHT);
-
-    // w->draw_rect(abs(yper5 - yper1), abs(xper2 - xper1), xper1, yper1, *color);
 
     w->draw_line(xper1, yper1, xper2, yper2, *color);
     w->draw_line(xper1, yper1, xper4, yper4, *color);

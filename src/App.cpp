@@ -50,20 +50,20 @@ int App::run(){
         time = SDL_GetTicks();
 
         // Generates random object every 50 cm (0,5 sec) after clearance
-        if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
-            if(frameCounter >= game->get_frame_rate() / 2){
-                game->add_random_obstacle();
-                frameCounter = 0;
-            }else
-                frameCounter++;
-        }
+        // if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
+        //     if(frameCounter >= game->get_frame_rate() / 2){
+        //         game->add_random_obstacle();
+        //         frameCounter = 0;
+        //     }else
+        //         frameCounter++;
+        // }
 
-        // One random movement at a given rate (2 seconds as default)
-        if(randomMovCounter >= game->get_player()->get_movement_rate()){
-            game->player_random_movement();
-            randomMovCounter = 0;
-        }else
-            randomMovCounter+=1;
+        // // One random movement at a given rate (2 seconds as default)
+        // if(randomMovCounter >= game->get_player()->get_movement_rate()){
+        //     game->player_random_movement();
+        //     randomMovCounter = 0;
+        // }else
+        //     randomMovCounter+=1;
 
         /* Cymi is always walking forward. Since the score is the distance,
             we can use the score increment for the distance */

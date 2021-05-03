@@ -68,13 +68,16 @@ int Game::draw(shared_ptr<Window> w){
     if(w->draw_text(scoreTxt, 48, white, 50, 50, pos, 0) < 0)
         return -1;
 
+    shared_ptr<People> p = make_shared<People>(0.0, 0.0, 0.0);
+    p->draw(w, player);
+
     // Draws other elements
-    path->draw(w, player);
-    kerbs[0].draw(w, player);
-    kerbs[1].draw(w, player);
-    // Draw obstacles but only the want in the DoV (depth of view)
-    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
-       iter->get()->draw(w, player);
+    // path->draw(w, player);
+    // kerbs[0].draw(w, player);
+    // kerbs[1].draw(w, player);
+    // // Draw obstacles but only the want in the DoV (depth of view)
+    // for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
+    //    iter->get()->draw(w, player);
 
     // If game is over, adds "game over" text
     if(state->get_status() == GameStateStatus::ended){

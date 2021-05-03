@@ -15,14 +15,6 @@ public:
     // Constuctor.
     Renderer();
 
-    /* Converts a value from cm to pixel.
-     *
-     * @param value : The value to convert.
-     * 
-     * @return The value in pixel.
-     */ 
-    double static from_cm_to_pixel_x(double x, std::shared_ptr<Player> p);
-
     /* Converts a x coord (in pixel) from the centered coordinate system to 
      * the window coordinate system.
      *
@@ -60,23 +52,23 @@ public:
      * 
      * @return The y perspective coordinate.
      */ 
-    double static compute_perspective_y(double y, double z);
+    double static compute_perspective_y(double y, double z, std::shared_ptr<Player> p);
 
-    double getScreenWidth(std::shared_ptr<Player> p);
+    double static get_screen_width(std::shared_ptr<Player> p);
 
-    double getScreenHeight(std::shared_ptr<Player> p);
+    double static get_screen_height(std::shared_ptr<Player> p);
 
-    double from_cm_to_pixel_x(double x, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
+    double static from_cm_to_pixel_x(double x, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
 
-    double from_cm_to_pixel_y(double y, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
+    double static from_cm_to_pixel_y(double y, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
 
 private:
     // in cm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
     constexpr static double DISTANCE_EYE_GROUND = 170.0;
     // in cm
     constexpr static double DISTANCE_EYE_SCREEN = 20.0;
-    // Ratio between width and height of the screen
-    constexpr static double ASPECT_RATIO = 1.33333333333333333333;
+    // Ratio between height and width of the screen
+    constexpr static double ASPECT_RATIO = 0.75;
 };
 
 #endif
