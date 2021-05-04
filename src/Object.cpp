@@ -6,9 +6,12 @@
 
 #include "Object.hpp"
 #include "Renderer.hpp"
+#include "Coordinate3D.hpp"
 
 #include <memory>
 #include <iostream>
+
+using namespace std;
 
 Object::Object(){
     size = std::make_shared<Size3D>();
@@ -39,98 +42,103 @@ void Object::set_coordinates(double x, double y, double z){
 }
 
 void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
-    Renderer r;
+    /*
+    Coordinate3D posEye = p->get_position_eye();
 
-    double x1 = topleft->get_x();
-    double y1 = topleft->get_y();
-    double z1 = topleft->get_z();
+    cout << "eye pos " << posEye << endl;
+    */
 
-    double x2 = x1 + size->get_width();
-    double y2 = y1;
-    double z2 = z1;
+    // Coordinates of the different points of the cuboid
+    Coordinate3D point1 = *topleft;
+    Coordinate3D point2(point1.get_x() + size->get_width(), point1.get_y(), point1.get_z());
+    Coordinate3D point3(point2.get_x(), point1.get_y(), point2.get_z() + size->get_depth());
+    Coordinate3D point4(point1.get_x(), point1.get_y(), point3.get_z());
+    Coordinate3D point5(point1.get_x(), point1.get_y() - size->get_height(), point1.get_z());
+    Coordinate3D point6(point2.get_x(), point5.get_y(), point1.get_z());
+    Coordinate3D point7(point2.get_x(), point5.get_y(), point3.get_z());
+    Coordinate3D point8(point1.get_x(), point5.get_y(), point3.get_z());
 
-    double x3 = x2;
-    double y3 = y1;
-    double z3 = z1 + size->get_depth();
+    /*
+    cout << "point 1" << point1 << endl;
+    cout << "point 2" << point2 << endl;
+    cout << "point 3" << point3 << endl;
+    cout << "point 4" << point4 << endl;
+    cout << "point 5" << point5 << endl;
+    cout << "point 6" << point6 << endl;
+    cout << "point 7" << point7 << endl;
+    cout << "point 8" << point8 << endl;
+    */
 
-    double x4 = x1;
-    double y4 = y1;
-    double z4 = z3;
+    // Coordinates of the different points of the cuboid with perspective
+    double xp1 = Renderer::compute_perspective_x(point1, p);
+    double yp1 = Renderer::compute_perspective_y(point1, p);
 
-    double x5 = x1;
-    double y5 = y1 - size->get_height();
-    double z5 = z1;
+    double xp2 = Renderer::compute_perspective_x(point2, p);
+    double yp2 = Renderer::compute_perspective_y(point2, p);
 
-    double x6 = x2;
-    double y6 = y5;
-    double z6 = z1;
+    double xp3 = Renderer::compute_perspective_x(point3, p);
+    double yp3 = Renderer::compute_perspective_y(point3, p);
 
-    double x7 = x2;
-    double y7 = y5;
-    double z7 = z3;
+    double xp4 = Renderer::compute_perspective_x(point4, p);
+    double yp4 = Renderer::compute_perspective_y(point4, p);
 
-    double x8 = x1;
-    double y8 = y5;
-    double z8 = z3;
+    double xp5 = Renderer::compute_perspective_x(point5, p);
+    double yp5 = Renderer::compute_perspective_y(point5, p);
 
-    double xper1 = r.from_cm_to_pixel_x(r.compute_perspective_x(x1, z1, p), w, p);
-    double yper1 = r.from_cm_to_pixel_y(r.compute_perspective_y(y1, z1, p), w, p);
+    double xp6 = Renderer::compute_perspective_x(point6, p);
+    double yp6 = Renderer::compute_perspective_y(point6, p);
 
-    double xper2 = r.from_cm_to_pixel_x(r.compute_perspective_x(x2, z2, p), w, p);
-    double yper2 = r.from_cm_to_pixel_y(r.compute_perspective_y(y2, z2, p), w, p);
+    double xp7 = Renderer::compute_perspective_x(point7, p);
+    double yp7 = Renderer::compute_perspective_y(point7, p);
 
-    double xper3 = r.from_cm_to_pixel_x(r.compute_perspective_x(x3, z3, p), w, p);
-    double yper3 = r.from_cm_to_pixel_y(r.compute_perspective_y(y3, z3, p), w, p);
+    double xp8 = Renderer::compute_perspective_x(point8, p);
+    double yp8 = Renderer::compute_perspective_y(point8, p);
 
-    double xper4 = r.from_cm_to_pixel_x(r.compute_perspective_x(x4, z4, p), w, p);
-    double yper4 = r.from_cm_to_pixel_y(r.compute_perspective_y(y4, z4, p), w, p);
+    /*
+    cout << "xp1 " << xp1 << " yp1 " << yp1 << endl;
+    cout << "xp2 " << xp2 << " yp2 " << yp2 << endl;
+    cout << "xp3 " << xp3 << " yp3 " << yp3 << endl;
+    cout << "xp4 " << xp4 << " yp4 " << yp4 << endl;
+    cout << "xp5 " << xp5 << " yp5 " << yp5 << endl;
+    cout << "xp6 " << xp6 << " yp6 " << yp6 << endl;
+    cout << "xp7 " << xp7 << " yp7 " << yp7 << endl;
+    cout << "xp8 " << xp8 << " yp8 " << yp8 << endl;
+    cout << endl;
+    */
 
-    double xper5 = r.from_cm_to_pixel_x(r.compute_perspective_x(x5, z5, p), w, p);
-    double yper5 = r.from_cm_to_pixel_y(r.compute_perspective_y(y5, z5, p), w, p);
+    /* Coordinates of the different points of the cuboid in the
+        window coordinate system */
+    Coordinate3D point1Window = Renderer::from_perspective_to_window(Coordinate3D(xp1, yp1, 0.0), w);
+    Coordinate3D point2Window = Renderer::from_perspective_to_window(Coordinate3D(xp2, yp2, 0.0), w);
+    Coordinate3D point3Window = Renderer::from_perspective_to_window(Coordinate3D(xp3, yp3, 0.0), w);
+    Coordinate3D point4Window = Renderer::from_perspective_to_window(Coordinate3D(xp4, yp4, 0.0), w);
+    Coordinate3D point5Window = Renderer::from_perspective_to_window(Coordinate3D(xp5, yp5, 0.0), w);
+    Coordinate3D point6Window = Renderer::from_perspective_to_window(Coordinate3D(xp6, yp6, 0.0), w);
+    Coordinate3D point7Window = Renderer::from_perspective_to_window(Coordinate3D(xp7, yp7, 0.0), w);
+    Coordinate3D point8Window = Renderer::from_perspective_to_window(Coordinate3D(xp8, yp8, 0.0), w);
 
-    double xper6 = r.from_cm_to_pixel_x(r.compute_perspective_x(x6, z6, p), w, p);
-    double yper6 = r.from_cm_to_pixel_y(r.compute_perspective_y(y6, z6, p), w, p);
+    /*
+    cout << "p1w " << point1Window << endl;
+    cout << "p2w " << point2Window << endl;
+    cout << "p3w " << point3Window << endl;
+    cout << "p4w " << point4Window << endl;
+    cout << "p5w " << point5Window << endl;
+    cout << "p6w " << point6Window << endl;
+    cout << "p7w " << point7Window << endl;
+    cout << "p8w " << point8Window << endl;
+    */
 
-    double xper7 = r.from_cm_to_pixel_x(r.compute_perspective_x(x7, z7, p), w, p);
-    double yper7 = r.from_cm_to_pixel_y(r.compute_perspective_y(y7, z7, p), w, p);
-
-    double xper8 = r.from_cm_to_pixel_x(r.compute_perspective_x(x8, z8, p), w, p);
-    double yper8 = r.from_cm_to_pixel_y(r.compute_perspective_y(y8, z8, p), w, p);
-
-    xper1 = r.x_to_window_coordinate(xper1, w->DEFAULT_WIDTH);
-    yper1 = r.x_to_window_coordinate(yper1, w->DEFAULT_HEIGHT);
-
-    xper2 = r.x_to_window_coordinate(xper2, w->DEFAULT_WIDTH);
-    yper2 = r.x_to_window_coordinate(yper2, w->DEFAULT_HEIGHT);
-
-    xper3 = r.x_to_window_coordinate(xper3, w->DEFAULT_WIDTH);
-    yper3 = r.x_to_window_coordinate(yper3, w->DEFAULT_HEIGHT);
-
-    xper4 = r.x_to_window_coordinate(xper4, w->DEFAULT_WIDTH);
-    yper4 = r.x_to_window_coordinate(yper4, w->DEFAULT_HEIGHT);
-
-    xper5 = r.x_to_window_coordinate(xper5, w->DEFAULT_WIDTH);
-    yper5 = r.x_to_window_coordinate(yper5, w->DEFAULT_HEIGHT);
-
-    xper6 = r.x_to_window_coordinate(xper6, w->DEFAULT_WIDTH);
-    yper6 = r.x_to_window_coordinate(yper6, w->DEFAULT_HEIGHT);
-
-    xper7 = r.x_to_window_coordinate(xper7, w->DEFAULT_WIDTH);
-    yper7 = r.x_to_window_coordinate(yper7, w->DEFAULT_HEIGHT);
-
-    xper8 = r.x_to_window_coordinate(xper8, w->DEFAULT_WIDTH);
-    yper8 = r.x_to_window_coordinate(yper8, w->DEFAULT_HEIGHT);
-
-    w->draw_line(xper1, yper1, xper2, yper2, *color);
-    w->draw_line(xper1, yper1, xper4, yper4, *color);
-    w->draw_line(xper1, yper1, xper5, yper5, *color);
-    w->draw_line(xper2, yper2, xper3, yper3, *color);
-    w->draw_line(xper2, yper2, xper6, yper6, *color);
-    w->draw_line(xper3, yper3, xper4, yper4, *color);
-    w->draw_line(xper3, yper3, xper7, yper7, *color);
-    w->draw_line(xper4, yper4, xper8, yper8, *color);
-    w->draw_line(xper5, yper5, xper8, yper8, *color);
-    w->draw_line(xper5, yper5, xper6, yper6, *color);
-    w->draw_line(xper6, yper6, xper7, yper7, *color);
-    w->draw_line(xper7, yper7, xper8, yper8, *color);
+    // Draws each lines of the cuboid
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point2Window.get_x(), point2Window.get_y(), *color);
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point5Window.get_x(), point5Window.get_y(), *color);
+    w->draw_line(point2Window.get_x(), point2Window.get_y(), point3Window.get_x(), point3Window.get_y(), *color);
+    w->draw_line(point2Window.get_x(), point2Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
+    w->draw_line(point3Window.get_x(), point3Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
+    w->draw_line(point3Window.get_x(), point3Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
+    w->draw_line(point4Window.get_x(), point4Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
+    w->draw_line(point5Window.get_x(), point5Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
+    w->draw_line(point5Window.get_x(), point5Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
+    w->draw_line(point6Window.get_x(), point6Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
+    w->draw_line(point7Window.get_x(), point7Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
 }

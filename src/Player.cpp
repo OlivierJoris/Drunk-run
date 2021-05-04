@@ -61,3 +61,19 @@ double Player::get_x() const{
 unsigned int Player::get_fov() const{
     return FOV;
 }
+
+unsigned int Player::get_distance_eye_ground() const{
+    return DEFAULT_DISTANCE_EYE_GROUND;
+}
+
+unsigned int Player::get_distance_eye_screen() const{
+    return DEFAULT_DISTANCE_EYE_SCREEN;
+}
+
+Coordinate3D Player::get_position_eye() const{
+    return Coordinate3D(
+        topleft->get_x() + (static_cast<double>(DEFAULT_WIDTH) / 2.0),
+        topleft->get_y() - static_cast<double>(DEFAULT_HEIGHT - get_distance_eye_ground()),
+        get_distance_eye_screen()
+    );
+}

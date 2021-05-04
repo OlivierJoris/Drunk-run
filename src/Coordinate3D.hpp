@@ -7,6 +7,8 @@
 #ifndef __COORDINATE_3D__
 #define __COORDINATE_3D__
 
+#include <iostream>
+
 // Represents a coordinate in three dimensions.
 class Coordinate3D{
 
@@ -47,5 +49,8 @@ private:
     double y;
     double z;
 };
+
+// Prints a Coordinate3D on the given output stream.
+std::ostream& operator<< (std::ostream& os, Coordinate3D coord3D);
 
 #endif

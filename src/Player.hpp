@@ -11,7 +11,7 @@
 
 #include <memory>
 
-class Player: public Object {
+class Player: public Object{
 
 public:
 
@@ -21,6 +21,10 @@ public:
     static const unsigned int DEFAULT_WIDTH = 40;
     // Default depth of the player in cm.
     static const unsigned int DEFAULT_DEPTH = 40;
+    // Default distance eye ground in cm.
+    static const unsigned int DEFAULT_DISTANCE_EYE_GROUND = 170;
+    // Default distance eye screen in cm.
+    static const unsigned int DEFAULT_DISTANCE_EYE_SCREEN = 20;
 
     // Constuctor.
     Player();
@@ -71,6 +75,21 @@ public:
      * Returns the size of a movement.
      */
     unsigned int get_movement_size() const;
+
+    /*
+     * Returns the height of the eye from the ground.
+     */
+    unsigned int get_distance_eye_ground() const;
+
+    /*
+     * Returns the distance between the eye and the screen.
+     */
+    unsigned int get_distance_eye_screen() const;
+
+    /*
+     * Returns the position of the eye.
+     */
+    Coordinate3D get_position_eye() const;
 
     double get_x() const;
 

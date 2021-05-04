@@ -68,7 +68,7 @@ int Game::draw(shared_ptr<Window> w){
     if(w->draw_text(scoreTxt, 48, white, 50, 50, pos, 0) < 0)
         return -1;
 
-    shared_ptr<People> p = make_shared<People>(0.0, 0.0, 0.0);
+    shared_ptr<People> p = make_shared<People>(40.0, 0.0, 0.0);
     p->draw(w, player);
 
     // Draws other elements

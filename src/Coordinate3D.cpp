@@ -6,6 +6,10 @@
 
 #include "Coordinate3D.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 Coordinate3D::Coordinate3D(
     const double x,
     const double y,
@@ -34,4 +38,12 @@ void Coordinate3D::set_z(const double z){
 
 double Coordinate3D::get_z() const{
     return z;
+}
+
+ostream& operator<< (ostream& os, Coordinate3D coord3D){
+    os << "(" << coord3D.get_x() << ", ";
+    os << coord3D.get_y() << ", ";
+    os << coord3D.get_z() << ")";
+
+    return os;
 }
