@@ -28,8 +28,8 @@ Coordinate3D Renderer::from_perspective_to_window(
     shared_ptr<Window> w)
 {
     Coordinate3D windowCoord;
-    double widthRatio = static_cast<double>(w->get_width()) / static_cast<double>(540);
-    double heightRatio = static_cast<double>(w->get_height()) / static_cast<double>(405);
+    double widthRatio = static_cast<double>(w->get_width()) / static_cast<double>(tan(30 * (M_PI/180.0)) * 20 * 2);
+    double heightRatio = static_cast<double>(w->get_height()) / static_cast<double>(tan(30 * (M_PI/180.0)) * 20 * 2 * 0.75);
 
     windowCoord.set_x(persepctive.get_x() * widthRatio + (static_cast<double>(w->get_width()) / 2.0));
     windowCoord.set_y((static_cast<double>(w->get_height()) / 2.0) - (persepctive.get_y() * heightRatio));
