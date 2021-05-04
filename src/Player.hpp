@@ -97,9 +97,9 @@ public:
 
 private:
     // FOV in degree.
-    const unsigned int FOV = 60; 
+    const static unsigned int FOV = 60; 
     // DOV in cm.
-    const unsigned int DOV = 15000;
+    const static unsigned int DOV = 15000;
     // Cm per second.
     const unsigned int SPEED = 100;
     // Min range for drunk movement.
@@ -109,7 +109,7 @@ private:
     // Drunk movement in seconds.
     const unsigned int MOVEMENT_RATE = 2;
     // Size of a movement in cm.
-    const unsigned int LATERAL_MOVEMENT_SIZE = 5;
+    const double LATERAL_MOVEMENT_SIZE = 5;
 };
 
 #endif

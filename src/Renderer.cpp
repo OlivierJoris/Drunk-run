@@ -14,25 +14,27 @@ using namespace std;
 
 double Renderer::compute_perspective_x(Coordinate3D& point, shared_ptr<Player> p){
     Coordinate3D eyePos = p->get_position_eye();
-    return eyePos.get_x() + (((point.get_x() - eyePos.get_x()) * eyePos.get_z()) 
-           / (point.get_z() + eyePos.get_z()));
+    return (((point.get_x() - eyePos.get_x()) * p->get_distance_eye_screen()) 
+           / (point.get_z() + p->get_distance_eye_screen()));
 }
 
 double Renderer::compute_perspective_y(Coordinate3D& point, shared_ptr<Player> p){
-    Coordinate3D eyePos = p->get_position_eye();
-    return eyePos.get_y() + (((point.get_y() - eyePos.get_y()) * eyePos.get_z()) / (point.get_z() + eyePos.get_z()));
+    return (((point.get_y() - p->get_distance_eye_ground()) * p->get_distance_eye_screen()) 
+           / (point.get_z() + p->get_distance_eye_screen()));
 }
 
 Coordinate3D Renderer::from_perspective_to_window(
     Coordinate3D persepctive,
-    shared_ptr<Window> w)
+    shared_ptr<Window> w, 
+    shared_ptr<Player> p)
 {
     Coordinate3D windowCoord;
-    double widthRatio = static_cast<double>(w->get_width()) / static_cast<double>(tan(30 * (M_PI/180.0)) * 20 * 2);
-    double heightRatio = static_cast<double>(w->get_height()) / static_cast<double>(tan(30 * (M_PI/180.0)) * 20 * 2 * 0.75);
-
-    windowCoord.set_x(persepctive.get_x() * widthRatio + (static_cast<double>(w->get_width()) / 2.0));
-    windowCoord.set_y((static_cast<double>(w->get_height()) / 2.0) - (persepctive.get_y() * heightRatio));
+    double ratio = static_cast<double>(w->get_width()) / 
+                   static_cast<double>(tan((p->get_fov() / 2) * 
+                   (M_PI / 180)) * 2 * (p->get_distance_eye_screen()));
+    
+    windowCoord.set_x(persepctive.get_x() * ratio + (static_cast<double>(w->get_width()) / 2.0));
+    windowCoord.set_y((static_cast<double>(w->get_height()) / 2.0) - (persepctive.get_y() * ratio));
     windowCoord.set_z(0.0);
 
     return windowCoord;

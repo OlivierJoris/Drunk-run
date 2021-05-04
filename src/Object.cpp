@@ -108,14 +108,97 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
 
     /* Coordinates of the different points of the cuboid in the
         window coordinate system */
-    Coordinate3D point1Window = Renderer::from_perspective_to_window(Coordinate3D(xp1, yp1, 0.0), w);
-    Coordinate3D point2Window = Renderer::from_perspective_to_window(Coordinate3D(xp2, yp2, 0.0), w);
-    Coordinate3D point3Window = Renderer::from_perspective_to_window(Coordinate3D(xp3, yp3, 0.0), w);
-    Coordinate3D point4Window = Renderer::from_perspective_to_window(Coordinate3D(xp4, yp4, 0.0), w);
-    Coordinate3D point5Window = Renderer::from_perspective_to_window(Coordinate3D(xp5, yp5, 0.0), w);
-    Coordinate3D point6Window = Renderer::from_perspective_to_window(Coordinate3D(xp6, yp6, 0.0), w);
-    Coordinate3D point7Window = Renderer::from_perspective_to_window(Coordinate3D(xp7, yp7, 0.0), w);
-    Coordinate3D point8Window = Renderer::from_perspective_to_window(Coordinate3D(xp8, yp8, 0.0), w);
+    Coordinate3D point1Window = Renderer::from_perspective_to_window(Coordinate3D(xp1, yp1, 0.0), w, p);
+    Coordinate3D point2Window = Renderer::from_perspective_to_window(Coordinate3D(xp2, yp2, 0.0), w, p);
+    Coordinate3D point3Window = Renderer::from_perspective_to_window(Coordinate3D(xp3, yp3, 0.0), w, p);
+    Coordinate3D point4Window = Renderer::from_perspective_to_window(Coordinate3D(xp4, yp4, 0.0), w, p);
+    Coordinate3D point5Window = Renderer::from_perspective_to_window(Coordinate3D(xp5, yp5, 0.0), w, p);
+    Coordinate3D point6Window = Renderer::from_perspective_to_window(Coordinate3D(xp6, yp6, 0.0), w, p);
+    Coordinate3D point7Window = Renderer::from_perspective_to_window(Coordinate3D(xp7, yp7, 0.0), w, p);
+    Coordinate3D point8Window = Renderer::from_perspective_to_window(Coordinate3D(xp8, yp8, 0.0), w, p);
+
+
+    if(point1Window.get_x() > w->get_width())
+        point1Window.set_x(w->get_width());
+    if(point1Window.get_x() < 0)
+        point1Window.set_x(0);
+
+    if(point2Window.get_x() > w->get_width())
+        point2Window.set_x(w->get_width());
+    if(point2Window.get_x() < 0)
+        point2Window.set_x(0);
+
+    if(point3Window.get_x() > w->get_width())
+        point3Window.set_x(w->get_width());
+    if(point3Window.get_x() < 0)
+        point3Window.set_x(0);
+
+    if(point4Window.get_x() > w->get_width())
+        point4Window.set_x(w->get_width());
+    if(point4Window.get_x() < 0)
+        point4Window.set_x(0);
+    
+    if(point5Window.get_x() > w->get_width())
+        point5Window.set_x(w->get_width());
+    if(point5Window.get_x() < 0)
+        point1Window.set_x(0);
+    
+    if(point6Window.get_x() > w->get_width())
+        point6Window.set_x(w->get_width());
+    if(point6Window.get_x() < 0)
+        point6Window.set_x(0);
+
+    if(point7Window.get_x() > w->get_width())
+        point7Window.set_x(w->get_width());
+    if(point7Window.get_x() < 0)
+        point7Window.set_x(0);
+
+    if(point8Window.get_x() > w->get_width())
+        point8Window.set_x(w->get_width());
+    if(point8Window.get_x() < 0)
+        point8Window.set_x(0);
+
+    
+    if(point1Window.get_y() > w->get_height())
+        point1Window.set_y(w->get_height());
+    if(point1Window.get_y() < 0)
+        point1Window.set_y(0);
+
+    if(point2Window.get_y() > w->get_height())
+        point2Window.set_y(w->get_height());
+    if(point2Window.get_y() < 0)
+        point2Window.set_y(0);
+
+    if(point3Window.get_y() > w->get_height())
+        point3Window.set_y(w->get_height());
+    if(point3Window.get_y() < 0)
+        point3Window.set_y(0);
+
+    if(point4Window.get_y() > w->get_height())
+        point4Window.set_y(w->get_height());
+    if(point4Window.get_y() < 0)
+        point4Window.set_y(0);
+
+    if(point5Window.get_y() > w->get_height())
+        point5Window.set_y(w->get_height());
+    if(point5Window.get_y() < 0)
+        point5Window.set_y(0);
+
+    if(point6Window.get_y() > w->get_height())
+        point6Window.set_y(w->get_height());
+    if(point6Window.get_y() < 0)
+        point6Window.set_y(0);
+
+    if(point7Window.get_y() > w->get_height())
+        point7Window.set_y(w->get_height());
+    if(point7Window.get_y() < 0)
+        point7Window.set_y(0);
+
+    if(point8Window.get_y() > w->get_height())
+        point8Window.set_y(w->get_height());
+    if(point8Window.get_y() < 0)
+        point8Window.set_y(0);
+
 
     /*
     cout << "p1w " << point1Window << endl;

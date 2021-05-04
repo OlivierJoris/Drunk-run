@@ -44,7 +44,7 @@ public:
      * 
      * @return Window coordinates of the given point.
      */
-    Coordinate3D static from_perspective_to_window(Coordinate3D point, std::shared_ptr<Window> w);
+    Coordinate3D static from_perspective_to_window(Coordinate3D point, std::shared_ptr<Window> w, std::shared_ptr<Player> p);
 };
 
 #endif

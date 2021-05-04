@@ -12,8 +12,8 @@ using namespace std;
 
 Player::Player(): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
     set_coordinates(
-        0 - static_cast<double>(DEFAULT_WIDTH/2),
-        -(405.0/2 - 180),
+        0 - static_cast<double>(DEFAULT_WIDTH / 2),
+        10,
         0
     );
 }
@@ -73,7 +73,7 @@ unsigned int Player::get_distance_eye_screen() const{
 Coordinate3D Player::get_position_eye() const{
     return Coordinate3D(
         topleft->get_x() + (static_cast<double>(DEFAULT_WIDTH) / 2.0),
-        topleft->get_y() - static_cast<double>(DEFAULT_HEIGHT - get_distance_eye_ground()),
-        get_distance_eye_screen()
+        0,
+        -get_distance_eye_screen()
     );
 }

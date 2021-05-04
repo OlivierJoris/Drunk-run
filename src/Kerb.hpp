@@ -13,10 +13,10 @@
 class Kerb: public DangerousObstacle{ // to fill
 
 public:
-    // Default height of the player in cm.
-    static const unsigned int DEFAULT_HEIGHT = 20;
-    // Default width of the player in cm.
-    static const unsigned int DEFAULT_WIDTH = 20;
+    // Default height of the kerb in cm.
+    static const unsigned int DEFAULT_HEIGHT = 1;
+    // Default width of the kerb in cm.
+    static const unsigned int DEFAULT_WIDTH = 1;
     // Default color - red.
     static const uint8_t DEFAULT_COLOR = 64;
 
@@ -24,7 +24,7 @@ public:
     Kerb(
         const unsigned int height = DEFAULT_HEIGHT,
         const unsigned int width = DEFAULT_WIDTH,
-        const unsigned int depth = 0,
+        const unsigned int depth = 1500,
         const uint8_t r = DEFAULT_COLOR,
         const uint8_t g = DEFAULT_COLOR,
         const uint8_t b = DEFAULT_COLOR,
