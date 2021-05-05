@@ -56,12 +56,12 @@ int App::run(){
         }else
             frameCounter++;
 
-        // // One random movement at a given rate (2 seconds as default)
-        // if(randomMovCounter >= game->get_player()->get_movement_rate()){
-        //     game->player_random_movement();
-        //     randomMovCounter = 0;
-        // }else
-        //     randomMovCounter+=1;
+        // One random movement at a given rate
+        if(randomMovCounter >= game->get_player()->get_movement_rate() * game->get_frame_rate()){
+            game->player_random_movement();
+            randomMovCounter = 0;
+        }else
+            randomMovCounter+=1;
 
         /* Cymi is always walking forward. Since the score is the distance,
             we can use the score increment for the distance */
@@ -83,6 +83,12 @@ int App::run(){
         if(game->draw(window) < 0)
             return -1;
 
+        int testHit = game->test_hit();
+        if(testHit == 1)
+            game->set_game_status(GameStateStatus::ended);
+        if(testHit < 0)
+            return -1;
+
         // Updates screen
         SDL_RenderPresent(window->get_sdl_renderer());
 
@@ -96,6 +102,8 @@ int App::run(){
     // If game is ended, shows game over message for 2 seconds.
     if(game->draw(window) < 0)
         return -1;
+    
+    SDL_RenderPresent(window->get_sdl_renderer());
 
     SDL_Delay(1000 * GAME_OVER_TIME);
 
