@@ -62,6 +62,10 @@ unsigned int Player::get_fov() const{
     return FOV;
 }
 
+unsigned int Player::get_dov() const{
+    return DOV;
+}
+
 unsigned int Player::get_distance_eye_ground() const{
     return DEFAULT_DISTANCE_EYE_GROUND;
 }

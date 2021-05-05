@@ -74,6 +74,8 @@ public:
     // Draws the object.
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
+    void print_coord() const;
+
 protected:
     // Size of the object.
     std::shared_ptr<Size3D> size;

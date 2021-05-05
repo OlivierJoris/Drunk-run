@@ -49,14 +49,12 @@ int App::run(){
     while(game->get_game_status() == GameStateStatus::ongoing){
         time = SDL_GetTicks();
 
-        // Generates random object every 50 cm (0,5 sec) after clearance
-        // if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
-        //     if(frameCounter >= game->get_frame_rate() / 2){
-        //         game->add_random_obstacle();
-        //         frameCounter = 0;
-        //     }else
-        //         frameCounter++;
-        // }
+        // Generates random object every 4 sec
+        if(frameCounter >= game->get_frame_rate() * 4){
+            game->add_random_obstacle();
+            frameCounter = 0;
+        }else
+            frameCounter++;
 
         // // One random movement at a given rate (2 seconds as default)
         // if(randomMovCounter >= game->get_player()->get_movement_rate()){
@@ -68,6 +66,9 @@ int App::run(){
         /* Cymi is always walking forward. Since the score is the distance,
             we can use the score increment for the distance */
         game->get_player()->player_goes_forward(SCORE_INCREMENT);
+
+        // Moves the obstacles forward.
+        game->move_obstacles_forward(SCORE_INCREMENT * 100);
     
         // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){

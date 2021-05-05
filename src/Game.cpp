@@ -40,9 +40,10 @@ Game::Game(
     kerbs.push_back(Kerb());
 
     kerbs[0].set_coordinates(-200, kerbs[0].DEFAULT_HEIGHT, 0);
-    kerbs[1].set_coordinates(200, kerbs[0].DEFAULT_HEIGHT, 0);
+    kerbs[1].set_coordinates(200, kerbs[1].DEFAULT_HEIGHT, 0);
 
     obstacles = list<shared_ptr<Object>>();
+    add_init_obstacles();
 
     randomGenerator = minstd_rand(chrono::system_clock::now().time_since_epoch().count());
 }
@@ -71,28 +72,18 @@ int Game::draw(shared_ptr<Window> w){
     if(w->draw_text(scoreTxt, 48, white, 50, 50, pos, 0) < 0)
         return -1;
 
-    shared_ptr<People> p = make_shared<People>(-20.0, 180.0, 500.0);
-    p->draw(w, player);
-
-    shared_ptr<People> q = make_shared<People>(100.0, 180.0, 900.0);
-    q->draw(w, player);
-
-    shared_ptr<Barrier> b = make_shared<Barrier>(-50.0, 100.0, 500.0);
-    b->draw(w, player);
-
-    shared_ptr<Crate> c = make_shared<Crate>(-50.0, 100.0, 600.0);
-    c->draw(w, player);
-
-    shared_ptr<Rubbish> r = make_shared<Rubbish>(-10.0, 30.0, 400.0);
-    r->draw(w, player);
-
     // Draws other elements
-    // path->draw(w, player);
     kerbs[0].draw(w, player);
     kerbs[1].draw(w, player);
-    // // Draw obstacles but only the want in the DoV (depth of view)
-    // for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
-    //    iter->get()->draw(w, player);
+
+    // Draws obstacles but only the want in the DoV (depth of view)
+    double dov = player->get_dov();
+    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++){
+        const shared_ptr<Object> o = *iter;
+        if(o->get_coordinates()->get_z() + o->get_size()->get_depth() >= dov)
+            break;
+        o->draw(w, player);
+    }
 
     // If game is over, adds "game over" text
     if(state->get_status() == GameStateStatus::ended){
@@ -138,36 +129,78 @@ const list<shared_ptr<Object>>& Game::get_obstacles() const{
     return obstacles;
 }
 
+void Game::add_init_obstacles(){
+    double currentDepth = 0.0;
+    double dov = static_cast<double>(player->get_dov());
+    while(currentDepth < dov){
+        add_random_obstacle();
+        currentDepth = obstacles.back()->get_coordinates()->get_z();
+    }
+}
+
 void Game::add_random_obstacle(){
     unsigned int dangerousOrNot = get_random(10);
     unsigned int type;
 
-    double x = 70 + get_random(400);
-    double y = -202.5;
-    double z = state->get_travelled_dist();
+    double z;
+    if(!obstacles.empty()){
+        z = obstacles.back()->get_coordinates()->get_z() + 400.0;
+    }else
+        z = clearance;
 
     if(dangerousOrNot < DEFAULT_DANGEROUS_RATE){
         // Needs to generate a dangerous obstacle
         type = get_random(DangerousObstacle::NB_RANDOM_D_OBSTACLES);
         if(type == 0)
             obstacles.push_back(
-                make_shared<Barrier>(x, y + Barrier::DEFAULT_HEIGHT, z)
+                make_shared<Barrier>(
+                    -200.0 + get_random(400 - Barrier::DEFAULT_WIDTH),
+                    static_cast<double>(Barrier::DEFAULT_HEIGHT),
+                    z
+                )
             );
         else
             obstacles.push_back(
-                make_shared<People>(x, y + People::DEFAULT_HEIGHT, z)
+                make_shared<People>(
+                    -200.0 + get_random(400 - People::DEFAULT_WIDTH),
+                    static_cast<double>(People::DEFAULT_HEIGHT),
+                    z
+                )
             );
     }else{
         // Needs to generate a non-dangerous obstacle
         type = get_random(NonDangerousObstacle::NB_RANDOM_ND_OBSTACLES);
         if(type == 0)
             obstacles.push_back(
-                make_shared<Rubbish>(x, y + Rubbish::DEFAULT_HEIGHT, z)
+                make_shared<Rubbish>(
+                    -200.0 + get_random(400 - Rubbish::DEFAULT_WIDTH),
+                    static_cast<double>(Rubbish::DEFAULT_HEIGHT),
+                    z
+                )
             );
         else
             obstacles.push_back(
-                make_shared<Crate>(x, y + Crate::DEFAULT_HEIGHT, z)
+                make_shared<Crate>(
+                    -200.0 + get_random(400 - Crate::DEFAULT_WIDTH),
+                    static_cast<double>(Crate::DEFAULT_HEIGHT),
+                    z
+                )
             );
+    }
+}
+
+void Game::move_obstacles_forward(double decrease){
+    auto iter = obstacles.cbegin();
+    auto end = obstacles.cend();
+    while(iter != end){
+        double currentDepth = (*iter)->get_coordinates()->get_z();
+        double newDepth = currentDepth - decrease;
+        if(newDepth < 0.0)
+            iter = obstacles.erase(iter);
+        else{
+            (*iter)->get_coordinates()->set_z(newDepth);
+            iter++;
+        }
     }
 }
 

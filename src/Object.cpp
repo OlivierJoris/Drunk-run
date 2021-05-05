@@ -216,3 +216,7 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     w->draw_line(point6Window.get_x(), point6Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
     w->draw_line(point7Window.get_x(), point7Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
 }
+
+void Object::print_coord() const{
+    cout << "(" << topleft->get_x() << ", " << topleft->get_y() << ", " << topleft->get_z() << ")";
+}

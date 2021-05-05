@@ -95,6 +95,8 @@ public:
 
     unsigned get_fov() const;
 
+    unsigned int get_dov() const;
+
 private:
     // FOV in degree.
     const static unsigned int FOV = 60; 

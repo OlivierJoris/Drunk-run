@@ -28,7 +28,7 @@ public:
     // Default dangerous obstacles rate (base 10).
     static const unsigned int DEFAULT_DANGEROUS_RATE = 3;
     // Default clearing distance before first obstacle.
-    constexpr static const double DEFAULT_CLEARANCE = 4.0L;
+    constexpr static const double DEFAULT_CLEARANCE = 600.0;
 
     /*
      * Constructor.
@@ -101,10 +101,16 @@ public:
      */
     const std::list<std::shared_ptr<Object>>& get_obstacles() const;
 
+    // Adds the first obstacles.
+    void add_init_obstacles();
+
     /*
      * Adds a new randomly generated obstacle.
      */
     void add_random_obstacle();
+
+    // Moves the obstacles forward by a given distance.
+    void move_obstacles_forward(double decrease);
 
     /*
      * Returns the fixed frame rate of the game.
