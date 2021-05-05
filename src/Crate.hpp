@@ -12,14 +12,14 @@
 #include <memory>
 
 // Represents a crate object of the game.
-class Crate : public NonDangerousObstacle{
+class Crate: public NonDangerousObstacle{
 
 public:
-    // Default height of the player in cm.
+    // Default height of the crate in cm.
     static const unsigned int DEFAULT_HEIGHT = 18;
-    // Default width of the player in cm.
+    // Default width of the crate in cm.
     static const unsigned int DEFAULT_WIDTH = 45;
-    // Default depth of the player in cm.
+    // Default depth of the crate in cm.
     static const unsigned int DEFAULT_DEPTH = 30;
     // Default color - red.
     static const uint8_t DEFAULT_RED = 255;
@@ -50,19 +50,19 @@ public:
      */
     Crate(const double x, const double y, const double z);
 
+    // Draws the crate.
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
+
     /*
-     * Tests if the obstacle hit the player.
+     * Tests if the player is going to trip on the obstacle.
      *
      * @param player The player.
      * 
-     * @return 1 if player hit the obstacle.
-     *         0 if player did not hit obstacle.
-     *         -1 error.
+     * @return 1 The player is going to trip.
+     *         0 The player is not going to trip.
+     *         -1 Error.
      */
     virtual int test_hit(std::shared_ptr<Player> player) const;
-
-    // Draws the crate.
-    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 };
 
 #endif

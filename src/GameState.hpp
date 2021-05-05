@@ -7,7 +7,7 @@
 #ifndef __GAME__STATE__
 #define __GAME__STATE__
 
-// Represents the status of the game
+// Represents the status of the game.
 enum GameStateStatus {ongoing, ended};
 
 // Represents the state of the game.
@@ -19,8 +19,6 @@ public:
 
     /*
      * Returns the distance travelled by Cymi.
-     *
-     * @return Distance travelled.
      */
     double get_travelled_dist() const;
     /*
@@ -38,8 +36,6 @@ public:
 
     /*
      * Returns the status of the game.
-     *
-     * @return Status of the game.
      */
     GameStateStatus get_status() const;
     /*

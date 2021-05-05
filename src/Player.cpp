@@ -10,7 +10,18 @@
 
 using namespace std;
 
-Player::Player(): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
+Player::Player(
+    const unsigned int fov,
+    const unsigned int dov,
+    const unsigned int drunkMovRate,
+    const unsigned int distanceEyeGround,
+    const unsigned int distanceEyeScreen
+): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
+    Player::fov = fov;
+    Player::dov = dov;
+    Player::drunkMovRate = drunkMovRate;
+    Player::distanceEyeGround = distanceEyeGround;
+    Player::distanceEyeScreen = distanceEyeScreen;
     set_coordinates(
         0 - static_cast<double>(DEFAULT_WIDTH / 2),
         10,
@@ -18,24 +29,24 @@ Player::Player(): Object(DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH, 0, 0, 0){
     );
 }
 
-void Player::increaseXPosition(double increase){
-    double currentX = topleft->get_x();
-    topleft->set_x(currentX + increase);
+void Player::increase_x_position(const double increase){
+    double currentX = topLeft->get_x();
+    topLeft->set_x(currentX + increase);
 }
 
-void Player::player_goes_forward(double increase){
-    double currentZ = topleft->get_z();
-    topleft->set_z(currentZ + increase);
+void Player::player_goes_forward(const double increase){
+    double currentZ = topLeft->get_z();
+    topLeft->set_z(currentZ + increase);
 }
 
 void Player::player_goes_left(){
-    double currentX = topleft->get_x();
-    topleft->set_x(currentX - LATERAL_MOVEMENT_SIZE);
+    double currentX = topLeft->get_x();
+    topLeft->set_x(currentX - LATERAL_MOVEMENT_SIZE);
 }
 
 void Player::player_goes_right(){
-    double currentX = topleft->get_x();
-    topleft->set_x(currentX + LATERAL_MOVEMENT_SIZE);
+    double currentX = topLeft->get_x();
+    topLeft->set_x(currentX + LATERAL_MOVEMENT_SIZE);
 }
 
 unsigned int Player::get_min_movement_range() const{
@@ -47,32 +58,32 @@ unsigned int Player::get_max_movement_range() const{
 }
 
 unsigned int Player::get_movement_rate() const{
-    return MOVEMENT_RATE;
+    return drunkMovRate;
 }
 
 unsigned int Player::get_movement_size() const{
     return LATERAL_MOVEMENT_SIZE;
 }
 
-double Player::get_x() const{
-    return topleft->get_x();
+unsigned int Player::get_fov() const{
+    return fov;
 }
 
-unsigned int Player::get_fov() const{
-    return FOV;
+unsigned int Player::get_dov() const{
+    return dov;
 }
 
 unsigned int Player::get_distance_eye_ground() const{
-    return DEFAULT_DISTANCE_EYE_GROUND;
+    return distanceEyeGround;
 }
 
 unsigned int Player::get_distance_eye_screen() const{
-    return DEFAULT_DISTANCE_EYE_SCREEN;
+    return distanceEyeScreen;
 }
 
 Coordinate3D Player::get_position_eye() const{
     return Coordinate3D(
-        topleft->get_x() + (static_cast<double>(DEFAULT_WIDTH) / 2.0),
+        topLeft->get_x() + (static_cast<double>(size->get_width()) / 2.0),
         0,
         -get_distance_eye_screen()
     );

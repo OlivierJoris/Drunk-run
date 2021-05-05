@@ -9,6 +9,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "Event.hpp"
+#include "Player.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
@@ -40,8 +41,11 @@ int App::run(){
     Uint32 time = 0, frameCounter = 0, randomMovCounter = 0;
     // Time per frame in ms
     const Uint32 TIME_PER_FRAME = 1000 / game->get_frame_rate();
-    // Score increment per frame. With this, 1 meter = 1 second
+    // Score increment per frame (in meter). With this, 1 meter = 1 second
     const double SCORE_INCREMENT = 1.0 / game->get_frame_rate();
+    shared_ptr<Player> player = game->get_player();
+    if(!player)
+        return -1;
 
     // Sets the status as running
     game->set_game_status(GameStateStatus::ongoing);
@@ -49,25 +53,26 @@ int App::run(){
     while(game->get_game_status() == GameStateStatus::ongoing){
         time = SDL_GetTicks();
 
-        // Generates random object every 50 cm (0,5 sec) after clearance
-        // if(game->get_game_state()->get_travelled_dist() > game->get_clearance_dist()){
-        //     if(frameCounter >= game->get_frame_rate() / 2){
-        //         game->add_random_obstacle();
-        //         frameCounter = 0;
-        //     }else
-        //         frameCounter++;
-        // }
+        // Generates random object every 4 sec
+        if(frameCounter >= game->get_frame_rate() * 4){
+            game->add_random_obstacle();
+            frameCounter = 0;
+        }else
+            frameCounter++;
 
-        // // One random movement at a given rate (2 seconds as default)
-        // if(randomMovCounter >= game->get_player()->get_movement_rate()){
-        //     game->player_random_movement();
-        //     randomMovCounter = 0;
-        // }else
-        //     randomMovCounter+=1;
+        // One random movement at a given rate
+        if(randomMovCounter >= player->get_movement_rate() * game->get_frame_rate()){
+            game->player_random_movement();
+            randomMovCounter = 0;
+        }else
+            randomMovCounter+=1;
 
         /* Cymi is always walking forward. Since the score is the distance,
             we can use the score increment for the distance */
-        game->get_player()->player_goes_forward(SCORE_INCREMENT);
+        player->player_goes_forward(SCORE_INCREMENT);
+
+        // Moves the obstacles forward.
+        game->move_obstacles_forward(SCORE_INCREMENT * 100);
     
         // Gets the events & reacts to them
         while(SDL_PollEvent(&event)){
@@ -82,10 +87,17 @@ int App::run(){
         if(game->draw(window) < 0)
             return -1;
 
+        // Tests if the player has it something
+        int testHit = game->test_hit();
+        if(testHit == 1)
+            game->set_game_status(GameStateStatus::ended);
+        if(testHit < 0)
+            return -1;
+
         // Updates screen
         SDL_RenderPresent(window->get_sdl_renderer());
 
-        // Lock rendering at given frame rate
+        // Locks rendering at given frame rate
         Uint32 diffTime = SDL_GetTicks() - time;
         if(diffTime < TIME_PER_FRAME){
             SDL_Delay(TIME_PER_FRAME - diffTime);
@@ -95,6 +107,8 @@ int App::run(){
     // If game is ended, shows game over message for 2 seconds.
     if(game->draw(window) < 0)
         return -1;
+    
+    SDL_RenderPresent(window->get_sdl_renderer());
 
     SDL_Delay(1000 * GAME_OVER_TIME);
 

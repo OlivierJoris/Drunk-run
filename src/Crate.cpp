@@ -6,6 +6,7 @@
 
 #include "Crate.hpp"
 #include "NonDangerousObstacle.hpp"
+#include "Object.hpp"
 
 #include <iostream>
 
@@ -31,11 +32,9 @@ Crate::Crate(const double x, const double y, const double z)
 ){}
 
 int Crate::test_hit(shared_ptr<Player> player) const {
-    // temporary
-    return 0;
+    return NonDangerousObstacle::test_hit(player);
 }
 
-void Crate::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+void Crate::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Object::draw(w, p);
-    // cout << "crate" << endl;
 }

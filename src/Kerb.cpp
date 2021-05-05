@@ -5,9 +5,13 @@
  */
 
 #include "Kerb.hpp"
+#include "Object.hpp"
 #include "DangerousObstacle.hpp"
+#include "Player.hpp"
+#include "Window.hpp"
 
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -24,11 +28,13 @@ Kerb::Kerb(
 ): DangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
 int Kerb::test_hit(shared_ptr<Player> player) const {
-    // temporary
-    return 0;
+    shared_ptr<Coordinate3D> playerPos = player->get_coordinates();
+    if(!playerPos)
+        return -1;
+
+    return abs(playerPos->get_x()) >= abs(topLeft->get_x());
 }
 
-void Kerb::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+void Kerb::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Object::draw(w, p);
-    // cout << "kerb" << endl;
 }

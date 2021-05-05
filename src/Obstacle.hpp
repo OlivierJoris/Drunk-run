@@ -16,7 +16,7 @@
 class Obstacle: public Object{ 
 
 public:
-    // Number of different random obstacles (barrier, people, rubish, crate).
+    // Number of different random obstacles (barrier, person, rubish, crate).
     static const unsigned int NB_RANDOM_OBSTACLES = 4;
 
     // Constructor.
@@ -46,6 +46,9 @@ public:
         const double z = 0.0
     );
 
+    // Draws the obstacle.
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
+
     /*
      * Tests if the obstacle hit the player.
      *
@@ -56,9 +59,6 @@ public:
      *         -1 error.
      */
     virtual int test_hit(std::shared_ptr<Player> player) const = 0;
-
-    // Draws the obstacle.
-    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
 };
 
 #endif

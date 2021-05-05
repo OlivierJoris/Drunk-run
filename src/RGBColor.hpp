@@ -20,44 +20,32 @@ public:
      * @param g Value for green component.
      * @param b Value for blue component.
      */
-    RGBColor(uint8_t r = 0, uint8_t g = 0, uint8_t b = 0);
+    RGBColor(const uint8_t r = 0, const uint8_t g = 0, const uint8_t b = 0);
 
     /*
      * Sets the value for the red component.
-     *
-     * @param r New value for the red component.
      */
-    void set_red(uint8_t r);
+    void set_red(const uint8_t r);
     /*
      * Gets the value for the red component.
-     *
-     * @return Value for the red component.
      */
     uint8_t get_red() const;
 
     /*
      * Sets the value for the green component.
-     *
-     * @param r New value for the green component.
      */
-    void set_green(uint8_t g);
+    void set_green(const uint8_t g);
     /*
      * Gets the value for the green component.
-     *
-     * @return Value for the green component.
      */
     uint8_t get_green() const;
 
     /*
      * Sets the value for the blue component.
-     *
-     * @param r New value for the blue component.
      */
-    void set_blue(uint8_t b);
+    void set_blue(const uint8_t b);
     /*
      * Gets the value for the blue component.
-     *
-     * @return Value for the blue component.
      */
     uint8_t get_blue() const;
 

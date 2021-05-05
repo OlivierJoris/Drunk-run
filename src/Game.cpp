@@ -7,13 +7,18 @@
 #include "Game.hpp"
 #include "GameState.hpp"
 #include "Renderer.hpp"
+#include "Window.hpp"
+#include "Object.hpp"
+#include "Player.hpp"
 #include "Obstacle.hpp"
 #include "DangerousObstacle.hpp"
 #include "NonDangerousObstacle.hpp"
-#include "People.hpp"
+#include "Person.hpp"
 #include "Barrier.hpp"
 #include "Rubbish.hpp"
 #include "Crate.hpp"
+#include "Path.hpp"
+#include "Kerb.hpp"
 
 #include <iostream>
 #include <memory>
@@ -26,9 +31,9 @@
 using namespace std;
 
 Game::Game(
-    unsigned int frameRate,
-    double clearingDistance,
-    double dangerousRate
+    const unsigned int frameRate,
+    const double clearingDistance,
+    const double dangerousRate
 ): frameRate{frameRate}, clearance{clearingDistance}, dangerousObstacleRate{dangerousRate}{
 
     state = make_shared<GameState>();
@@ -39,10 +44,11 @@ Game::Game(
     kerbs.push_back(Kerb());
     kerbs.push_back(Kerb());
 
-    kerbs[0].set_coordinates(-200, kerbs[0].DEFAULT_HEIGHT, 0);
-    kerbs[1].set_coordinates(200, kerbs[0].DEFAULT_HEIGHT, 0);
+    kerbs[0].set_coordinates(-path->get_width()/2.0, kerbs[0].DEFAULT_HEIGHT, 0);
+    kerbs[1].set_coordinates(path->get_width()/2.0, kerbs[1].DEFAULT_HEIGHT, 0);
 
     obstacles = list<shared_ptr<Object>>();
+    add_init_obstacles();
 
     randomGenerator = minstd_rand(chrono::system_clock::now().time_since_epoch().count());
 }
@@ -53,45 +59,72 @@ int Game::draw(shared_ptr<Window> w){
 
     // Black background
     if(SDL_SetRenderDrawColor(w->get_sdl_renderer(), 0, 0, 0, 255) < 0){
-        cerr << "Error while setting background color" << endl;
+        cerr << "Error while setting background color " << SDL_GetError() << endl;
         return -1;
     }
     if(SDL_RenderClear(w->get_sdl_renderer()) < 0){
-        cerr << "Error while printing background color" << endl;
+        cerr << "Error while printing background color " << SDL_GetError() << endl;
         return -1;
     }
 
+    // Shows score
     unsigned int score;
     score = static_cast<unsigned int>(floor(state->get_travelled_dist()));
     string scoreTxt = to_string(score);
     scoreTxt+=" m";
-
     RGBColor white(255, 255, 255);
     unsigned int pos = (w->get_width() / 2) - 25;
     if(w->draw_text(scoreTxt, 48, white, 50, 50, pos, 0) < 0)
         return -1;
 
-    shared_ptr<People> p = make_shared<People>(-20.0, 180.0, 500.0);
-    p->draw(w, player);
-
-    shared_ptr<People> q = make_shared<People>(100.0, 180.0, 900.0);
-    q->draw(w, player);
-
-    // Draws other elements
-    // path->draw(w, player);
+    // Draws kerbs
     kerbs[0].draw(w, player);
     kerbs[1].draw(w, player);
-    // // Draw obstacles but only the want in the DoV (depth of view)
-    // for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++)
-    //    iter->get()->draw(w, player);
+
+    // Draws obstacles but only the ones in the DoV (depth of view)
+    double dov = player->get_dov();
+    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++){
+        const shared_ptr<Object> o = *iter;
+        if(o->get_coordinates()->get_z() + o->get_size()->get_depth() >= dov)
+            break;
+        o->draw(w, player);
+    }
 
     // If game is over, adds "game over" text
     if(state->get_status() == GameStateStatus::ended){
         unsigned int height = 100, width = 250;
         unsigned int xTop = (w->get_width() / 2) - 125;
         unsigned int yTop = (w->get_height() / 2) - 50;
-        if(w->draw_text("Game Over!", 96, white, height, width, xTop, yTop))
+        if(w->draw_text("Game Over!", 256, white, height, width, xTop, yTop))
             return -1;
+    }
+
+    return 0;
+}
+
+int Game::test_hit() const{
+    shared_ptr<Coordinate3D> playerPos = player->get_coordinates();
+    if(!playerPos)
+        return -1;
+    
+    // Tests if he tripped on the first kerb
+    int testHitKerb1 = kerbs[0].test_hit(player);
+    if(testHitKerb1 == 1 || testHitKerb1 < 0)
+        return testHitKerb1;
+    
+    // Tests if he tripped on the second kerb
+    int testHitKerb2 = kerbs[0].test_hit(player);
+    if(testHitKerb2 == 1 || testHitKerb2 < 0)
+        return testHitKerb2;
+
+    if(obstacles.size() == 0)
+        return 0;
+
+    // Tests if he tripped on one of the obstacles.
+    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++){
+        int testHit = (*iter)->test_hit(player);
+        if(testHit == 1 || testHit < 0)
+            return testHit;
     }
 
     return 0;
@@ -108,7 +141,7 @@ GameStateStatus Game::get_game_status() const{
         return GameStateStatus::ended;
 }
 
-void Game::set_game_status(GameStateStatus status){
+void Game::set_game_status(const GameStateStatus status){
     if(state)
         state->set_status(status);
 }
@@ -129,36 +162,79 @@ const list<shared_ptr<Object>>& Game::get_obstacles() const{
     return obstacles;
 }
 
+void Game::add_init_obstacles(){
+    // Adds random obstacles until we've reached the DoV
+    double currentDepth = 0.0;
+    double dov = static_cast<double>(player->get_dov());
+    while(currentDepth < dov){
+        add_random_obstacle();
+        currentDepth = obstacles.back()->get_coordinates()->get_z();
+    }
+}
+
 void Game::add_random_obstacle(){
     unsigned int dangerousOrNot = get_random(10);
     unsigned int type;
 
-    double x = 70 + get_random(400);
-    double y = -202.5;
-    double z = state->get_travelled_dist();
+    double z;
+    if(!obstacles.empty()){
+        z = obstacles.back()->get_coordinates()->get_z() + 400.0;
+    }else
+        z = clearance;
 
     if(dangerousOrNot < DEFAULT_DANGEROUS_RATE){
         // Needs to generate a dangerous obstacle
         type = get_random(DangerousObstacle::NB_RANDOM_D_OBSTACLES);
         if(type == 0)
             obstacles.push_back(
-                make_shared<Barrier>(x, y + Barrier::DEFAULT_HEIGHT, z)
+                make_shared<Barrier>(
+                    -path->get_width()/2.0 + get_random(path->get_width() - Barrier::DEFAULT_WIDTH),
+                    static_cast<double>(Barrier::DEFAULT_HEIGHT),
+                    z
+                )
             );
         else
             obstacles.push_back(
-                make_shared<People>(x, y + People::DEFAULT_HEIGHT, z)
+                make_shared<Person>(
+                    -path->get_width()/2.0 + get_random(path->get_width() - Person::DEFAULT_WIDTH),
+                    static_cast<double>(Person::DEFAULT_HEIGHT),
+                    z
+                )
             );
     }else{
         // Needs to generate a non-dangerous obstacle
         type = get_random(NonDangerousObstacle::NB_RANDOM_ND_OBSTACLES);
         if(type == 0)
             obstacles.push_back(
-                make_shared<Rubbish>(x, y + Rubbish::DEFAULT_HEIGHT, z)
+                make_shared<Rubbish>(
+                    -path->get_width()/2.0 + get_random(path->get_width() - Rubbish::DEFAULT_WIDTH),
+                    static_cast<double>(Rubbish::DEFAULT_HEIGHT),
+                    z
+                )
             );
         else
             obstacles.push_back(
-                make_shared<Crate>(x, y + Crate::DEFAULT_HEIGHT, z)
+                make_shared<Crate>(
+                    -path->get_width()/2.0 + get_random(path->get_width() - Crate::DEFAULT_WIDTH),
+                    static_cast<double>(Crate::DEFAULT_HEIGHT),
+                    z
+                )
             );
+    }
+}
+
+void Game::move_obstacles_forward(const double decrease){
+    auto iter = obstacles.cbegin();
+    auto end = obstacles.cend();
+    while(iter != end){
+        double currentDepth = (*iter)->get_coordinates()->get_z();
+        double newDepth = currentDepth - decrease;
+        if(newDepth < 0.0) // if out of view, removes obstacle
+            iter = obstacles.erase(iter);
+        else{
+            (*iter)->get_coordinates()->set_z(newDepth);
+            iter++;
+        }
     }
 }
 
@@ -179,12 +255,11 @@ void Game::increment_score(const double increment) const{
         state->increase_travelled_dist(increment);
 }
 
-unsigned int Game::get_random(unsigned int upperLimit){
+unsigned int Game::get_random(const unsigned int upperLimit){
     return randomGenerator() % upperLimit;
 }
 
 void Game::player_random_movement(){
-    // Need to take into account the current position of Cymi.
     unsigned int movSizeMin = player->get_min_movement_range();
     unsigned int movSizeMax = player->get_max_movement_range();
     unsigned int randMovSize = get_random(movSizeMax - movSizeMin + 1);
@@ -196,5 +271,5 @@ void Game::player_random_movement(){
     else
         increaseX = (- static_cast<double>(randMovSize)) * player->get_movement_size();
 
-    player->increaseXPosition(increaseX);
+    player->increase_x_position(increaseX);
 }

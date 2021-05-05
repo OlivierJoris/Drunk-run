@@ -1,17 +1,17 @@
 /*
- * Implementation of the object of the game drunk run.
+ * Implementation of the person obstacle of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
 
-#include "People.hpp"
+#include "Person.hpp"
 #include "Player.hpp"
 
 #include <iostream>
 
 using namespace std;
 
-People::People(
+Person::Person(
     const unsigned int height,
     const unsigned int width,
     const unsigned int depth,
@@ -23,19 +23,17 @@ People::People(
     const double z
 ): DangerousObstacle(height, width, depth, r, g, b, x, y, z){}
 
-People::People(const double x, const double y, const double z)
+Person::Person(const double x, const double y, const double z)
 : DangerousObstacle(
     DEFAULT_HEIGHT, DEFAULT_WIDTH, DEFAULT_DEPTH,
     DEFAULT_RED, DEFAULT_GREEN, DEFAULT_BLUE,
     x, y, z
 ){}
 
-int People::test_hit(shared_ptr<Player>) const {
-    // temporary
-    return 0;
+int Person::test_hit(shared_ptr<Player> player) const {
+    return DangerousObstacle::test_hit(player);
 }
 
-void People::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
+void Person::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Object::draw(w, p);
-    // cout << "people" << endl;
 }

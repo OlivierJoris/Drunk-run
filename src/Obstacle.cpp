@@ -7,8 +7,6 @@
 #include "Obstacle.hpp"
 #include "Object.hpp"
 
-#include <memory>
-
 Obstacle::Obstacle(): Object(){}
 
 Obstacle::Obstacle(
