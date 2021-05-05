@@ -37,5 +37,4 @@ int Rubbish::test_hit(shared_ptr<Player> player) const {
 
 void Rubbish::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     Object::draw(w, p);
-    // cout << "rubbish" << endl;
 }

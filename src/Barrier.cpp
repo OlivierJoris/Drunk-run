@@ -39,5 +39,4 @@ int Barrier::test_hit(shared_ptr<Player>) const{
 
 void Barrier::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     Object::draw(w, p);
-    // cout << "barrier" << endl;
 }

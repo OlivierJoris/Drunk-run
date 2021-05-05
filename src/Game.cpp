@@ -77,6 +77,15 @@ int Game::draw(shared_ptr<Window> w){
     shared_ptr<People> q = make_shared<People>(100.0, 180.0, 900.0);
     q->draw(w, player);
 
+    shared_ptr<Barrier> b = make_shared<Barrier>(-50.0, 100.0, 500.0);
+    b->draw(w, player);
+
+    shared_ptr<Crate> c = make_shared<Crate>(-50.0, 100.0, 600.0);
+    c->draw(w, player);
+
+    shared_ptr<Rubbish> r = make_shared<Rubbish>(-10.0, 30.0, 400.0);
+    r->draw(w, player);
+
     // Draws other elements
     // path->draw(w, player);
     kerbs[0].draw(w, player);
