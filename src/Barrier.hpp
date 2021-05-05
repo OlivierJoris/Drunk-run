@@ -51,7 +51,7 @@ public:
     Barrier(const double x, const double y, const double z);
 
     // Draws the barrier.
-    virtual void draw() const;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
     /*
      * Tests if the obstacle hit the player.

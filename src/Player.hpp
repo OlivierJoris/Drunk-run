@@ -21,12 +21,16 @@ public:
     static const unsigned int DEFAULT_WIDTH = 40;
     // Default depth of the player in cm.
     static const unsigned int DEFAULT_DEPTH = 40;
+    // Default distance eye ground in cm.
+    static const unsigned int DEFAULT_DISTANCE_EYE_GROUND = 170;
+    // Default distance eye screen in cm.
+    static const unsigned int DEFAULT_DISTANCE_EYE_SCREEN = 20;
 
     // Constuctor.
     Player();
 
     // Draws the player.
-    virtual void draw() const {};
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const {};
 
     /*
      * Increases/Decreases the position of the player on the x axis.
@@ -72,11 +76,30 @@ public:
      */
     unsigned int get_movement_size() const;
 
+    /*
+     * Returns the height of the eye from the ground.
+     */
+    unsigned int get_distance_eye_ground() const;
+
+    /*
+     * Returns the distance between the eye and the screen.
+     */
+    unsigned int get_distance_eye_screen() const;
+
+    /*
+     * Returns the position of the eye.
+     */
+    Coordinate3D get_position_eye() const;
+
+    double get_x() const;
+
+    unsigned get_fov() const;
+
 private:
     // FOV in degree.
-    const unsigned int FOV = 60; 
+    const static unsigned int FOV = 60; 
     // DOV in cm.
-    const unsigned int DOV = 15000;
+    const static unsigned int DOV = 15000;
     // Cm per second.
     const unsigned int SPEED = 100;
     // Min range for drunk movement.
@@ -86,7 +109,7 @@ private:
     // Drunk movement in seconds.
     const unsigned int MOVEMENT_RATE = 2;
     // Size of a movement in cm.
-    const unsigned int LATERAL_MOVEMENT_SIZE = 5;
+    const double LATERAL_MOVEMENT_SIZE = 5;
 };
 
 #endif

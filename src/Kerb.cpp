@@ -28,7 +28,7 @@ int Kerb::test_hit(shared_ptr<Player> player) const {
     return 0;
 }
 
-void Kerb::draw() const{
-    // temporary
-    cout << "kerb" << endl;
+void Kerb::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+    Object::draw(w, p);
+    // cout << "kerb" << endl;
 }

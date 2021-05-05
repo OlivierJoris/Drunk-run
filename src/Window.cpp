@@ -91,6 +91,8 @@ int Window::draw_rect(
         return -1;
     }
 
+    SDL_RenderFillRect(renderer, &rect);
+
     return 0;
 }
 

@@ -58,7 +58,7 @@ public:
     virtual int test_hit(std::shared_ptr<Player> player) const = 0;
 
     // Draws the obstacle.
-    virtual void draw() const = 0;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
 };
 
 #endif

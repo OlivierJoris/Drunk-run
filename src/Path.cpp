@@ -15,7 +15,7 @@ Path::Path(): Object(0, DEFAULT_WIDTH, 0, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_
     set_coordinates(-200, -202.5, 0);
 }
 
-void Path::draw() const{
+void Path::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     //temporary
-    cout << "path" << endl;
+    // cout << "path" << endl;
 }

@@ -8,7 +8,6 @@
 #include "Player.hpp"
 
 #include <iostream>
-#include <memory>
 
 using namespace std;
 
@@ -36,7 +35,7 @@ int People::test_hit(shared_ptr<Player>) const {
     return 0;
 }
 
-void People::draw() const{
-    // temporary
-    cout << "people" << endl;
+void People::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
+    Object::draw(w, p);
+    // cout << "people" << endl;
 }

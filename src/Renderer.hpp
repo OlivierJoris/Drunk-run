@@ -7,65 +7,41 @@
 #ifndef __RENDERER__
 #define __RENDERER__
 
+#include "Player.hpp"
+#include "Coordinate3D.hpp"
+
+#include <memory>
+
 class Renderer{
 
 public:
-    // Constuctor.
-    Renderer();
+    /*
+    * Computes the perspective coordinates of the given point.
+    *
+    * @param point The point for which we want the persepctive.
+    * @param p The player of the game.
+    * 
+    * @return The perspective coordinats.
+    */ 
+    static Coordinate3D compute_perspective(
+        const Coordinate3D& point,
+        std::shared_ptr<Player> p
+    );
 
-    /* Converts a value from cm to pixel.
+    /*
+     * Computes the window coordinates of the given point.
      *
-     * @param value : The value to convert.
+     * @param point The point for which we want the window coordinates.
+     * @param w The window of the game.
+     * @param p The player of the game.
      * 
-     * @return The value in pixel.
-     */ 
-    double static from_cm_to_pixel(double value);
-
-    /* Converts a x coord (in pixel) from the centered coordinate system to 
-     * the window coordinate system.
-     *
-     * @param x : The x value to convert.
-     * @param window_width : The window width.
-     * 
-     * @return The converted x value (in pixel).
-     */ 
-    double static x_to_window_coordinate(double x, unsigned int window_width);
-
-    /* Converts a y coord (in pixel) from the centered coordinate system to 
-     * the window coordinate system.
-     *
-     * @param y : The y value to convert.
-     * @param window_height : The window height.
-     * 
-     * @return The converted y value (in pixel).
-     */ 
-    double static y_to_window_coordinate(double y, unsigned int window_height);
-
-    /* Computes the x perspective coordinate given the x and z 3D coordinates.
-     *
-     * @param x : the given x 3D coordinate.
-     * @param z : the given z 3D coordinate.
-     * 
-     * @return The x perspective coordinate.
-     */ 
-    double static compute_perspective_x(double x, double z);
-
-    /* Computes the y perspective coordinate given the y and z 3D coordinates.
-     *
-     * @param y : the given y 3D coordinate.
-     * @param z : the given z 3D coordinate.
-     * 
-     * @return The y perspective coordinate.
-     */ 
-    double static compute_perspective_y(double y, double z);
-
-private:
-    // in cm                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-    constexpr static double DISTANCE_EYE_GROUND = 170.0;
-    // in cm
-    constexpr static double DISTANCE_EYE_SCREEN = 20.0;
-    // in pixel / cm
-    const static unsigned int SCALE = 3;
+     * @return Window coordinates of the given point.
+     */
+    static Coordinate3D from_perspective_to_window(
+        const Coordinate3D& point,
+        std::shared_ptr<Window> w,
+        std::shared_ptr<Player> p
+    );
 };
 
 #endif
