@@ -42,11 +42,6 @@ void Object::set_coordinates(double x, double y, double z){
 }
 
 void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
-    /*
-    Coordinate3D posEye = p->get_position_eye();
-
-    cout << "eye pos " << posEye << endl;
-    */
 
     // Coordinates of the different points of the cuboid
     Coordinate3D point1 = *topleft;
@@ -70,29 +65,14 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
     */
 
     // Coordinates of the different points of the cuboid with perspective
-    double xp1 = Renderer::compute_perspective_x(point1, p);
-    double yp1 = Renderer::compute_perspective_y(point1, p);
-
-    double xp2 = Renderer::compute_perspective_x(point2, p);
-    double yp2 = Renderer::compute_perspective_y(point2, p);
-
-    double xp3 = Renderer::compute_perspective_x(point3, p);
-    double yp3 = Renderer::compute_perspective_y(point3, p);
-
-    double xp4 = Renderer::compute_perspective_x(point4, p);
-    double yp4 = Renderer::compute_perspective_y(point4, p);
-
-    double xp5 = Renderer::compute_perspective_x(point5, p);
-    double yp5 = Renderer::compute_perspective_y(point5, p);
-
-    double xp6 = Renderer::compute_perspective_x(point6, p);
-    double yp6 = Renderer::compute_perspective_y(point6, p);
-
-    double xp7 = Renderer::compute_perspective_x(point7, p);
-    double yp7 = Renderer::compute_perspective_y(point7, p);
-
-    double xp8 = Renderer::compute_perspective_x(point8, p);
-    double yp8 = Renderer::compute_perspective_y(point8, p);
+    Coordinate3D point1p = Renderer::compute_perspective(point1, p);
+    Coordinate3D point2p = Renderer::compute_perspective(point2, p);
+    Coordinate3D point3p = Renderer::compute_perspective(point3, p);
+    Coordinate3D point4p = Renderer::compute_perspective(point4, p);
+    Coordinate3D point5p = Renderer::compute_perspective(point5, p);
+    Coordinate3D point6p = Renderer::compute_perspective(point6, p);
+    Coordinate3D point7p = Renderer::compute_perspective(point7, p);
+    Coordinate3D point8p = Renderer::compute_perspective(point8, p);
 
     /*
     cout << "xp1 " << xp1 << " yp1 " << yp1 << endl;
@@ -108,15 +88,14 @@ void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
 
     /* Coordinates of the different points of the cuboid in the
         window coordinate system */
-    Coordinate3D point1Window = Renderer::from_perspective_to_window(Coordinate3D(xp1, yp1, 0.0), w, p);
-    Coordinate3D point2Window = Renderer::from_perspective_to_window(Coordinate3D(xp2, yp2, 0.0), w, p);
-    Coordinate3D point3Window = Renderer::from_perspective_to_window(Coordinate3D(xp3, yp3, 0.0), w, p);
-    Coordinate3D point4Window = Renderer::from_perspective_to_window(Coordinate3D(xp4, yp4, 0.0), w, p);
-    Coordinate3D point5Window = Renderer::from_perspective_to_window(Coordinate3D(xp5, yp5, 0.0), w, p);
-    Coordinate3D point6Window = Renderer::from_perspective_to_window(Coordinate3D(xp6, yp6, 0.0), w, p);
-    Coordinate3D point7Window = Renderer::from_perspective_to_window(Coordinate3D(xp7, yp7, 0.0), w, p);
-    Coordinate3D point8Window = Renderer::from_perspective_to_window(Coordinate3D(xp8, yp8, 0.0), w, p);
-
+    Coordinate3D point1Window = Renderer::from_perspective_to_window(point1p, w, p);
+    Coordinate3D point2Window = Renderer::from_perspective_to_window(point2p, w, p);
+    Coordinate3D point3Window = Renderer::from_perspective_to_window(point3p, w, p);
+    Coordinate3D point4Window = Renderer::from_perspective_to_window(point4p, w, p);
+    Coordinate3D point5Window = Renderer::from_perspective_to_window(point5p, w, p);
+    Coordinate3D point6Window = Renderer::from_perspective_to_window(point6p, w, p);
+    Coordinate3D point7Window = Renderer::from_perspective_to_window(point7p, w, p);
+    Coordinate3D point8Window = Renderer::from_perspective_to_window(point8p, w, p);
 
     if(point1Window.get_x() > w->get_width())
         point1Window.set_x(w->get_width());

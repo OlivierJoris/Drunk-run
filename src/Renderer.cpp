@@ -12,19 +12,20 @@
 
 using namespace std;
 
-double Renderer::compute_perspective_x(Coordinate3D& point, shared_ptr<Player> p){
+Coordinate3D Renderer::compute_perspective(const Coordinate3D& point, shared_ptr<Player> p){
     Coordinate3D eyePos = p->get_position_eye();
-    return (((point.get_x() - eyePos.get_x()) * p->get_distance_eye_screen()) 
-           / (point.get_z() + p->get_distance_eye_screen()));
-}
+    Coordinate3D perspective;
 
-double Renderer::compute_perspective_y(Coordinate3D& point, shared_ptr<Player> p){
-    return (((point.get_y() - p->get_distance_eye_ground()) * p->get_distance_eye_screen()) 
-           / (point.get_z() + p->get_distance_eye_screen()));
+    perspective.set_x(((point.get_x() - eyePos.get_x()) * p->get_distance_eye_screen()) 
+        / (point.get_z() + p->get_distance_eye_screen()));
+    perspective.set_y(((point.get_y() - p->get_distance_eye_ground()) * p->get_distance_eye_screen())
+        / (point.get_z() + p->get_distance_eye_screen()));
+
+    return perspective;
 }
 
 Coordinate3D Renderer::from_perspective_to_window(
-    Coordinate3D persepctive,
+    const Coordinate3D& persepctive,
     shared_ptr<Window> w, 
     shared_ptr<Player> p)
 {
