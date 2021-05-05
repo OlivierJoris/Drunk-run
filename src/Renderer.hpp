@@ -8,6 +8,7 @@
 #define __RENDERER__
 
 #include "Player.hpp"
+#include "Window.hpp"
 #include "Coordinate3D.hpp"
 
 #include <memory>
@@ -16,13 +17,13 @@ class Renderer{
 
 public:
     /*
-    * Computes the perspective coordinates of the given point.
-    *
-    * @param point The point for which we want the persepctive.
-    * @param p The player of the game.
-    * 
-    * @return The perspective coordinats.
-    */ 
+     * Computes the perspective coordinates of the given point.
+     *
+     * @param point The point for which we want the persepctive.
+     * @param p The player of the game.
+     * 
+     * @return The perspective coordinats.
+     */ 
     static Coordinate3D compute_perspective(
         const Coordinate3D& point,
         std::shared_ptr<Player> p

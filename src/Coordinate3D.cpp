@@ -39,11 +39,3 @@ void Coordinate3D::set_z(const double z){
 double Coordinate3D::get_z() const{
     return z;
 }
-
-ostream& operator<< (ostream& os, Coordinate3D coord3D){
-    os << "(" << coord3D.get_x() << ", ";
-    os << coord3D.get_y() << ", ";
-    os << coord3D.get_z() << ")";
-
-    return os;
-}

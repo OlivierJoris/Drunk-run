@@ -8,23 +8,27 @@
 #define __KERB__
 
 #include "DangerousObstacle.hpp"
+#include "Window.hpp"
+#include "Player.hpp"
 
 // Represents a kerb of the game.
-class Kerb: public DangerousObstacle{ // to fill
+class Kerb: public DangerousObstacle{
 
 public:
     // Default height of the kerb in cm.
     static const unsigned int DEFAULT_HEIGHT = 1;
     // Default width of the kerb in cm.
     static const unsigned int DEFAULT_WIDTH = 1;
-    // Default color - red.
+    // Default depth of the kerb in cm.
+    static const unsigned int DEFAULT_DEPTH = 15000;
+    // Default color.
     static const uint8_t DEFAULT_COLOR = 64;
 
     // Constructor.
     Kerb(
         const unsigned int height = DEFAULT_HEIGHT,
         const unsigned int width = DEFAULT_WIDTH,
-        const unsigned int depth = 15000,
+        const unsigned int depth = DEFAULT_DEPTH,
         const uint8_t r = DEFAULT_COLOR,
         const uint8_t g = DEFAULT_COLOR,
         const uint8_t b = DEFAULT_COLOR,
@@ -32,6 +36,9 @@ public:
         const double y = 0.0,
         const double z = 0.0
     );
+
+    // Draws the kerb.
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
     
     /*
      * Tests if the obstacle hit the player.
@@ -43,9 +50,6 @@ public:
      *         -1 error.
      */
     virtual int test_hit(std::shared_ptr<Player> player) const;
-
-    // Draws the kerb.
-    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 };
 
 #endif

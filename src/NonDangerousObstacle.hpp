@@ -1,5 +1,5 @@
 /*
- * A dangerous obstacle of the game drunk run.
+ * A non-dangerous obstacle of the game drunk run.
  *
  * @author Maxime Goffart (180521) & Olivier Joris (182113)
  */
@@ -61,7 +61,7 @@ public:
      *         0 The player is not going to trip.
      *         -1 Error.
      */
-    virtual int test_hit(std::shared_ptr<Player> player) const;
+    virtual int test_hit(std::shared_ptr<Player>) const;
 };
 
 #endif

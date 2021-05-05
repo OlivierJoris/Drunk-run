@@ -5,16 +5,13 @@
  */
 
 #include "Window.hpp"
+#include "RGBColor.hpp"
 
 #include <iostream>
 #include <string>
 #include <SDL2/SDL_ttf.h>
 
 using namespace std;
-
-Window::Window(): height{DEFAULT_HEIGHT}, width{DEFAULT_WIDTH}{
-    build_window();
-}
 
 Window::Window(const unsigned int width, const unsigned int height)
 : height{height}, width{width} {

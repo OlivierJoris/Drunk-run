@@ -50,7 +50,4 @@ private:
     double z;
 };
 
-// Prints a Coordinate3D on the given output stream.
-std::ostream& operator<< (std::ostream& os, Coordinate3D coord3D);
-
 #endif

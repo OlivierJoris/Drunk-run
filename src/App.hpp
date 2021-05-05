@@ -46,15 +46,11 @@ public:
 
     /*
      * Returns the window of the app.
-     *
-     * @return Pointer to the window of the app.
      */
     std::shared_ptr<Window> get_window() const;
 
     /*
      * Returns the game of the app.
-     *
-     * @return Pointer to the game of the app.
      */
     std::shared_ptr<Game> get_game() const;
 

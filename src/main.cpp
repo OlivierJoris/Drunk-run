@@ -5,7 +5,6 @@
  */
 
 #include "App.hpp"
-#include "Window.hpp"
 #include "Game.hpp"
 
 #include <SDL2/SDL.h>
@@ -15,7 +14,7 @@
 
 using namespace std;
 
-int main(int argc, char const *argv[]){
+int main(){
     // Initializes SDL
     int initSDL = SDL_Init(SDL_INIT_VIDEO);
     if(initSDL < 0){

@@ -6,6 +6,7 @@
 
 #include "Barrier.hpp"
 #include "DangerousObstacle.hpp"
+#include "Object.hpp"
 #include "Player.hpp"
 
 #include <iostream>
@@ -36,6 +37,6 @@ int Barrier::test_hit(shared_ptr<Player> player) const{
     return DangerousObstacle::test_hit(player);
 }
 
-void Barrier::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+void Barrier::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Object::draw(w, p);
 }

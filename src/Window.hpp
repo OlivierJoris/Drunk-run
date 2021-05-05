@@ -16,15 +16,10 @@
 class Window{
 
 public:
-    // Default width of the window.
+    // Default width of the window in pixels.
     static const unsigned int DEFAULT_WIDTH = 640;
-    // Default height of the window.
+    // Default height of the window in pixels.
     static const unsigned int DEFAULT_HEIGHT = 480;
-
-    /*
-     * Constructs a Window with a default size.
-     */
-    Window();
 
     /*
      * Constructor.
@@ -34,33 +29,28 @@ public:
      *
      * @return Window with the given size.
      */
-    Window(const unsigned int width, const unsigned int height);
+    Window(
+        const unsigned int width = DEFAULT_WIDTH,
+        const unsigned int height = DEFAULT_HEIGHT
+    );
 
     /*
-     * Returns the height of the window.
-     *
-     * @return The height of the window in pixels.
+     * Returns the height of the window in pixels.
      */
     unsigned int get_height() const;
 
     /*
-     * Returns the width of the window.
-     *
-     * @return The width of the window in pixels.
+     * Returns the width of the window in pixels.
      */
     unsigned int get_width() const;
 
     /*
-     * Returns the SDL window.
-     *
-     * @return The SDL window of this window.
+     * Returns the SDL window of this window.
      */
     SDL_Window* get_sdl_window() const;
 
     /*
-     * Returns the SDL renderer.
-     *
-     * @return The SDL renderer of the window.
+     * Returns the SDL renderer of this window.
      */
     SDL_Renderer* get_sdl_renderer() const;
 

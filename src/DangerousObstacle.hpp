@@ -17,7 +17,7 @@
 class DangerousObstacle: public Obstacle{
 
 public:
-    // Number of different random dangerous obstacles (barrier, people).
+    // Number of different random dangerous obstacles (barrier, person).
     static const unsigned int NB_RANDOM_D_OBSTACLES = 2;
 
     // Constructor.

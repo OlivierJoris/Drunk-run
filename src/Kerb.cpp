@@ -5,7 +5,10 @@
  */
 
 #include "Kerb.hpp"
+#include "Object.hpp"
 #include "DangerousObstacle.hpp"
+#include "Player.hpp"
+#include "Window.hpp"
 
 #include <iostream>
 #include <cmath>
@@ -28,9 +31,10 @@ int Kerb::test_hit(shared_ptr<Player> player) const {
     shared_ptr<Coordinate3D> playerPos = player->get_coordinates();
     if(!playerPos)
         return -1;
-    return abs(playerPos->get_x()) >= abs(topleft->get_x());
+
+    return abs(playerPos->get_x()) >= abs(topLeft->get_x());
 }
 
-void Kerb::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
+void Kerb::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Object::draw(w, p);
 }

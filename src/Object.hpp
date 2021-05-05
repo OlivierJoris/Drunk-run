@@ -60,7 +60,7 @@ public:
      * @param y Y coordinate.
      * @param z Z coordinate.
      */
-    void set_coordinates(double x, double y, double z);
+    void set_coordinates(const double x, const double y, const double z);
 
     // Returns the coordinates of the top left corner of the object.
     std::shared_ptr<Coordinate3D> get_coordinates() const;
@@ -70,6 +70,9 @@ public:
 
     // Returns the color of the object.
     std::shared_ptr<RGBColor> get_color() const;
+
+    // Draws the object.
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
     /*
      * Tests if the obstacle hit the player.
@@ -81,17 +84,12 @@ public:
      *         -1 error.
      */
     virtual int test_hit(std::shared_ptr<Player> player) const = 0;
-           
-    // Draws the object.
-    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
-
-    void print_coord() const;
 
 protected:
     // Size of the object.
     std::shared_ptr<Size3D> size;
     // 3D coordinates of the top left corner of the object.
-    std::shared_ptr<Coordinate3D> topleft;
+    std::shared_ptr<Coordinate3D> topLeft;
     // RGB color of the obstacle.
     std::shared_ptr<RGBColor> color;
 };

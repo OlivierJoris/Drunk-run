@@ -27,7 +27,7 @@ public:
     static const unsigned int DEFAULT_FRAME_RATE = 30;
     // Default dangerous obstacles rate (base 10).
     static const unsigned int DEFAULT_DANGEROUS_RATE = 3;
-    // Default clearing distance before first obstacle.
+    // Default clearing distance before first obstacle in cm.
     constexpr static const double DEFAULT_CLEARANCE = 600.0;
 
     /*
@@ -38,9 +38,9 @@ public:
      * @param dangerousRate Dangerous obstacles rate.
      */
     Game(
-        unsigned int frameRate = DEFAULT_FRAME_RATE,
-        double clearingDistance = DEFAULT_CLEARANCE,
-        double dangerousRate = DEFAULT_DANGEROUS_RATE
+        const unsigned int frameRate = DEFAULT_FRAME_RATE,
+        const double clearingDistance = DEFAULT_CLEARANCE,
+        const double dangerousRate = DEFAULT_DANGEROUS_RATE
     );
 
     /*
@@ -63,15 +63,11 @@ public:
 
     /*
      * Returns the state of the game.
-     *
-     * @return State of the game.
      */
     std::shared_ptr<GameState> get_game_state() const;
 
     /*
      * Returns the status of the game.
-     *
-     * @return The status of the game.
      */
     GameStateStatus get_game_status() const;
 
@@ -80,37 +76,31 @@ public:
      *
      * @param status The new status of the game.
      */
-    void set_game_status(GameStateStatus status);
+    void set_game_status(const GameStateStatus status);
 
     /*
      * Returns the player of the game.
-     *
-     * @return Player of the game.
      */
     std::shared_ptr<Player> get_player() const;
 
     /*
      * Returns the path of the game.
-     *
-     * @return Path of the game.
      */
     std::shared_ptr<Path> get_path() const;
 
     /*
      * Returns the vector of kerbs of the game.
-     *
-     * @return Vector of kerbs.
      */
     const std::vector<Kerb>& get_kerbs() const;
 
     /*
      * Returns the list of obstacles of the game.
-     *
-     * @return List of obstacles as objects.
      */
     const std::list<std::shared_ptr<Object>>& get_obstacles() const;
 
-    // Adds the first obstacles.
+    /*
+     * Adds the first obstacles.
+     */
     void add_init_obstacles();
 
     /*
@@ -118,27 +108,23 @@ public:
      */
     void add_random_obstacle();
 
-    // Moves the obstacles forward by a given distance.
-    void move_obstacles_forward(double decrease);
+    /*
+     * Moves the obstacles forward by a given distance.
+     */
+    void move_obstacles_forward(const double decrease);
 
     /*
      * Returns the fixed frame rate of the game.
-     *
-     * @return Fixed frame rate.
      */
     unsigned int get_frame_rate() const;
 
     /*
      * Returns the clearing distance of the game.
-     *
-     * @return Clearing distance.
      */
     double get_clearance_dist() const;
 
     /*
      * Returns the rate of dangerous obstacle.
-     *
-     * @return Rate of dangerous obstacle.
      */
     double get_distribution_dangerous() const;
 
@@ -151,10 +137,8 @@ public:
 
     /*
      * Returns a random number in [0, upperLimit[.
-     *
-     * @return Random number in [0, upperlimit[.
      */
-    unsigned int get_random(unsigned int upperLimit);
+    unsigned int get_random(const unsigned int upperLimit);
 
     /*
      * Generates a random movement of the player (Cymi).
@@ -169,13 +153,13 @@ private:
     // Player of the game.
     std::shared_ptr<Player> player;
 
-    // Path/road of the game.
+    // Path of the game.
     std::shared_ptr<Path> path;
 
-    // Left & right kerb of the path/road.
+    // Left & right kerbs of the path.
     std::vector<Kerb> kerbs;
 
-    // Obstacles on the path/road.
+    // Obstacles on the path.
     std::list<std::shared_ptr<Object>> obstacles;
 
     // Random number generator.

@@ -15,11 +15,11 @@
 class Barrier: public DangerousObstacle{
 
 public:
-    // Default height of the player in cm.
+    // Default height of the barrier in cm.
     static const unsigned int DEFAULT_HEIGHT = 90;
-    // Default width of the player in cm.
+    // Default width of the barrier in cm.
     static const unsigned int DEFAULT_WIDTH = 120;
-    // Default depth of the player in cm.
+    // Default depth of the barrier in cm.
     static const unsigned int DEFAULT_DEPTH = 20;
     // Default color - red.
     static const uint8_t DEFAULT_RED = 255;

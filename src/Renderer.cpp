@@ -5,6 +5,8 @@
  */
 
 #include "Renderer.hpp"
+#include "Player.hpp"
+#include "Window.hpp"
 #include "Coordinate3D.hpp"
 
 #include <math.h>

@@ -6,6 +6,7 @@
 
 #include "NonDangerousObstacle.hpp"
 #include "Obstacle.hpp"
+#include "Player.hpp"
 
 #include <memory>
 
@@ -25,7 +26,7 @@ NonDangerousObstacle::NonDangerousObstacle(
     const double z
 ): Obstacle(height, width, depth, r, g, b, x, y, z){}
 
-int NonDangerousObstacle::test_hit(shared_ptr<Player> player) const{
+int NonDangerousObstacle::test_hit(shared_ptr<Player>) const{
     // The player will never trip on a non-dangerous obstacle.
     return 0;
 }

@@ -8,13 +8,13 @@
 
 #include <cstdint>
 
-RGBColor::RGBColor(uint8_t r, uint8_t g, uint8_t b){
+RGBColor::RGBColor(const uint8_t r, const uint8_t g, const uint8_t b){
     red = r;
     green = g;
     blue = b;
 }
   
-void RGBColor::set_red(uint8_t r){
+void RGBColor::set_red(const uint8_t r){
     red = r;
 }
 
@@ -22,7 +22,7 @@ uint8_t RGBColor::get_red() const{
     return red;
 }
 
-void RGBColor::set_green(uint8_t g){
+void RGBColor::set_green(const uint8_t g){
     green = g;
 }
 
@@ -30,7 +30,7 @@ uint8_t RGBColor::get_green() const{
     return green;
 }
 
-void RGBColor::set_blue(uint8_t b){
+void RGBColor::set_blue(const uint8_t b){
     blue = b;
 }
 
