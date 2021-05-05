@@ -53,6 +53,15 @@ public:
     int draw(std::shared_ptr<Window> w);
 
     /*
+     * Tests if the player tripped on something or not.
+     * 
+     * @return 1 The player tripped.
+     *         0 The player did not tripped.
+     *         -1 Error.
+     */
+    int test_hit() const;
+
+    /*
      * Returns the state of the game.
      *
      * @return State of the game.

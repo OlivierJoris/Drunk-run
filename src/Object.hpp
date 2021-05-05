@@ -70,6 +70,17 @@ public:
 
     // Returns the color of the object.
     std::shared_ptr<RGBColor> get_color() const;
+
+    /*
+     * Tests if the obstacle hit the player.
+     *
+     * @param player The player.
+     * 
+     * @return 1 if player hit the obstacle.
+     *         0 if player did not hit obstacle.
+     *         -1 error.
+     */
+    virtual int test_hit(std::shared_ptr<Player> player) const = 0;
            
     // Draws the object.
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;

@@ -21,7 +21,9 @@ public:
     Path();
 
     // Draws the path.
-    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
+    virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{};
+
+    virtual int test_hit(std::shared_ptr<Player> player) const{};
 };
 
 #endif

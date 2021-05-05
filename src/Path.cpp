@@ -14,8 +14,3 @@ using namespace std;
 Path::Path(): Object(0, DEFAULT_WIDTH, 0, DEFAULT_COLOR, DEFAULT_COLOR, DEFAULT_COLOR){
     set_coordinates(-200, -202.5, 0);
 }
-
-void Path::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
-    //temporary
-    // cout << "path" << endl;
-}

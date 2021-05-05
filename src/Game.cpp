@@ -97,6 +97,31 @@ int Game::draw(shared_ptr<Window> w){
     return 0;
 }
 
+int Game::test_hit() const{
+    shared_ptr<Coordinate3D> playerPos = player->get_coordinates();
+    if(!playerPos)
+        return -1;
+    
+    int testHitKerb1 = kerbs[0].test_hit(player);
+    if(testHitKerb1 == 1 || testHitKerb1 < 0)
+        return testHitKerb1;
+    
+    int testHitKerb2 = kerbs[0].test_hit(player);
+    if(testHitKerb2 == 1 || testHitKerb2 < 0)
+        return testHitKerb2;
+
+    if(obstacles.size() == 0)
+        return 0;
+
+    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++){
+        int testHit = (*iter)->test_hit(player);
+        if(testHit == 1 || testHit < 0)
+            return testHit;
+    }
+
+    return 0;
+}
+
 shared_ptr<GameState> Game::get_game_state() const{
     return state;
 }

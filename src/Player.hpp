@@ -32,6 +32,8 @@ public:
     // Draws the player.
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const {};
 
+    virtual int test_hit(std::shared_ptr<Player> player) const {};
+
     /*
      * Increases/Decreases the position of the player on the x axis.
      *
@@ -96,6 +98,8 @@ public:
     unsigned get_fov() const;
 
     unsigned int get_dov() const;
+
+    void print_pos() const;
 
 private:
     // FOV in degree.

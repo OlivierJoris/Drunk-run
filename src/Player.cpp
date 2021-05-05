@@ -81,3 +81,7 @@ Coordinate3D Player::get_position_eye() const{
         -get_distance_eye_screen()
     );
 }
+
+void Player::print_pos() const{
+    cout << "Player : " << *topleft << endl;
+}
