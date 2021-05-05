@@ -41,6 +41,18 @@ void Object::set_coordinates(double x, double y, double z){
     topleft->set_z(z);
 }
 
+shared_ptr<Coordinate3D> Object::get_coordinates() const{
+    return topleft;
+}
+
+shared_ptr<Size3D> Object::get_size() const{
+    return size;
+}
+
+shared_ptr<RGBColor> Object::get_color() const{
+    return color;
+}
+
 void Object::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
 
     // Coordinates of the different points of the cuboid

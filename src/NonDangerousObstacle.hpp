@@ -53,15 +53,15 @@ public:
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
 
     /*
-     * Tests if the obstacle hit the player.
+     * Tests if the player is going to trip on the obstacle.
      *
      * @param player The player.
      * 
-     * @return 1 if player hit the obstacle.
-     *         0 if player did not hit obstacle.
-     *         -1 error.
+     * @return 1 The player is going to trip.
+     *         0 The player is not going to trip.
+     *         -1 Error.
      */
-    virtual int test_hit(std::shared_ptr<Player> player) const = 0;
+    virtual int test_hit(std::shared_ptr<Player> player) const;
 };
 
 #endif

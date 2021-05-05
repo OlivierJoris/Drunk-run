@@ -9,6 +9,8 @@
 
 #include <memory>
 
+using namespace std;
+
 NonDangerousObstacle::NonDangerousObstacle(): Obstacle(){}
 
 NonDangerousObstacle::NonDangerousObstacle(
@@ -22,3 +24,8 @@ NonDangerousObstacle::NonDangerousObstacle(
     const double y,
     const double z
 ): Obstacle(height, width, depth, r, g, b, x, y, z){}
+
+int NonDangerousObstacle::test_hit(shared_ptr<Player> player) const{
+    // The player will never trip on a non-dangerous obstacle.
+    return 0;
+}

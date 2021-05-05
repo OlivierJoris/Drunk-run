@@ -61,6 +61,15 @@ public:
      * @param z Z coordinate.
      */
     void set_coordinates(double x, double y, double z);
+
+    // Returns the coordinates of the top left corner of the object.
+    std::shared_ptr<Coordinate3D> get_coordinates() const;
+
+    // Returns the size of the object.
+    std::shared_ptr<Size3D> get_size() const;
+
+    // Returns the color of the object.
+    std::shared_ptr<RGBColor> get_color() const;
            
     // Draws the object.
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;

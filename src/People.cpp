@@ -30,9 +30,8 @@ People::People(const double x, const double y, const double z)
     x, y, z
 ){}
 
-int People::test_hit(shared_ptr<Player>) const {
-    // temporary
-    return 0;
+int People::test_hit(shared_ptr<Player> player) const {
+    return DangerousObstacle::test_hit(player);
 }
 
 void People::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{

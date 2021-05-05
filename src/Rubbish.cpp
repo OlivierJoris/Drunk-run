@@ -31,8 +31,7 @@ Rubbish::Rubbish(const double x, const double y, const double z)
 ){}
 
 int Rubbish::test_hit(shared_ptr<Player> player) const {
-    // temporary
-    return 0;
+    return NonDangerousObstacle::test_hit(player);
 }
 
 void Rubbish::draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const{
