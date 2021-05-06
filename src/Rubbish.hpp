@@ -25,11 +25,11 @@ public:
     // Default depth of the playerubbishr in cm.
     static const unsigned int DEFAULT_DEPTH = 30;
     // Default color - red.
-    static const uint8_t DEFAULT_RED = 255;
+    static const uint8_t DEFAULT_RED = 128;
     // Default color - green.
-    static const uint8_t DEFAULT_GREEN = 153;
+    static const uint8_t DEFAULT_GREEN = 128;
     // Default color - blue.
-    static const uint8_t DEFAULT_BLUE = 51;
+    static const uint8_t DEFAULT_BLUE = 128;
 
     // Constructor.
     Rubbish(
@@ -53,7 +53,11 @@ public:
      */
     Rubbish(const double x, const double y, const double z);
 
-    // Draws the rubbish.
+    /* Draws the rubbish.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
     /*

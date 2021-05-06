@@ -50,7 +50,11 @@ public:
      */
     Crate(const double x, const double y, const double z);
 
-    // Draws the crate.
+    /* Draws the crate.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
     /*

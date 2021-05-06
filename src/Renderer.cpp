@@ -40,5 +40,17 @@ Coordinate3D Renderer::from_perspective_to_window(
     windowCoord.set_y((static_cast<double>(w->get_height()) / 2.0) - (persepctive.get_y() * ratio));
     windowCoord.set_z(0.0);
 
+    if(windowCoord.get_x() > w->get_width())
+        windowCoord.set_x(w->get_width());
+    
+    if(windowCoord.get_y() > w->get_height())
+        windowCoord.set_y(w->get_height());
+    
+    if(windowCoord.get_x() < 0.0)
+        windowCoord.set_x(0.0);
+
+    if(windowCoord.get_y() < 0.0)
+        windowCoord.set_y(0.0);
+
     return windowCoord;
 }

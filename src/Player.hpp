@@ -47,9 +47,22 @@ public:
         const unsigned int distanceEyeScree = DEFAULT_DISTANCE_EYE_SCREEN
     );
 
-    // Draws the player.
+    /* Draws the player.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window>, std::shared_ptr<Player>) const {};
 
+    /*
+     * Tests if the player is going to trip on the obstacle.
+     *
+     * @param player The player.
+     * 
+     * @return 1 The player is going to trip.
+     *         0 The player is not going to trip.
+     *         -1 Error.
+     */
     virtual int test_hit(std::shared_ptr<Player>) const {return 0;};
 
     /*

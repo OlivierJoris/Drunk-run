@@ -49,7 +49,11 @@ public:
     // Destructor.
     virtual ~NonDangerousObstacle() = default;
 
-    // Draws the obstacle.
+    /* Draws the obstacle.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const = 0;
 
     /*

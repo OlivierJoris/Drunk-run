@@ -86,100 +86,66 @@ void Object::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Coordinate3D point5Window = Renderer::from_perspective_to_window(point5p, w, p);
     Coordinate3D point6Window = Renderer::from_perspective_to_window(point6p, w, p);
     Coordinate3D point7Window = Renderer::from_perspective_to_window(point7p, w, p);
-    Coordinate3D point8Window = Renderer::from_perspective_to_window(point8p, w, p);
+    Coordinate3D point8Window = Renderer::from_perspective_to_window(point8p, w, p); 
 
-    if(point1Window.get_x() > w->get_width())
-        point1Window.set_x(w->get_width());
-    if(point1Window.get_x() < 0)
-        point1Window.set_x(0);
+    RGBColor colorFace = RGBColor(color->get_red() / 2, color->get_green() / 2,
+                                  color->get_blue() / 2);
+    Coordinate3D firstPoint, secondPoint, firstPointP, secondPointP, firstPointW, secondPointW;
 
-    if(point2Window.get_x() > w->get_width())
-        point2Window.set_x(w->get_width());
-    if(point2Window.get_x() < 0)
-        point2Window.set_x(0);
+    // Back face 
+    w->draw_rect(abs(point4Window.get_y() - point8Window.get_y()), abs(point4Window.get_x() -
+                     point3Window.get_x()), point4Window.get_x(), point4Window.get_y(), colorFace);
 
-    if(point3Window.get_x() > w->get_width())
-        point3Window.set_x(w->get_width());
-    if(point3Window.get_x() < 0)
-        point3Window.set_x(0);
-
-    if(point4Window.get_x() > w->get_width())
-        point4Window.set_x(w->get_width());
-    if(point4Window.get_x() < 0)
-        point4Window.set_x(0);
-    
-    if(point5Window.get_x() > w->get_width())
-        point5Window.set_x(w->get_width());
-    if(point5Window.get_x() < 0)
-        point1Window.set_x(0);
-    
-    if(point6Window.get_x() > w->get_width())
-        point6Window.set_x(w->get_width());
-    if(point6Window.get_x() < 0)
-        point6Window.set_x(0);
-
-    if(point7Window.get_x() > w->get_width())
-        point7Window.set_x(w->get_width());
-    if(point7Window.get_x() < 0)
-        point7Window.set_x(0);
-
-    if(point8Window.get_x() > w->get_width())
-        point8Window.set_x(w->get_width());
-    if(point8Window.get_x() < 0)
-        point8Window.set_x(0);
-
-    
-    if(point1Window.get_y() > w->get_height())
-        point1Window.set_y(w->get_height());
-    if(point1Window.get_y() < 0)
-        point1Window.set_y(0);
-
-    if(point2Window.get_y() > w->get_height())
-        point2Window.set_y(w->get_height());
-    if(point2Window.get_y() < 0)
-        point2Window.set_y(0);
-
-    if(point3Window.get_y() > w->get_height())
-        point3Window.set_y(w->get_height());
-    if(point3Window.get_y() < 0)
-        point3Window.set_y(0);
-
-    if(point4Window.get_y() > w->get_height())
-        point4Window.set_y(w->get_height());
-    if(point4Window.get_y() < 0)
-        point4Window.set_y(0);
-
-    if(point5Window.get_y() > w->get_height())
-        point5Window.set_y(w->get_height());
-    if(point5Window.get_y() < 0)
-        point5Window.set_y(0);
-
-    if(point6Window.get_y() > w->get_height())
-        point6Window.set_y(w->get_height());
-    if(point6Window.get_y() < 0)
-        point6Window.set_y(0);
-
-    if(point7Window.get_y() > w->get_height())
-        point7Window.set_y(w->get_height());
-    if(point7Window.get_y() < 0)
-        point7Window.set_y(0);
-
-    if(point8Window.get_y() > w->get_height())
-        point8Window.set_y(w->get_height());
-    if(point8Window.get_y() < 0)
-        point8Window.set_y(0);
-
-    // Draws each line of the cuboid
-    w->draw_line(point1Window.get_x(), point1Window.get_y(), point2Window.get_x(), point2Window.get_y(), *color);
-    w->draw_line(point1Window.get_x(), point1Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
-    w->draw_line(point1Window.get_x(), point1Window.get_y(), point5Window.get_x(), point5Window.get_y(), *color);
-    w->draw_line(point2Window.get_x(), point2Window.get_y(), point3Window.get_x(), point3Window.get_y(), *color);
-    w->draw_line(point2Window.get_x(), point2Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
     w->draw_line(point3Window.get_x(), point3Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
-    w->draw_line(point3Window.get_x(), point3Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
     w->draw_line(point4Window.get_x(), point4Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
-    w->draw_line(point5Window.get_x(), point5Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
-    w->draw_line(point5Window.get_x(), point5Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
-    w->draw_line(point6Window.get_x(), point6Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
     w->draw_line(point7Window.get_x(), point7Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
+    w->draw_line(point3Window.get_x(), point3Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);  
+
+    // Side faces drawn by increasing z
+    for(int z = point4.get_z(); z > point1.get_z(); --z)
+    {
+        // Left face
+        firstPoint = Coordinate3D(point1.get_x(), point1.get_y(), z);
+        firstPointP = Renderer::compute_perspective(firstPoint, p);
+        firstPointW = Renderer::from_perspective_to_window(firstPointP, w, p);
+        secondPoint = Coordinate3D(point1.get_x(), point5.get_y(), z);
+        secondPointP = Renderer::compute_perspective(secondPoint, p);
+        secondPointW = Renderer::from_perspective_to_window(secondPointP, w, p);
+        w->draw_line(firstPointW.get_x(), firstPointW.get_y(), secondPointW.get_x(), 
+                     secondPointW.get_y(), colorFace);
+
+        // Up face
+        firstPoint = Coordinate3D(point1.get_x(), point1.get_y(), z);
+        firstPointP = Renderer::compute_perspective(firstPoint, p);
+        firstPointW = Renderer::from_perspective_to_window(firstPointP, w, p);
+        secondPoint = Coordinate3D(point2.get_x(), point1.get_y(), z);
+        secondPointP = Renderer::compute_perspective(secondPoint, p);
+        secondPointW = Renderer::from_perspective_to_window(secondPointP, w, p);
+        w->draw_line(firstPointW.get_x(), firstPointW.get_y(), secondPointW.get_x(), 
+                     secondPointW.get_y(), colorFace);
+
+        // Right face
+        firstPoint = Coordinate3D(point2.get_x(), point1.get_y(), z);
+        firstPointP = Renderer::compute_perspective(firstPoint, p);
+        firstPointW = Renderer::from_perspective_to_window(firstPointP, w, p);
+        secondPoint = Coordinate3D(point2.get_x(), point5.get_y(), z);
+        secondPointP = Renderer::compute_perspective(secondPoint, p);
+        secondPointW = Renderer::from_perspective_to_window(secondPointP, w, p);
+        w->draw_line(firstPointW.get_x(), firstPointW.get_y(), secondPointW.get_x(), 
+                     secondPointW.get_y(), colorFace);
+    }
+
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
+    w->draw_line(point2Window.get_x(), point2Window.get_y(), point3Window.get_x(), point3Window.get_y(), *color);
+    w->draw_line(point5Window.get_x(), point5Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
+    w->draw_line(point6Window.get_x(), point6Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
+    
+    // Front face
+    w->draw_rect(abs(point1Window.get_y() - point5Window.get_y()), abs(point1Window.get_x() - 
+                     point2Window.get_x()), point1Window.get_x(), point1Window.get_y(), colorFace);
+
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point2Window.get_x(), point2Window.get_y(), *color);
+    w->draw_line(point1Window.get_x(), point1Window.get_y(), point5Window.get_x(), point5Window.get_y(), *color);
+    w->draw_line(point5Window.get_x(), point5Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
+    w->draw_line(point2Window.get_x(), point2Window.get_y(), point6Window.get_x(), point6Window.get_y(), *color);
 }

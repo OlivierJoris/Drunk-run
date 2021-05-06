@@ -18,9 +18,22 @@ public:
     // Constructor.
     Path(const unsigned int width = DEFAULT_WIDTH);
 
-    // Draws the path.
+    /* Draws the path.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window>, std::shared_ptr<Player>) const {};
 
+    /*
+     * Tests if the player is going to trip on the obstacle.
+     *
+     * @param player The player.
+     * 
+     * @return 1 The player is going to trip.
+     *         0 The player is not going to trip.
+     *         -1 Error.
+     */
     virtual int test_hit(std::shared_ptr<Player>) const {return 0;};
 
     // Returns the width of the path.

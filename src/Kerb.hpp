@@ -20,7 +20,7 @@ public:
     // Default width of the kerb in cm.
     static const unsigned int DEFAULT_WIDTH = 1;
     // Default depth of the kerb in cm.
-    static const unsigned int DEFAULT_DEPTH = 15000;
+    static const unsigned int DEFAULT_DEPTH = Player::DEFAULT_DOV;
     // Default color.
     static const uint8_t DEFAULT_COLOR = 64;
 
@@ -37,7 +37,11 @@ public:
         const double z = 0.0
     );
 
-    // Draws the kerb.
+    /* Draws the kerb.
+     *
+     * @param w pointer to window in which the object will be drawn.
+     * @param p pointer to player which is viewing the object.
+     */
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
     
     /*
