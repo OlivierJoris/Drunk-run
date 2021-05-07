@@ -50,7 +50,26 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Architecture}
-\paragraph{}Add the diagram (UML) of classes and explain the purpose/responsibility of each.
+\paragraph{}In this section, we will present the classes we build in this project as long with their responsibilities and their interactions.
+\paragraph{}Our classes and their interactions can be represented by the following UML static diagram\footnote{We purposefully did not represent every field and function of the classes because wanted to keep the diagram as general as possible. You can look at the documented header files of the classes for more information on their fields and functions.}:
+\begin{figure}[ht!]
+  \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{uml.pdf}}%
+  \caption{UML static diagram}
+\end{figure}
+\paragraph{}The class \texttt{Window} is a wrapper around a \texttt{SDL\_Window} which stores some information about the window it is representing as long as a few functions that are wrappers around SDL functions. These functions allow to draw a line, a rectangle, or a text on the window.\\ \newline
+The class \texttt{App} represents the application. It is responsible for running the game, handling the events, and quitting the game properly at the end.\\ \newline
+The goal of the class \texttt{Renderer} is to compute the coordinates of the perspective of a given point and to calculate the coordinates of the point on the window coordinate system.\\ \newline
+The class \texttt{Game} is representing the game. It is responsible for the logic of the game and for maintaining references to all the elements needed by the game. It has a lot of responsibilities with the most important being to draw the game on a given window, test if the player hit something, and generating random obstacles.\\ \newline
+The class \texttt{GameState} is responsible for maintaining the state of the ongoing game. It is remembering if the game is still ongoing and the distance travelled by the player.\\ \newline
+The class \texttt{Object} represents every object of the game. It stores information about an object, including its size, position, and color. These properties are respectively represented by the class \texttt{Size3D}, \texttt{Coordinate3D}, and \texttt{RGBColor}. It also has a function to draw the object on a given window and another one to test if the player hit the object.\\
+The class \texttt{Path} represents the path on which the player is walking.\\ \newline
+The class \texttt{Player} represents the player (Cymi) of the game.\\ \newline
+The abstract class \texttt{Obstacle} represents every obstacle of the game. It is further divided into \texttt{DangerousObstacle} and \texttt{NonDangerousObstacle} which respectively represent obstacles on which the player will trip and obstacles on which it will not trip.\\ \newline
+The class \texttt{DangerousObstacle} is itself specialized into \texttt{Barrier}, which represents a barrier, \texttt{People}, which represents a person standing on the path, and \texttt{Kerb}, which represents a kerb on the side of the path.\\ \newline
+The class \texttt{NonDangerousObstacle} is also specialized in \texttt{Rubbish}, which represent a rubbish left by the people on the path, and \texttt{Crate}, which represent a crate on the path.
+
+\paragraph{}Each class has two files associated to it. The names of the files associated to a given class are the name of the class then \texttt{.hpp} or \texttt{.cpp} depending on whether you are searching for the interface or the implementation of the class.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -60,7 +79,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Feedback about the assignment}
-\paragraph{}Time spent by student + main difficulties.
+\paragraph{}In this section, we will explain the main difficulties we encountered during the development of this project as long with an approximation of the time we spent on this project.
+\paragraph{}Undoubtedly, the hardest part was the rendering process. We encountered some troubles to take the field of view into account when drawing the obstacles on the window. The other parts of the project were not that hard once we had our architecture figured out.
+\paragraph{}Regarding the time we spent, Maxime spent approximately 15 hours on the project while Olivier spent approximately \textbf{ADD TIME SPENT} hours on the project 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
