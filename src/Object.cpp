@@ -86,7 +86,7 @@ void Object::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Coordinate3D point5Window = Renderer::from_perspective_to_window(point5p, w, p);
     Coordinate3D point6Window = Renderer::from_perspective_to_window(point6p, w, p);
     Coordinate3D point7Window = Renderer::from_perspective_to_window(point7p, w, p);
-    Coordinate3D point8Window = Renderer::from_perspective_to_window(point8p, w, p); 
+    Coordinate3D point8Window = Renderer::from_perspective_to_window(point8p, w, p);
 
     RGBColor colorFace = RGBColor(color->get_red() / 2, color->get_green() / 2,
                                   color->get_blue() / 2);

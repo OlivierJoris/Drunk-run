@@ -54,8 +54,8 @@ public:
 
     /* Draws the person.
      *
-     * @param w pointer to window in which the object will be drawn.
-     * @param p pointer to player which is viewing the object.
+     * @param w Pointer to window in which the object will be drawn.
+     * @param p Pointer to player which is viewing the object.
      */
     virtual void draw(std::shared_ptr<Window> w, std::shared_ptr<Player> p) const;
 
