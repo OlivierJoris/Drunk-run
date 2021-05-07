@@ -45,8 +45,11 @@ int DangerousObstacle::test_hit(shared_ptr<Player> player) const{
         return -1;
 
     double playerXmin = playerPos->get_x();
-    double playerYmin = playerPos->get_y();
+    double playerXmax = playerXmin + player->get_size()->get_width();
+    double playerYtop = playerPos->get_y();
+    double playerYbottom = playerYtop - player->get_size()->get_height();
     double playerZmin = playerPos->get_z();
+    double playerZmax = playerZmin + player->get_size()->get_depth();
 
     double obstacleXmin = topLeft->get_x();
     double obstacleXmax = obstacleXmin + size->get_width();
@@ -57,10 +60,19 @@ int DangerousObstacle::test_hit(shared_ptr<Player> player) const{
 
     bool inObstacleXrange = false, inObstacleYrange = false, inObstacleZrange = false;
 
+
+    if(playerXmax >= obstacleXmin && playerXmax <= obstacleXmax)
+        inObstacleXrange = true;
     if(playerXmin >= obstacleXmin && playerXmin <= obstacleXmax)
         inObstacleXrange = true;
-    if(playerYmin <= obstacleYtop && playerYmin >= obstacleYbottom)
+
+    if(playerYtop >= obstacleYbottom && playerYtop <= obstacleYtop)
         inObstacleYrange = true;
+    if(playerYbottom >= obstacleYbottom && playerYbottom <= obstacleYtop)
+        inObstacleYrange = true;
+
+    if(playerZmax >= obstacleZmin && playerZmax <= obstacleZmax)
+        inObstacleZrange = true;
     if(playerZmin >= obstacleZmin && playerZmin <= obstacleZmax)
         inObstacleZrange = true;
 

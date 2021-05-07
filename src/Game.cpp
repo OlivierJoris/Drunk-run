@@ -44,8 +44,8 @@ Game::Game(
     kerbs.push_back(Kerb());
     kerbs.push_back(Kerb());
 
-    kerbs[0].set_coordinates(-path->get_width()/2.0, kerbs[0].DEFAULT_HEIGHT, 0);
-    kerbs[1].set_coordinates(path->get_width()/2.0, kerbs[1].DEFAULT_HEIGHT, 0);
+    kerbs[0].set_coordinates(-path->get_width()/2, kerbs[0].DEFAULT_HEIGHT, 0);
+    kerbs[1].set_coordinates(path->get_width()/2, kerbs[1].DEFAULT_HEIGHT, 0);
 
     obstacles = list<shared_ptr<Object>>();
     add_init_obstacles();
@@ -83,9 +83,10 @@ int Game::draw(shared_ptr<Window> w){
 
     // Draws obstacles but only the ones in the DoV (depth of view)
     double dov = player->get_dov();
-    for(auto iter = obstacles.cbegin(); iter != obstacles.cend(); iter++){
+    for(auto iter = obstacles.crbegin(); iter != obstacles.crend(); iter++){
         const shared_ptr<Object> o = *iter;
-        if(o->get_coordinates()->get_z() + o->get_size()->get_depth() >= dov)
+        if(o->get_coordinates()->get_z() + o->get_size()->get_depth() >= dov ||
+           o->get_coordinates()->get_z() <= 0)
             break;
         o->draw(w, player);
     }
@@ -113,7 +114,7 @@ int Game::test_hit() const{
         return testHitKerb1;
     
     // Tests if he tripped on the second kerb
-    int testHitKerb2 = kerbs[0].test_hit(player);
+    int testHitKerb2 = kerbs[1].test_hit(player);
     if(testHitKerb2 == 1 || testHitKerb2 < 0)
         return testHitKerb2;
 

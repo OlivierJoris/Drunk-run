@@ -9,6 +9,7 @@
 #include "DangerousObstacle.hpp"
 #include "Player.hpp"
 #include "Window.hpp"
+#include "Renderer.hpp"
 
 #include <iostream>
 #include <cmath>
@@ -36,5 +37,16 @@ int Kerb::test_hit(shared_ptr<Player> player) const {
 }
 
 void Kerb::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
-    Object::draw(w, p);
+    Coordinate3D firstPoint, secondPoint, firstPointP, secondPointP, firstPointW, secondPointW;
+    
+    for(int z = size->get_depth(); z > 0; --z)
+    {
+        firstPoint = Coordinate3D(topLeft->get_x(), topLeft->get_y(), z);
+        firstPointP = Renderer::compute_perspective(firstPoint, p);
+        firstPointW = Renderer::from_perspective_to_window(firstPointP, w, p);
+        secondPoint = Coordinate3D(topLeft->get_x() + size->get_width(), topLeft->get_y(), z);
+        secondPointP = Renderer::compute_perspective(secondPoint, p);
+        secondPointW = Renderer::from_perspective_to_window(secondPointP, w, p);
+        w->draw_line(firstPointW.get_x(), firstPointW.get_y(), secondPointW.get_x(), secondPointW.get_y(), *color);
+    }
 }

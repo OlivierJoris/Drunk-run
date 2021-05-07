@@ -41,8 +41,8 @@ int App::run(){
     Uint32 time = 0, frameCounter = 0, randomMovCounter = 0;
     // Time per frame in ms
     const Uint32 TIME_PER_FRAME = 1000 / game->get_frame_rate();
-    // Score increment per frame (in meter). With this, 1 meter = 1 second
-    const double SCORE_INCREMENT = 1.0 / game->get_frame_rate();
+    // Score increment per frame (in meter). 
+    const double SCORE_INCREMENT = 2.0 / game->get_frame_rate();
     shared_ptr<Player> player = game->get_player();
     if(!player)
         return -1;
@@ -53,8 +53,8 @@ int App::run(){
     while(game->get_game_status() == GameStateStatus::ongoing){
         time = SDL_GetTicks();
 
-        // Generates random object every 4 sec
-        if(frameCounter >= game->get_frame_rate() * 4){
+        // Generates random object every 5 sec
+        if(frameCounter >= game->get_frame_rate() * 5){
             game->add_random_obstacle();
             frameCounter = 0;
         }else
@@ -65,7 +65,7 @@ int App::run(){
             game->player_random_movement();
             randomMovCounter = 0;
         }else
-            randomMovCounter+=1;
+            randomMovCounter += 1;
 
         /* Cymi is always walking forward. Since the score is the distance,
             we can use the score increment for the distance */
