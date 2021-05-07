@@ -83,7 +83,7 @@ int Game::draw(shared_ptr<Window> w){
 
     // Draws obstacles but only the ones in the DoV (depth of view)
     double dov = player->get_dov();
-    for(auto iter = obstacles.rbegin(); iter != obstacles.rend(); iter++){
+    for(auto iter = obstacles.crbegin(); iter != obstacles.crend(); iter++){
         const shared_ptr<Object> o = *iter;
         if(o->get_coordinates()->get_z() + o->get_size()->get_depth() >= dov ||
            o->get_coordinates()->get_z() <= 0)

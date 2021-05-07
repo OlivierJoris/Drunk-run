@@ -93,8 +93,13 @@ void Object::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     Coordinate3D firstPoint, secondPoint, firstPointP, secondPointP, firstPointW, secondPointW;
 
     // Back face 
-    w->draw_rect(abs(point4Window.get_y() - point8Window.get_y()), abs(point4Window.get_x() -
-                     point3Window.get_x()), point4Window.get_x(), point4Window.get_y(), colorFace);
+    w->draw_rect(
+        abs(point4Window.get_y() - point8Window.get_y()),
+        abs(point4Window.get_x() - point3Window.get_x()),
+        point4Window.get_x(),
+        point4Window.get_y(),
+        colorFace
+    );
 
     w->draw_line(point3Window.get_x(), point3Window.get_y(), point4Window.get_x(), point4Window.get_y(), *color);
     w->draw_line(point4Window.get_x(), point4Window.get_y(), point8Window.get_x(), point8Window.get_y(), *color);
@@ -141,8 +146,13 @@ void Object::draw(shared_ptr<Window> w, shared_ptr<Player> p) const{
     w->draw_line(point6Window.get_x(), point6Window.get_y(), point7Window.get_x(), point7Window.get_y(), *color);
     
     // Front face
-    w->draw_rect(abs(point1Window.get_y() - point5Window.get_y()), abs(point1Window.get_x() - 
-                     point2Window.get_x()), point1Window.get_x(), point1Window.get_y(), colorFace);
+    w->draw_rect(
+        abs(point1Window.get_y() - point5Window.get_y()),
+        abs(point1Window.get_x() - point2Window.get_x()),
+        point1Window.get_x(),
+        point1Window.get_y(),
+        colorFace
+    );
 
     w->draw_line(point1Window.get_x(), point1Window.get_y(), point2Window.get_x(), point2Window.get_y(), *color);
     w->draw_line(point1Window.get_x(), point1Window.get_y(), point5Window.get_x(), point5Window.get_y(), *color);
