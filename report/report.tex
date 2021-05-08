@@ -74,14 +74,29 @@ The class \texttt{NonDangerousObstacle} is also specialized in \texttt{Rubbish},
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Design}
-\paragraph{}How we solved non-obvious specific problems (generation of obstacles, drawing of side faces, etc). Justification behind your implementation choices.
+\paragraph{}In this section, we will present how we solved the non-obvious specific problems and justify these implementation choices.
+
+\subsection{Obstacles generation}
+\paragraph{}We generated our obstacles from the closest to the farthest and taking into account the applicate of the last generated obstacle. We chose to proceed like that in order to not have any overlap between two or more obstacles. Moreover, closest obstacles should be generated before farthest obstacles because there are the first ones visible by the player.
+\paragraph{}These obstacles were generated according to the proportions of dangerous and non-dangerous obstacles that can be easily modified in our code.
+
+\subsection{Coordinates projection}
+\paragraph{}To draw the elements of our game, we had to project their 3D coordinates, that we were storing in centimeters in memory, to their perspective 2D coordinates in pixels. This task was not really hard thanks to the formula given in the statement. We just had to take the field of view into account using some right triangles trigonometry formula and then passing from centimeters to pixels using the computed scaling factors. Finally, we had to translate the computed coordinates to the window coordinate system.
+\paragraph{}We chose to store 3D coordinates using centimeters as units because it was easier to manipulate than pixels. All the necessary computations for these projections are implemented in the \texttt{Renderer} class. 
+
+\subsection{Drawing of obstacles}
+\paragraph{}We drawn the obstacles, which are all rectangular parallelepipeds, from back to front because back obstacles are hidden by front obstacles mimicking the real-life view. 
+\paragraph{}Moreover, the points representing an obstacle were drawn from back to front for the same reason. Front and back faces were drawn by drawing rectangles, while side faces were drawn line by line with an increasing applicate.
+
+\subsection{Collision detection}
+\paragraph{}The player and obstacles being all rectangular parallelepipeds, the detection of collisions consists of, at each move, taking the player and the sizes of the obstacles and checking if one point inside an obstacle box is also inside the player box. We chose to detect collisions this way because we found that it was the more natural way of detecting such collisions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Feedback about the assignment}
 \paragraph{}In this section, we will explain the main difficulties we encountered during the development of this project as long with an approximation of the time we spent on this project.
 \paragraph{}Undoubtedly, the hardest part was the rendering process. We encountered some troubles to take the field of view into account when drawing the obstacles on the window. The other parts of the project were not that hard once we had our architecture figured out.
-\paragraph{}Regarding the time we spent, Maxime spent approximately 15 hours on the project while Olivier spent approximately \textbf{ADD TIME SPENT} hours on the project 
+\paragraph{}Regarding the time we spent, we both spent approximately 15 hours on the project.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
