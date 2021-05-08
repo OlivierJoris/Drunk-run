@@ -74,26 +74,23 @@ The class \texttt{NonDangerousObstacle} is also specialized in \texttt{Rubbish},
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Design}
-\paragraph{}In this section, we will present how we solved non-obvious specific problems and justify these implementation choices.
+\paragraph{}In this section, we will present how we solved the non-obvious specific problems and justify these implementation choices.
 
 \subsection{Obstacles generation}
-\paragraph{}We generated our obstacles from front to back of the path and taking into account the applicate of the last generated obstacle. We chose to proceed 
-like that to not have any overlap between two or more obstacles and because front obstacles are more important to be generated than back obstacles because there are the first visible by the player.
-\paragraph{}These obstacles were generated according to proportions of dangerous and non-dangerous obstacles that can be easily modified in our code.
+\paragraph{}We generated our obstacles from the closest to the farthest and taking into account the applicate of the last generated obstacle. We chose to proceed like that in order to not have any overlap between two or more obstacles. Moreover, closest obstacles should be generated before farthest obstacles because there are the first ones visible by the player.
+\paragraph{}These obstacles were generated according to the proportions of dangerous and non-dangerous obstacles that can be easily modified in our code.
 
 \subsection{Coordinates projection}
-\paragraph{}To draw the elements of our game we had to project their 3D coordinates that we were storing in centimeters
-in memory to their perspective 2D coordinates in pixels. This task was not really hard thanks to the formula given in 
-the statement. We had just to take the field of view into account using some right triangle trigonometry formula and then passing from centimeters to pixel using computed scaling factors. Finally, we had to translate the computed coordinates to the window coordinate system.
-\paragraph{}We chose to store 3D coordinates using centimeters as units because it was easier to manipulate than pixels. All the necessary computation for these projections are implemented in the \texttt{Renderer} class. 
+\paragraph{}To draw the elements of our game, we had to project their 3D coordinates, that we were storing in centimeters in memory, to their perspective 2D coordinates in pixels. This task was not really hard thanks to the formula given in the statement. We just had to take the field of view into account using some right triangles trigonometry formula and then passing from centimeters to pixels using the computed scaling factors. Finally, we had to translate the computed coordinates to the window coordinate system.
+\paragraph{}We chose to store 3D coordinates using centimeters as units because it was easier to manipulate than pixels. All the necessary computations for these projections are implemented in the \texttt{Renderer} class. 
 
 \subsection{Drawing of obstacles}
-\paragraph{}We drawn the obstacles, which are all rectangular parallelepipeds, from back to front because back obstacles are hidden by front obstacle mimicing the real-life view. 
-\paragraph{}Moreover, the point representing an obstacle were drawn from back to front for the same reason. Front and back faces were drawn while drawing rectangles, while side faces were drawn line by line with an increasing applicate.
+\paragraph{}We drawn the obstacles, which are all rectangular parallelepipeds, from back to front because back obstacles are hidden by front obstacles mimicking the real-life view. 
+\paragraph{}Moreover, the points representing an obstacle were drawn from back to front for the same reason. Front and back faces were drawn by drawing rectangles, while side faces were drawn line by line with an increasing applicate.
 
 \subsection{Collision detection}
-\paragraph{}The player and obstacles being all rectangular parallelepipeds, the detection collision detection consists of, at each move, taking the player and obstacle sizes into account, checking if one point inside an obstacle box is also inside the player box. We chose to detect collisions this way
-because we found that it was the more natural way of detecting such collisions.
+\paragraph{}The player and obstacles being all rectangular parallelepipeds, the detection of collisions consists of, at each move, taking the player and the sizes of the obstacles and checking if one point inside an obstacle box is also inside the player box. We chose to detect collisions this way because we found that it was the more natural way of detecting such collisions.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Feedback about the assignment}
